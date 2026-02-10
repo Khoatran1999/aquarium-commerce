@@ -19,7 +19,9 @@ declare global {
 const JWT_SECRET: string = (() => {
   const secret = process.env.JWT_SECRET;
   if (!secret) {
-    throw new Error('FATAL: JWT_SECRET environment variable is required. Generate one with: openssl rand -base64 64');
+    throw new Error(
+      'FATAL: JWT_SECRET environment variable is required. Generate one with: openssl rand -base64 64',
+    );
   }
   return secret;
 })();
