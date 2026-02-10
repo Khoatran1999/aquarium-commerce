@@ -1,0 +1,30 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noFallthroughCasesInSwitch": true,
+    "skipLibCheck": true,
+    "jsx": "react-jsx",
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*"],
+      "@repo/ui": ["../../packages/ui/src"],
+      "@repo/hooks": ["../../packages/hooks/src"],
+      "@repo/services": ["../../packages/services/src"],
+      "@repo/types": ["../../packages/types/src"]
+    }
+  },
+  "include": ["src", "vite-env.d.ts"],
+  "exclude": ["src/**/*.test.*", "src/**/*.spec.*"],
+  "references": [{ "path": "./tsconfig.node.json" }]
+}

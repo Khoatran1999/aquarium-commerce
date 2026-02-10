@@ -1,0 +1,74 @@
+import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
+import { useState } from 'react';
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+import { adminService } from '@repo/services';
+import { Plus, Search, Trash2, Pencil } from 'lucide-react';
+import { Link, useNavigate } from 'react-router-dom';
+import toast from 'react-hot-toast';
+import DataTable from '../components/DataTable';
+import ConfirmDialog from '../components/ConfirmDialog';
+export default function ProductListPage() {
+    const navigate = useNavigate();
+    const queryClient = useQueryClient();
+    const [page, setPage] = useState(1);
+    const [search, setSearch] = useState('');
+    const [deleteTarget, setDeleteTarget] = useState(null);
+    const { data, isLoading } = useQuery({
+        queryKey: ['admin', 'products', { page, search }],
+        queryFn: () => adminService.getProducts({ page, limit: 10, search: search || undefined }),
+    });
+    const deleteMutation = useMutation({
+        mutationFn: (id) => adminService.deleteProduct(id),
+        onSuccess: () => {
+            toast.success('Product deleted');
+            queryClient.invalidateQueries({ queryKey: ['admin', 'products'] });
+            setDeleteTarget(null);
+        },
+        onError: () => toast.error('Failed to delete product'),
+    });
+    const products = data?.data ?? [];
+    const meta = data?.meta;
+    const columns = [
+        {
+            key: 'image',
+            label: '',
+            className: 'w-12',
+            render: (p) => (_jsx("img", { src: p.images?.[0]?.url ?? '/placeholder-fish.jpg', alt: p.name, className: "h-10 w-10 rounded-lg object-cover" })),
+        },
+        {
+            key: 'name',
+            label: 'Product',
+            render: (p) => (_jsxs("div", { children: [_jsx("p", { className: "text-foreground font-medium", children: p.name }), _jsx("p", { className: "text-muted-foreground text-xs", children: p.species?.name ?? 'No species' })] })),
+        },
+        {
+            key: 'price',
+            label: 'Price',
+            render: (p) => (_jsxs("div", { children: [_jsxs("span", { className: "text-foreground font-semibold", children: ["$", p.price.toFixed(2)] }), p.comparePrice && (_jsxs("span", { className: "text-muted-foreground ml-1 text-xs line-through", children: ["$", p.comparePrice.toFixed(2)] }))] })),
+        },
+        {
+            key: 'stock',
+            label: 'Stock',
+            render: (p) => (_jsx("span", { className: `text-xs font-semibold ${p.available <= 0 ? 'text-danger' : p.available <= 5 ? 'text-warning' : 'text-success'}`, children: p.available })),
+        },
+        {
+            key: 'size',
+            label: 'Size',
+            render: (p) => (_jsx("span", { className: "bg-muted text-foreground rounded px-2 py-0.5 text-xs font-medium", children: p.size })),
+        },
+        {
+            key: 'status',
+            label: 'Status',
+            render: (p) => (_jsx("span", { className: `rounded-full px-2 py-0.5 text-xs font-semibold ${p.isActive ? 'bg-success/10 text-success' : 'bg-danger/10 text-danger'}`, children: p.isActive ? 'Active' : 'Inactive' })),
+        },
+        {
+            key: 'actions',
+            label: '',
+            className: 'w-24',
+            render: (p) => (_jsxs("div", { className: "flex items-center gap-1", onClick: (e) => e.stopPropagation(), children: [_jsx(Link, { to: `/products/${p.id}/edit`, className: "hover:bg-muted rounded-lg p-1.5 transition-colors", children: _jsx(Pencil, { className: "text-muted-foreground h-4 w-4" }) }), _jsx("button", { onClick: () => setDeleteTarget(p), className: "hover:bg-danger/10 rounded-lg p-1.5 transition-colors", children: _jsx(Trash2, { className: "text-danger h-4 w-4" }) })] })),
+        },
+    ];
+    return (_jsxs("div", { className: "space-y-4 p-6", children: [_jsxs("div", { className: "flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between", children: [_jsxs("div", { children: [_jsx("h1", { className: "text-foreground text-2xl font-bold", children: "Products" }), _jsxs("p", { className: "text-muted-foreground text-sm", children: [meta?.total ?? 0, " products in your store"] })] }), _jsxs(Link, { to: "/products/new", className: "bg-primary inline-flex items-center gap-2 rounded-lg px-4 py-2.5 text-sm font-medium text-white transition-colors hover:opacity-90", children: [_jsx(Plus, { className: "h-4 w-4" }), "Add Product"] })] }), _jsxs("div", { className: "relative max-w-sm", children: [_jsx(Search, { className: "text-muted-foreground absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2" }), _jsx("input", { type: "text", placeholder: "Search products...", value: search, onChange: (e) => {
+                            setSearch(e.target.value);
+                            setPage(1);
+                        }, className: "bg-card border-border text-foreground placeholder:text-muted-foreground focus:ring-primary/30 w-full rounded-lg border py-2 pl-9 pr-4 text-sm focus:outline-none focus:ring-2" })] }), _jsx(DataTable, { columns: columns, data: products, page: page, totalPages: meta?.totalPages ?? 1, total: meta?.total ?? 0, loading: isLoading, onPageChange: setPage, onRowClick: (p) => navigate(`/products/${p.id}/edit`), getRowKey: (p) => p.id, emptyMessage: "No products found" }), _jsx(ConfirmDialog, { open: !!deleteTarget, title: "Delete Product", description: `Are you sure you want to delete "${deleteTarget?.name}"? This will deactivate the product.`, confirmLabel: "Delete", variant: "danger", loading: deleteMutation.isPending, onConfirm: () => deleteTarget && deleteMutation.mutate(deleteTarget.id), onCancel: () => setDeleteTarget(null) })] }));
+}

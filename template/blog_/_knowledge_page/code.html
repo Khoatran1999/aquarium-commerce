@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>AquaLux Knowledge Base</title>
+<!-- Fonts: Lexend & Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Theme Config -->
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#136dec",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#101822",
+                    },
+                    fontFamily: {
+                        "display": ["Lexend", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.375rem", 
+                        "lg": "0.5rem", 
+                        "xl": "0.75rem", 
+                        "2xl": "1rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        /* Custom scrollbar for clean look */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 font-display selection:bg-primary/20">
+<!-- Top Navigation -->
+<div class="relative w-full bg-white dark:bg-[#151f2e] border-b border-slate-200 dark:border-slate-800 sticky top-0 z-50">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<header class="flex items-center justify-between h-16">
+<!-- Logo -->
+<div class="flex items-center gap-3">
+<div class="text-primary">
+<span class="material-symbols-outlined text-3xl">water_drop</span>
+</div>
+<h2 class="text-xl font-bold tracking-tight text-slate-900 dark:text-white">AquaLux</h2>
+</div>
+<!-- Desktop Nav -->
+<nav class="hidden md:flex items-center gap-8">
+<a class="text-sm font-medium hover:text-primary transition-colors" href="#">Shop</a>
+<a class="text-sm font-medium text-primary" href="#">Knowledge Base</a>
+<a class="text-sm font-medium hover:text-primary transition-colors" href="#">About Us</a>
+<a class="text-sm font-medium hover:text-primary transition-colors" href="#">Contact</a>
+</nav>
+<!-- Actions -->
+<div class="flex items-center gap-3">
+<button class="flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors text-slate-700 dark:text-slate-200">
+<span class="material-symbols-outlined text-[20px]">shopping_cart</span>
+</button>
+<button class="flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors text-slate-700 dark:text-slate-200">
+<span class="material-symbols-outlined text-[20px]">account_circle</span>
+</button>
+</div>
+</header>
+</div>
+</div>
+<!-- Hero Section -->
+<section class="relative bg-white dark:bg-[#151f2e] pt-12 pb-16 px-4 border-b border-slate-200 dark:border-slate-800">
+<div class="max-w-3xl mx-auto text-center flex flex-col items-center">
+<h1 class="text-4xl md:text-5xl font-bold tracking-tight mb-4 text-slate-900 dark:text-white">
+                Mastering Aquarium Care
+            </h1>
+<p class="text-slate-500 dark:text-slate-400 text-lg mb-8 max-w-xl">
+                Expert advice, species guides, and aquascaping tips for your aquatic ecosystem.
+            </p>
+<!-- Search Bar -->
+<div class="w-full max-w-xl relative mb-8 group">
+<div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-slate-400 group-focus-within:text-primary transition-colors">
+<span class="material-symbols-outlined">search</span>
+</div>
+<input class="block w-full pl-12 pr-4 py-4 rounded-xl border-none bg-slate-100 dark:bg-slate-800 text-slate-900 dark:text-white placeholder-slate-400 focus:ring-2 focus:ring-primary/50 text-base shadow-sm transition-all" placeholder="Search articles (e.g., 'Nitrogen Cycle', 'Betta Care')..." type="text"/>
+</div>
+<!-- Chips -->
+<div class="flex flex-wrap justify-center gap-3">
+<a class="px-4 py-2 rounded-full bg-primary/10 hover:bg-primary/20 text-primary text-sm font-medium transition-colors border border-primary/10" href="#">
+                    🔥 Trending
+                </a>
+<a class="px-4 py-2 rounded-full bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-600 dark:text-slate-300 text-sm font-medium transition-colors" href="#">
+                    Freshwater Basics
+                </a>
+<a class="px-4 py-2 rounded-full bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-600 dark:text-slate-300 text-sm font-medium transition-colors" href="#">
+                    Plant Care
+                </a>
+<a class="px-4 py-2 rounded-full bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-600 dark:text-slate-300 text-sm font-medium transition-colors" href="#">
+                    Algae Control
+                </a>
+</div>
+</div>
+</section>
+<!-- Main Content Grid -->
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+<!-- Sidebar Navigation -->
+<aside class="lg:col-span-3">
+<div class="sticky top-24">
+<h3 class="text-sm uppercase tracking-wider text-slate-500 font-bold mb-4">Categories</h3>
+<nav class="space-y-1">
+<a class="flex items-center justify-between px-3 py-2 text-sm font-medium bg-primary/10 text-primary rounded-lg" href="#">
+<span>All Articles</span>
+<span class="bg-white dark:bg-[#101822] px-2 py-0.5 rounded-md text-xs">42</span>
+</a>
+<a class="flex items-center justify-between px-3 py-2 text-sm font-medium text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transition-colors group" href="#">
+<span>Freshwater</span>
+<span class="bg-slate-100 dark:bg-slate-800 group-hover:bg-white dark:group-hover:bg-[#101822] px-2 py-0.5 rounded-md text-xs transition-colors">15</span>
+</a>
+<a class="flex items-center justify-between px-3 py-2 text-sm font-medium text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transition-colors group" href="#">
+<span>Saltwater</span>
+<span class="bg-slate-100 dark:bg-slate-800 group-hover:bg-white dark:group-hover:bg-[#101822] px-2 py-0.5 rounded-md text-xs transition-colors">8</span>
+</a>
+<a class="flex items-center justify-between px-3 py-2 text-sm font-medium text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transition-colors group" href="#">
+<span>Aquascaping</span>
+<span class="bg-slate-100 dark:bg-slate-800 group-hover:bg-white dark:group-hover:bg-[#101822] px-2 py-0.5 rounded-md text-xs transition-colors">12</span>
+</a>
+<a class="flex items-center justify-between px-3 py-2 text-sm font-medium text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transition-colors group" href="#">
+<span>Equipment</span>
+<span class="bg-slate-100 dark:bg-slate-800 group-hover:bg-white dark:group-hover:bg-[#101822] px-2 py-0.5 rounded-md text-xs transition-colors">7</span>
+</a>
+</nav>
+<div class="mt-8 p-5 bg-gradient-to-br from-slate-900 to-slate-800 rounded-xl text-white">
+<h4 class="font-bold mb-2 text-lg">New to the hobby?</h4>
+<p class="text-sm text-slate-300 mb-4">Get our "First Tank Checklist" completely free.</p>
+<button class="w-full py-2 bg-primary hover:bg-primary/90 text-white text-sm font-bold rounded-lg transition-colors">
+                            Download Guide
+                        </button>
+</div>
+</div>
+</aside>
+<!-- Content Area -->
+<main class="lg:col-span-9 space-y-16">
+<!-- Section: Latest Articles Grid -->
+<section>
+<div class="flex items-center justify-between mb-6">
+<h2 class="text-2xl font-bold">Latest Articles</h2>
+<div class="flex gap-2">
+<button class="p-2 rounded-lg bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:border-primary dark:hover:border-primary text-slate-500 hover:text-primary transition-all">
+<span class="material-symbols-outlined text-[20px]">grid_view</span>
+</button>
+<button class="p-2 rounded-lg bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:border-primary dark:hover:border-primary text-slate-500 hover:text-primary transition-all">
+<span class="material-symbols-outlined text-[20px]">list</span>
+</button>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+<!-- Article Card 1 -->
+<article class="group bg-white dark:bg-[#151f2e] rounded-xl overflow-hidden border border-slate-200 dark:border-slate-800 hover:shadow-lg hover:shadow-primary/5 transition-all duration-300 flex flex-col h-full">
+<div class="relative h-48 overflow-hidden bg-slate-200">
+<img alt="Colorful freshwater fish tank with live plants" class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500" data-alt="Colorful freshwater fish tank with live plants" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA-Tm4HExv6vZNeagum6GO8VLH_L1oiPqCUF2xvhUYcIsCnGK3eeTc1bzBkSI3yfGAquQTrCgYCxt2fI_wpi_0lzuEdwdxcrwcTkTT1YqGY_8mXcNkTIitQ2T3LyOoI8L46pr6PiV9V8O5kJzId7tn_zkOzddf7sDVcQnR07akWRI3MbqDK9tkacBMEJMoaQt3oVWw-3mi6oeuKtGDjFNppHYsytfGLNu1u_nFikBEd9nLxmzOnuJntIFj2RpOtR8pCJr9A4IWynKA"/>
+<div class="absolute top-3 left-3">
+<span class="px-2 py-1 bg-white/90 dark:bg-black/80 backdrop-blur-sm text-xs font-bold rounded text-slate-900 dark:text-white uppercase tracking-wider">Guide</span>
+</div>
+</div>
+<div class="p-5 flex flex-col flex-grow">
+<div class="flex items-center gap-2 text-xs text-slate-500 dark:text-slate-400 mb-3">
+<span class="material-symbols-outlined text-[16px]">schedule</span>
+<span>5 min read</span>
+<span class="w-1 h-1 bg-slate-300 rounded-full"></span>
+<span>Oct 12, 2023</span>
+</div>
+<h3 class="text-lg font-bold mb-2 group-hover:text-primary transition-colors line-clamp-2">
+                                    The Nitrogen Cycle Explained: Safe Start for Your Tank
+                                </h3>
+<p class="text-slate-600 dark:text-slate-400 text-sm line-clamp-3 mb-4 flex-grow">
+                                    Understanding ammonia, nitrites, and nitrates is crucial for keeping your fish alive. Here is a simple breakdown.
+                                </p>
+<a class="inline-flex items-center text-primary text-sm font-bold hover:underline" href="#">
+                                    Read Article <span class="material-symbols-outlined text-[16px] ml-1">arrow_forward</span>
+</a>
+</div>
+</article>
+<!-- Article Card 2 -->
+<article class="group bg-white dark:bg-[#151f2e] rounded-xl overflow-hidden border border-slate-200 dark:border-slate-800 hover:shadow-lg hover:shadow-primary/5 transition-all duration-300 flex flex-col h-full">
+<div class="relative h-48 overflow-hidden bg-slate-200">
+<img alt="Close up of a Betta fish with vibrant red fins" class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500" data-alt="Close up of a Betta fish with vibrant red fins" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCI-CYsxxdahMsmNYDMbWT5nIReclAQWvPXven13D3dog7PQmY-43uRcBW98FV0iMYdYniOpVGGRCxuOmRki0XWmDRWzgYs90n7o_ECtjB68lCUdmSJj61-pGYf1HMjSXHkXUkTCiaN4kFD9_rIroy-zwGdf7L0kx0NGJYAFev3moGugdYwA7Jr_-aHO0gHLnVkD3_KmQeziWy1Pfq_B5RwyR3NQhzMj1hYSCdC_L1HnpH1PTsQjf2p5QpmdNYa_7-UhDNl3A6gIPk"/>
+<div class="absolute top-3 left-3">
+<span class="px-2 py-1 bg-white/90 dark:bg-black/80 backdrop-blur-sm text-xs font-bold rounded text-slate-900 dark:text-white uppercase tracking-wider">Species</span>
+</div>
+</div>
+<div class="p-5 flex flex-col flex-grow">
+<div class="flex items-center gap-2 text-xs text-slate-500 dark:text-slate-400 mb-3">
+<span class="material-symbols-outlined text-[16px]">schedule</span>
+<span>7 min read</span>
+<span class="w-1 h-1 bg-slate-300 rounded-full"></span>
+<span>Oct 10, 2023</span>
+</div>
+<h3 class="text-lg font-bold mb-2 group-hover:text-primary transition-colors line-clamp-2">
+                                    Betta Fish Care: Myths vs. Reality
+                                </h3>
+<p class="text-slate-600 dark:text-slate-400 text-sm line-clamp-3 mb-4 flex-grow">
+                                    Can they really live in small bowls? We debunk common myths and show you how to give your Betta a thriving life.
+                                </p>
+<a class="inline-flex items-center text-primary text-sm font-bold hover:underline" href="#">
+                                    Read Article <span class="material-symbols-outlined text-[16px] ml-1">arrow_forward</span>
+</a>
+</div>
+</article>
+<!-- Article Card 3 -->
+<article class="group bg-white dark:bg-[#151f2e] rounded-xl overflow-hidden border border-slate-200 dark:border-slate-800 hover:shadow-lg hover:shadow-primary/5 transition-all duration-300 flex flex-col h-full">
+<div class="relative h-48 overflow-hidden bg-slate-200">
+<img alt="Aquascaped tank with rocks and green plants Iwagumi style" class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500" data-alt="Aquascaped tank with rocks and green plants Iwagumi style" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCCto1SPlswhumt6XJ7AqmOrPByScC0EG00RKEjzi39fK9959x7E-k5FJ8zYilqLY67cxSlPGPvfVEAz6p11ItUxl4vYU2WNZtIBho4_-HoD38Um9RQQu6hlQoYauK4Cc4zx2-oaIZIZFPoOFpmCZrmAbjHzQAOzdmsc0b2-DDmhXr9brrkmeM3yifsEzQoBNVZ22DFhZsdZWU24939H1BO-hn36kngoThfXb9Gq8EC9rSR6hB2hI1udIVLzZUFLbjLCEJbuMSZCHc"/>
+<div class="absolute top-3 left-3">
+<span class="px-2 py-1 bg-white/90 dark:bg-black/80 backdrop-blur-sm text-xs font-bold rounded text-slate-900 dark:text-white uppercase tracking-wider">Design</span>
+</div>
+</div>
+<div class="p-5 flex flex-col flex-grow">
+<div class="flex items-center gap-2 text-xs text-slate-500 dark:text-slate-400 mb-3">
+<span class="material-symbols-outlined text-[16px]">schedule</span>
+<span>10 min read</span>
+<span class="w-1 h-1 bg-slate-300 rounded-full"></span>
+<span>Oct 05, 2023</span>
+</div>
+<h3 class="text-lg font-bold mb-2 group-hover:text-primary transition-colors line-clamp-2">
+                                    Aquascaping 101: The Iwagumi Style
+                                </h3>
+<p class="text-slate-600 dark:text-slate-400 text-sm line-clamp-3 mb-4 flex-grow">
+                                    Minimalist rock formations that create a zen-like atmosphere. Learn the rules of odd numbers and flow.
+                                </p>
+<a class="inline-flex items-center text-primary text-sm font-bold hover:underline" href="#">
+                                    Read Article <span class="material-symbols-outlined text-[16px] ml-1">arrow_forward</span>
+</a>
+</div>
+</article>
+</div>
+<div class="mt-8 flex justify-center">
+<button class="px-6 py-2 border border-slate-200 dark:border-slate-700 rounded-full text-sm font-bold text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors">
+                            Load More Articles
+                        </button>
+</div>
+</section>
+<!-- Separator / Visual Break -->
+<div class="border-t border-slate-200 dark:border-slate-800"></div>
+<!-- Section: Featured Guide / Article Detail Demo -->
+<section class="bg-white dark:bg-[#151f2e] p-8 md:p-12 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm relative overflow-hidden">
+<div class="absolute top-0 right-0 w-64 h-64 bg-primary/5 rounded-full blur-3xl -mr-32 -mt-32"></div>
+<div class="relative z-10">
+<!-- Breadcrumbs -->
+<div class="flex flex-wrap gap-2 mb-6 text-sm">
+<a class="text-slate-500 hover:text-primary transition-colors" href="#">Knowledge Base</a>
+<span class="text-slate-300">/</span>
+<a class="text-slate-500 hover:text-primary transition-colors" href="#">Freshwater</a>
+<span class="text-slate-300">/</span>
+<span class="text-slate-900 dark:text-slate-100 font-medium">Neon Tetra Care</span>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-10">
+<!-- Article Content -->
+<div class="lg:col-span-8">
+<h1 class="text-3xl md:text-4xl font-bold mb-4 leading-tight">
+                                    Neon Tetra Care Guide: The Jewel of the Aquarium
+                                </h1>
+<div class="flex items-center gap-4 mb-8 pb-8 border-b border-slate-100 dark:border-slate-800">
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 bg-slate-200 rounded-full flex items-center justify-center overflow-hidden">
+<span class="material-symbols-outlined text-slate-500">person</span>
+</div>
+<span class="text-sm font-medium text-slate-900 dark:text-white">Dr. Sarah Fin</span>
+</div>
+<div class="h-4 w-px bg-slate-300 dark:bg-slate-700"></div>
+<span class="text-sm text-slate-500">Updated Oct 24, 2023</span>
+</div>
+<div class="prose prose-slate dark:prose-invert max-w-none text-slate-600 dark:text-slate-300 leading-relaxed">
+<p class="mb-6 text-lg">
+                                        Neon Tetras are among the most popular freshwater tropical fish. Their striking blue and red stripes make them a dazzling addition to any community tank. However, keeping them vibrant requires specific water parameters.
+                                    </p>
+<div class="my-8 rounded-xl overflow-hidden shadow-md">
+<img alt="School of Neon Tetras in a planted tank" class="w-full h-auto object-cover" data-alt="School of Neon Tetras in a planted tank" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCUOeAclz2Vzf1lKD5PXXPuhSNKeREObkdI9VVsBXvOULMlOimITG0gdVdX8JU_vnkkuhDM6FU06N0Cl9FWgaVMGQ-BWdf1j0ZoAR5GVQ-XNVs0zlKDf3S48mfWlaqJcLICx_YbuHFAaCtAIi6QdeNDWTx-EdgrS4K5-uGv2LSZ-rQ7HR7qiwIK1rabuMborj4b6AnWIXdhwnv0NG7YfcHlnrybOqX8OVG2UNspNms9q4iRnPlhKJVW73NrgsDdOqz0rWYT9NqabBM"/>
+<p class="bg-slate-50 dark:bg-[#101822] p-3 text-xs text-center text-slate-500">
+                                            A school of Neon Tetras thriving in a planted environment.
+                                        </p>
+</div>
+<h2 class="text-2xl font-bold text-slate-900 dark:text-white mb-4">Ideal Water Parameters</h2>
+<p class="mb-4">
+                                        Neons originate from the blackwater streams of South America, which are typically soft and acidic. Replicating this environment is key to their longevity.
+                                    </p>
+<!-- Pro-Tip Box -->
+<div class="bg-blue-50 dark:bg-blue-900/20 border-l-4 border-primary p-5 my-6 rounded-r-lg">
+<div class="flex gap-3">
+<span class="material-symbols-outlined text-primary">tips_and_updates</span>
+<div>
+<h4 class="font-bold text-primary mb-1">Pro-Tip: Stability is Key</h4>
+<p class="text-sm text-slate-700 dark:text-slate-300">
+                                                    Neon Tetras are sensitive to changes. Avoid large water changes (more than 30%) at once. Instead, opt for smaller, weekly changes to keep parameters stable.
+                                                </p>
+</div>
+</div>
+</div>
+<h3 class="text-xl font-bold text-slate-900 dark:text-white mb-3 mt-8">Tank Mates</h3>
+<p class="mb-4">
+                                        Because of their small size, Neons should only be kept with peaceful community fish. Avoid large or aggressive species like Cichlids or Angelfish that might see them as a snack.
+                                    </p>
+<ul class="list-disc pl-5 space-y-2 mb-6">
+<li><strong>Good Mates:</strong> Guppies, Rasboras, Corydoras Catfish.</li>
+<li><strong>Bad Mates:</strong> Goldfish, Oscars, Bettas (sometimes).</li>
+</ul>
+</div>
+</div>
+<!-- Right Column: Related Products / Sidebar -->
+<div class="lg:col-span-4 space-y-8">
+<!-- Shop the Setup -->
+<div class="bg-slate-50 dark:bg-[#101822] rounded-xl p-6 border border-slate-100 dark:border-slate-800">
+<h3 class="font-bold text-slate-900 dark:text-white mb-4 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">shopping_bag</span>
+                                        Shop This Guide
+                                    </h3>
+<div class="space-y-4">
+<div class="flex gap-3 items-center group cursor-pointer">
+<div class="w-16 h-16 bg-white rounded-lg p-2 flex items-center justify-center border border-slate-200 overflow-hidden">
+<img alt="Fish food" class="object-contain" data-alt="Fish food container" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBDD0qS_lsA8p4C6ghA-iV5j1BT4Zk62tirAOJz21z2e7IJvCDZQsD9RCUfJLpUq5wLYGGtVB3hI1iD1MaVxUrEsO3kQcXfO6tdz_d6pTTQUeCqt-y33fOvAX-kZ8pEEl6U7xpgc3b3UHOLjY5VfLS1tFs1LG7XojqGSpkJzTD2MkisESxMpYPNFwEv7E06h9bBsczpWPMCO4NLbE_p28mQI8h7Xlrrv2i64-ei1hEC-Oqw8As3DgWOXURdV6rqhtBucHuEJTbID58"/>
+</div>
+<div>
+<p class="text-sm font-medium group-hover:text-primary transition-colors">Micro Pellet Food</p>
+<p class="text-xs text-slate-500 mb-1">Perfect for small mouths</p>
+<span class="text-sm font-bold text-primary">$8.99</span>
+</div>
+</div>
+<div class="flex gap-3 items-center group cursor-pointer">
+<div class="w-16 h-16 bg-white rounded-lg p-2 flex items-center justify-center border border-slate-200 overflow-hidden">
+<img alt="Water test kit" class="object-contain" data-alt="Water test kit box" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAp-yUUCsxQwj5jc7kSDfCE2aQrtj37Mq2VN_7ifZQardzkEmdljwGgeNIJ8kerUgcNEnDoJysoZTmVKe-zTqI50UScLEQTW_dL-zKsrxUWvV7lnkWPqPqagsHe0VFN0T8gZQgP0AWz0Oaiir1VZXn7t1C-3YUqbeUT95RVP739YLM08hoE9sl1FwchRafXak2eiOdOf6JzAxD5awX6BKTYLwtCAl5HWf43Oh8mupKbyBnmNb7oB9r59myAhq0Gtx1As3w-IUVdpnY"/>
+</div>
+<div>
+<p class="text-sm font-medium group-hover:text-primary transition-colors">Master Test Kit</p>
+<p class="text-xs text-slate-500 mb-1">Check pH &amp; Ammonia</p>
+<span class="text-sm font-bold text-primary">$34.50</span>
+</div>
+</div>
+<div class="flex gap-3 items-center group cursor-pointer">
+<div class="w-16 h-16 bg-white rounded-lg p-2 flex items-center justify-center border border-slate-200 overflow-hidden">
+<img alt="Heater" class="object-contain" data-alt="Aquarium heater device" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBo275CcwCNmiYHV9SXMHHDl-NqLYRxZr2jFUWNA-xdUWtYiC4yMuxqXjuSyHHJBUfbGx3veMnP-Zne5M4KFtZjGlM47TVT1bMY39I91o8VhHiW9u2YylT2sE-6xHGoWF1lYTfOD1u8s1EQBPO0-4py99u6DQ9_AKxnhBerwUFdoKA6enz-Hlz4pmzflw0cwdN9P1HMpxMFov-pYte4MdI12UNeQMmoruNhBQiLShH7Cfnl5nXROD4EUg_KHC3x7p8SkFEMl1TUHHc"/>
+</div>
+<div>
+<p class="text-sm font-medium group-hover:text-primary transition-colors">50W Adjustable Heater</p>
+<p class="text-xs text-slate-500 mb-1">Keep temp at 75°F</p>
+<span class="text-sm font-bold text-primary">$19.99</span>
+</div>
+</div>
+</div>
+<button class="w-full mt-6 py-2 border border-primary text-primary hover:bg-primary hover:text-white rounded-lg text-sm font-bold transition-all">
+                                        View All Recommended
+                                    </button>
+</div>
+<!-- Related Articles -->
+<div>
+<h3 class="font-bold text-slate-900 dark:text-white mb-4">Related Readings</h3>
+<div class="space-y-4">
+<a class="block group" href="#">
+<h4 class="text-sm font-medium group-hover:text-primary transition-colors mb-1">Top 5 Tetras for Beginners</h4>
+<p class="text-xs text-slate-500">Comparing Rummy Nose, Neon, and Cardinal Tetras.</p>
+</a>
+<div class="border-t border-slate-100 dark:border-slate-800"></div>
+<a class="block group" href="#">
+<h4 class="text-sm font-medium group-hover:text-primary transition-colors mb-1">Understanding Blackwater Habitats</h4>
+<p class="text-xs text-slate-500">How to use tannins safely in your aquarium.</p>
+</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+</div>
+</div>
+<!-- Newsletter Section -->
+<section class="bg-slate-50 dark:bg-[#151f2e] py-16 border-t border-slate-200 dark:border-slate-800">
+<div class="max-w-4xl mx-auto px-4 text-center">
+<div class="inline-flex items-center justify-center w-12 h-12 bg-primary/10 rounded-full mb-4 text-primary">
+<span class="material-symbols-outlined">mail</span>
+</div>
+<h2 class="text-2xl font-bold text-slate-900 dark:text-white mb-2">Join the AquaLux Community</h2>
+<p class="text-slate-500 mb-8">Get weekly care tips, new arrival alerts, and exclusive discounts delivered to your inbox.</p>
+<form class="max-w-md mx-auto flex gap-2">
+<input class="flex-1 rounded-lg border-slate-200 dark:border-slate-700 bg-white dark:bg-[#101822] text-sm focus:ring-primary focus:border-primary" placeholder="Enter your email" type="email"/>
+<button class="bg-primary hover:bg-primary/90 text-white px-6 py-2 rounded-lg text-sm font-bold transition-colors" type="button">
+                    Subscribe
+                </button>
+</form>
+</div>
+</section>
+<!-- Simple Footer -->
+<footer class="bg-white dark:bg-[#101822] border-t border-slate-200 dark:border-slate-800 py-8">
+<div class="max-w-7xl mx-auto px-4 text-center">
+<div class="flex items-center justify-center gap-2 mb-4">
+<div class="text-slate-400">
+<span class="material-symbols-outlined text-xl">water_drop</span>
+</div>
+<span class="font-bold text-slate-900 dark:text-white">AquaLux</span>
+</div>
+<p class="text-xs text-slate-400">© 2023 AquaLux Inc. All rights reserved. Designed for Fish Lovers.</p>
+</div>
+</footer>
+</body></html>

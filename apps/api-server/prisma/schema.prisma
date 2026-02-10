@@ -1,0 +1,296 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+// ═══════════════════════════════════════════════
+// Users
+// ═══════════════════════════════════════════════
+model User {
+  id         String   @id @default(cuid())
+  email      String   @unique
+  name       String
+  password   String
+  role       Role     @default(USER)
+  avatar     String?
+  phone      String?
+  address    String?  @db.Text
+  supabaseId String?  @unique @map("supabase_id")
+  createdAt  DateTime @default(now()) @map("created_at")
+  updatedAt  DateTime @updatedAt @map("updated_at")
+
+  cart           Cart?
+  orders         Order[]
+  reviews        Review[]
+  chatSessions   AiChatSession[]
+
+  @@map("users")
+}
+
+enum Role {
+  USER
+  ADMIN
+}
+
+// ═══════════════════════════════════════════════
+// Fish Species
+// ═══════════════════════════════════════════════
+model FishSpecies {
+  id             String       @id @default(cuid())
+  name           String
+  scientificName String       @unique @map("scientific_name")
+  description    String?      @db.Text
+  careLevel      CareLevel    @map("care_level")
+  temperament    Temperament
+  waterType      WaterType    @map("water_type")
+  minTankSize    Int?         @map("min_tank_size")
+  minTemp        Float?       @map("min_temp")
+  maxTemp        Float?       @map("max_temp")
+  minPh          Float?       @map("min_ph")
+  maxPh          Float?       @map("max_ph")
+  maxSize        Float?       @map("max_size")
+  lifespan       String?
+  diet           String?
+  origin         String?
+  createdAt      DateTime     @default(now()) @map("created_at")
+
+  images    FishImage[]
+  products  Product[]
+
+  @@map("fish_species")
+}
+
+enum CareLevel {
+  EASY
+  MODERATE
+  HARD
+  EXPERT
+}
+
+enum Temperament {
+  PEACEFUL
+  SEMI_AGGRESSIVE
+  AGGRESSIVE
+}
+
+enum WaterType {
+  FRESHWATER
+  SALTWATER
+  BRACKISH
+}
+
+// ═══════════════════════════════════════════════
+// Fish Images (species or product gallery)
+// ═══════════════════════════════════════════════
+model FishImage {
+  id          String      @id @default(cuid())
+  speciesId   String?     @map("species_id")
+  productId   String?     @map("product_id")
+  url         String
+  alt         String?
+  isPrimary   Boolean     @default(false) @map("is_primary")
+  sortOrder   Int         @default(0) @map("sort_order")
+
+  species FishSpecies? @relation(fields: [speciesId], references: [id], onDelete: Cascade)
+  product Product?     @relation(fields: [productId], references: [id], onDelete: Cascade)
+
+  @@map("fish_images")
+}
+
+// ═══════════════════════════════════════════════
+// Products
+// ═══════════════════════════════════════════════
+model Product {
+  id            String      @id @default(cuid())
+  speciesId     String      @map("species_id")
+  name          String
+  slug          String      @unique
+  description   String      @default("") @db.Text
+  price         Float
+  comparePrice  Float?      @map("compare_price")
+  size          FishSize    @default(M)
+  age           String?
+  gender        String?
+  isActive      Boolean     @default(true) @map("is_active")
+  available     Int         @default(0)
+  reserved      Int         @default(0)
+  sold          Int         @default(0)
+  avgRating     Float       @default(0) @map("avg_rating")
+  reviewCount   Int         @default(0) @map("review_count")
+  createdAt     DateTime    @default(now()) @map("created_at")
+  updatedAt     DateTime    @updatedAt @map("updated_at")
+
+  species       FishSpecies     @relation(fields: [speciesId], references: [id])
+  images        FishImage[]
+  cartItems     CartItem[]
+  orderItems    OrderItem[]
+  reviews       Review[]
+  inventoryLogs InventoryLog[]
+
+  @@map("products")
+}
+
+enum FishSize {
+  XS
+  S
+  M
+  L
+  XL
+}
+
+// ═══════════════════════════════════════════════
+// Cart
+// ═══════════════════════════════════════════════
+model Cart {
+  id        String   @id @default(cuid())
+  userId    String   @unique @map("user_id")
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  user  User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  items CartItem[]
+
+  @@map("carts")
+}
+
+model CartItem {
+  id         String   @id @default(cuid())
+  cartId     String   @map("cart_id")
+  productId  String   @map("product_id")
+  quantity   Int
+  price      Float    @default(0)
+  createdAt  DateTime @default(now()) @map("created_at")
+
+  cart    Cart    @relation(fields: [cartId], references: [id], onDelete: Cascade)
+  product Product @relation(fields: [productId], references: [id])
+
+  @@unique([cartId, productId])
+  @@map("cart_items")
+}
+
+// ═══════════════════════════════════════════════
+// Orders
+// ═══════════════════════════════════════════════
+model Order {
+  id              String      @id @default(cuid())
+  userId          String      @map("user_id")
+  status          OrderStatus @default(PENDING)
+  subtotal        Float       @default(0)
+  shippingFee     Float       @default(0) @map("shipping_fee")
+  total           Float
+  shippingAddress String      @map("shipping_address") @db.Text
+  shippingCity    String      @default("") @map("shipping_city")
+  shippingPhone   String      @default("") @map("shipping_phone")
+  paymentMethod   String      @default("COD") @map("payment_method")
+  note            String?     @db.Text
+  createdAt       DateTime    @default(now()) @map("created_at")
+  updatedAt       DateTime    @updatedAt @map("updated_at")
+
+  user  User        @relation(fields: [userId], references: [id])
+  items OrderItem[]
+
+  @@map("orders")
+}
+
+enum OrderStatus {
+  PENDING
+  CONFIRMED
+  PREPARING
+  SHIPPING
+  DELIVERED
+  CANCELLED
+  REFUNDED
+}
+
+model OrderItem {
+  id        String @id @default(cuid())
+  orderId   String @map("order_id")
+  productId String @map("product_id")
+  quantity  Int
+  price     Float
+  name      String @default("")
+
+  order   Order   @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  product Product @relation(fields: [productId], references: [id])
+
+  @@map("order_items")
+}
+
+// ═══════════════════════════════════════════════
+// Inventory Logs
+// ═══════════════════════════════════════════════
+model InventoryLog {
+  id        String          @id @default(cuid())
+  productId String          @map("product_id")
+  action    InventoryAction
+  quantity  Int
+  note      String?
+  createdAt DateTime        @default(now()) @map("created_at")
+
+  product Product @relation(fields: [productId], references: [id])
+
+  @@map("inventory_logs")
+}
+
+enum InventoryAction {
+  ADD
+  RESERVE
+  RELEASE
+  SELL
+  RETURN
+}
+
+// ═══════════════════════════════════════════════
+// Reviews
+// ═══════════════════════════════════════════════
+model Review {
+  id        String   @id @default(cuid())
+  userId    String   @map("user_id")
+  productId String   @map("product_id")
+  rating    Int      @db.SmallInt
+  comment   String?  @db.Text
+  createdAt DateTime @default(now()) @map("created_at")
+
+  user    User    @relation(fields: [userId], references: [id])
+  product Product @relation(fields: [productId], references: [id])
+
+  @@unique([userId, productId])
+  @@map("reviews")
+}
+
+// ═══════════════════════════════════════════════
+// AI Chat
+// ═══════════════════════════════════════════════
+model AiChatSession {
+  id        String   @id @default(cuid())
+  userId    String   @map("user_id")
+  title     String   @default("Cuộc hội thoại mới")
+  createdAt DateTime @default(now()) @map("created_at")
+
+  user     User             @relation(fields: [userId], references: [id], onDelete: Cascade)
+  messages AiChatMessage[]
+
+  @@map("ai_chat_sessions")
+}
+
+model AiChatMessage {
+  id        String       @id @default(cuid())
+  sessionId String       @map("session_id")
+  role      MessageRole
+  content   String       @db.Text
+  createdAt DateTime     @default(now()) @map("created_at")
+
+  session AiChatSession @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+
+  @@map("ai_chat_messages")
+}
+
+enum MessageRole {
+  USER
+  ASSISTANT
+}
