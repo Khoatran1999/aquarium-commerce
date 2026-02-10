@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <defs>
+    <linearGradient id="aqua" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00ced1"/>
+      <stop offset="100%" stop-color="#0097a7"/>
+    </linearGradient>
+  </defs>
+  <circle cx="32" cy="32" r="30" fill="url(#aqua)"/>
+  <!-- Fish body -->
+  <ellipse cx="30" cy="32" rx="14" ry="8" fill="white" opacity="0.95"/>
+  <!-- Tail -->
+  <polygon points="44,32 54,24 54,40" fill="white" opacity="0.85"/>
+  <!-- Eye -->
+  <circle cx="22" cy="30" r="2.5" fill="#0d131b"/>
+  <!-- Bubbles -->
+  <circle cx="14" cy="20" r="2" fill="white" opacity="0.5"/>
+  <circle cx="18" cy="14" r="1.5" fill="white" opacity="0.4"/>
+  <circle cx="12" cy="26" r="1" fill="white" opacity="0.3"/>
+</svg>

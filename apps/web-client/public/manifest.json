@@ -1,0 +1,10 @@
+{
+  "name": "AquaLuxe – Premium Ornamental Fish",
+  "short_name": "AquaLuxe",
+  "description": "Shop premium ornamental fish online. Freshwater, saltwater, koi and rare species.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#f0fdfa",
+  "theme_color": "#00ced1",
+  "icons": [{ "src": "/favicon.svg", "sizes": "any", "type": "image/svg+xml" }]
+}

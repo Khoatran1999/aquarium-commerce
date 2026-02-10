@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>AquaLuxe - Premium Ornamental Fish</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#00CED1","secondary": "#FF7F50","accent": "#FFD700","background-light": "#f0fdfa","background-dark": "#061b23",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.5rem", "lg": "1rem", "xl": "1.5rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style type="text/tailwindcss">
+        :root {
+            --primary: #00CED1;
+            --secondary: #FF7F50;
+            --accent: #FFD700;
+        }
+        .text-coral { color: var(--secondary); }
+        .bg-coral { background-color: var(--secondary); }
+        .border-coral { border-color: var(--secondary); }
+        .bg-aqua { background-color: var(--primary); }
+        .text-aqua { color: var(--primary); }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-[#0d131b] dark:text-white font-display overflow-x-hidden">
+<header class="sticky top-0 z-50 w-full border-b border-aqua/20 dark:border-gray-800 bg-white/90 dark:bg-slate-900/90 backdrop-blur-md">
+<div class="max-w-[1280px] mx-auto px-4 md:px-10 py-3">
+<div class="flex items-center justify-between gap-4">
+<div class="flex items-center gap-2 text-aqua">
+<span class="material-symbols-outlined text-3xl">water_drop</span>
+<h2 class="text-[#0d131b] dark:text-white text-xl font-bold tracking-tight">AquaLuxe</h2>
+</div>
+<nav class="hidden md:flex items-center gap-8">
+<a class="text-sm font-medium hover:text-coral transition-colors" href="#">Shop</a>
+<a class="text-sm font-medium hover:text-coral transition-colors" href="#">Species</a>
+<a class="text-sm font-medium hover:text-coral transition-colors" href="#">Supplies</a>
+<a class="text-sm font-medium hover:text-coral transition-colors" href="#">Care Guides</a>
+</nav>
+<div class="flex items-center gap-4">
+<label class="hidden lg:flex items-center bg-gray-100 dark:bg-slate-800 rounded-full h-10 px-4 w-64 border border-transparent focus-within:border-aqua transition-all">
+<span class="material-symbols-outlined text-gray-500 text-[20px]">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-sm ml-2 w-full placeholder-gray-500 text-[#0d131b] dark:text-white" placeholder="Search species..."/>
+</label>
+<div class="flex gap-2">
+<button class="p-2 rounded-full hover:bg-aqua/10 text-[#0d131b] dark:text-white transition-colors">
+<span class="material-symbols-outlined text-[24px]">shopping_cart</span>
+</button>
+<button class="p-2 rounded-full hover:bg-aqua/10 text-[#0d131b] dark:text-white transition-colors">
+<span class="material-symbols-outlined text-[24px]">person</span>
+</button>
+<button class="md:hidden p-2 rounded-full hover:bg-aqua/10 text-[#0d131b] dark:text-white transition-colors">
+<span class="material-symbols-outlined text-[24px]">menu</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</header>
+<section class="relative w-full h-[700px] flex items-center justify-center overflow-hidden">
+<div class="absolute inset-0 z-0 bg-cover bg-center" style='background-image: linear-gradient(rgba(0, 80, 100, 0.4) 0%, rgba(0, 30, 40, 0.7) 100%), url("https://lh3.googleusercontent.com/aida-public/AB6AXuD9Xc5E1fXNnhwDxlHLh9_RigMrx1eFnOk-14c3wC_5if4bUe_qKTzjpW76uszOaPVzjLTSvbgXpyOYZpLqB0d65sI7KLG7O-bsi7oZg3u8JGU_VFXBcbg8ibpD_6FKNNPvmUyJbRlo0wSrgahR_auTl255Jz5pKWulsvw08UnK6XHmL-SLZW3L92sGBvA8j33uXFrMmBYjYw3963aNmnEz7r4AbaPo9hu7hb4t2Rbu5o0fHYNRerEkLcvhKLoSW2F5Ue19fH1mPeo");'></div>
+<div class="relative z-10 text-center px-4 max-w-4xl mx-auto flex flex-col items-center gap-6">
+<span class="inline-block py-1 px-3 rounded-full bg-accent text-slate-900 text-xs font-bold uppercase tracking-widest animate-pulse">Tropical Reef Collection</span>
+<h1 class="text-white text-5xl md:text-8xl font-black leading-tight tracking-tight drop-shadow-2xl">
+            Bring the Ocean Home
+        </h1>
+<p class="text-blue-50 text-lg md:text-xl font-light max-w-2xl drop-shadow-md">
+            Premium ornamental fish delivered safely to your door. Experience the serenity of aquatic life with our sustainable collection.
+        </p>
+<div class="flex flex-wrap justify-center gap-4 mt-4">
+<button class="bg-coral hover:bg-[#ff6a33] text-white font-bold py-4 px-10 rounded-full transition-all transform hover:scale-105 shadow-xl shadow-secondary/30">
+                Shop Collection
+            </button>
+<button class="bg-white/10 hover:bg-white/20 backdrop-blur-md border border-white/30 text-white font-bold py-4 px-10 rounded-full transition-all">
+                Learn More
+            </button>
+</div>
+</div>
+</section>
+<main class="max-w-[1280px] mx-auto px-4 md:px-10 py-12 flex flex-col gap-24">
+<section>
+<div class="flex items-center justify-between mb-10">
+<h2 class="text-2xl md:text-4xl font-black tracking-tight flex items-center gap-3">
+<span class="w-2 h-8 bg-coral rounded-full"></span>
+                Explore by Category
+            </h2>
+<a class="text-aqua font-bold flex items-center gap-1 hover:text-coral transition-colors" href="#">
+                View all <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</a>
+</div>
+<div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8">
+<a class="group flex flex-col items-center gap-5 p-2 rounded-2xl transition-all" href="#">
+<div class="w-40 h-40 rounded-full p-1 border-2 border-transparent group-hover:border-coral transition-all">
+<div class="w-full h-full rounded-full overflow-hidden shadow-xl group-hover:scale-95 transition-transform duration-500">
+<div class="w-full h-full bg-cover bg-center" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDNMtxFfnWEVyDAJi3LnS_neinxrrR3ZxyL7vt0FaW3RypDNATYImF6NvjETbSjQga1dbVozE7QI_r9HTSBLD2wDQcdYQYMZv2UoKmZq9y99S5Qtdqod75f2GQUKgZ5lYwGRmNocnONNpyMtc0b8eEZHI7oAknzVYbXlV-OPFHGC7aiWvTQY93tnzrbxe2fXkPVUy3hnk15VB0bJPhf-Isj7qCCFmhMGDO7MfsMKlUwoloTZVgy18BWf11C7TVa4B_0KcTGEkg2BKE");'></div>
+</div>
+</div>
+<div class="text-center">
+<h3 class="font-bold text-xl group-hover:text-aqua transition-colors">Freshwater</h3>
+<p class="text-sm text-gray-500 dark:text-gray-400">Vibrant &amp; Hardy</p>
+</div>
+</a>
+<a class="group flex flex-col items-center gap-5 p-2 rounded-2xl transition-all" href="#">
+<div class="w-40 h-40 rounded-full p-1 border-2 border-transparent group-hover:border-coral transition-all">
+<div class="w-full h-full rounded-full overflow-hidden shadow-xl group-hover:scale-95 transition-transform duration-500">
+<div class="w-full h-full bg-cover bg-center" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCsuL7OnHi1wQOp5IZSoloVgHqND8nL7kwpL4JszWGjxcrXlfhLl_bBA-JRmxt57GNi9_uzvY4nZ41HkSBsxjQAEO3LRMZIgpT_lp8tjMSNeXwPlW1Q_iX2oEG0ZTvSB7C5MQLMY3eOVgsLwafyStrgI-bW6F-sWJQSDoqu9o--ZHHm0YEFnjQhBR7Atwf4xdXfET0QeCAruqh53mAenzer1SxgzKVS2SmYALAR5Jk1Ec1QMjyQimOxNG1-vXuydCench7G3P7f0IY");'></div>
+</div>
+</div>
+<div class="text-center">
+<h3 class="font-bold text-xl group-hover:text-aqua transition-colors">Saltwater</h3>
+<p class="text-sm text-gray-500 dark:text-gray-400">Exotic &amp; Rare</p>
+</div>
+</a>
+<a class="group flex flex-col items-center gap-5 p-2 rounded-2xl transition-all" href="#">
+<div class="w-40 h-40 rounded-full p-1 border-2 border-transparent group-hover:border-coral transition-all">
+<div class="w-full h-full rounded-full overflow-hidden shadow-xl group-hover:scale-95 transition-transform duration-500">
+<div class="w-full h-full bg-cover bg-center" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuA-lZ-MPN3u97Zn32toHWHcKjoVs6vYNRlsjwBngZyydSKvAiQMCW47SpUKofuZvGhEEoxYOBQtdrtWMY9em0WOE-UvJssaE8i_uFKPU5KeGvrt0misL-8h1d-8je2SWpOAzzIsVfZn3ieKkUO0s4Em6LA2z7-9BZ9oWziY5nnLigKfUPewYm1KA7A7AoA2ZhHRezwr7xWxk3-2geqiUDOR-18AIqqMF-jUhxMotBdYc1AesBjPRQUHTqL5-YYuPsNJJzhdEBaKW6E");'></div>
+</div>
+</div>
+<div class="text-center">
+<h3 class="font-bold text-xl group-hover:text-aqua transition-colors">Invertebrates</h3>
+<p class="text-sm text-gray-500 dark:text-gray-400">Shrimp &amp; Snails</p>
+</div>
+</a>
+<a class="group flex flex-col items-center gap-5 p-2 rounded-2xl transition-all" href="#">
+<div class="w-40 h-40 rounded-full p-1 border-2 border-transparent group-hover:border-coral transition-all">
+<div class="w-full h-full rounded-full overflow-hidden shadow-xl group-hover:scale-95 transition-transform duration-500">
+<div class="w-full h-full bg-cover bg-center" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDbzGUyVzeRWup8fDU7kh5QQpHwI2k8zEiD-biVFkifeT0_G8a8wcS9EIWzYxxxQR8ufG7ohWFBY0OFrkrAFuq8NSlUuo_iTjtIJLvPD6wRVL_9Wx565uv-kfpJ8bNjJHdEjKKs2RQuMagxX3D0ajBLMwBh_-ae0YcW7vP4tWhi-5MrL9p6mGX2ch0n8-6TMLe--hiziWlcqnvZZhOR_tC4txXQ_4Nnbfq1Ks0MFaZxAE3Q4cqV3ALGmyb_t9rr14GN0lLK6KGfySw");'></div>
+</div>
+</div>
+<div class="text-center">
+<h3 class="font-bold text-xl group-hover:text-aqua transition-colors">Plants</h3>
+<p class="text-sm text-gray-500 dark:text-gray-400">Live Greenery</p>
+</div>
+</a>
+<a class="group flex flex-col items-center gap-5 p-2 rounded-2xl transition-all" href="#">
+<div class="w-40 h-40 rounded-full p-1 border-2 border-transparent group-hover:border-coral transition-all">
+<div class="w-full h-full rounded-full overflow-hidden shadow-xl group-hover:scale-95 transition-transform duration-500">
+<div class="w-full h-full bg-cover bg-center" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuB9mXPV0Z4WpfH2a57G2FUq6sCiwmVUR7M6EjqJH61eKh1sxuuyncNy4FqOcl8W_i2ZeboAypT2kexizatFAbMTiHpm0yg3dhSt2dysVflCx9GedytvLxwsBEfaEyI3VkA2cbu3NJrVceRcknagBHV6zLIZOHO1oO4bSt0EC2nbPcY4KfwY7v2r_lwCUOsA0Gm8RHFxC7BSijtlWY95gtUyn1CE4KBCB4s3k7IJXbh2k8ACHy7QO_MdZKXXcUE2DtipnoueHKdOfTU");'></div>
+</div>
+</div>
+<div class="text-center">
+<h3 class="font-bold text-xl group-hover:text-aqua transition-colors">Tanks &amp; Tech</h3>
+<p class="text-sm text-gray-500 dark:text-gray-400">Setup &amp; Care</p>
+</div>
+</a>
+</div>
+</section>
+<section>
+<div class="flex items-center justify-between mb-8">
+<h2 class="text-2xl md:text-4xl font-black tracking-tight flex items-center gap-3">
+<span class="w-2 h-8 bg-aqua rounded-full"></span>
+                Best Selling Products
+            </h2>
+<div class="flex gap-2">
+<button class="p-2 rounded-full border border-aqua/30 dark:border-slate-700 hover:bg-aqua hover:text-white transition-colors">
+<span class="material-symbols-outlined">chevron_left</span>
+</button>
+<button class="p-2 rounded-full border border-aqua/30 dark:border-slate-700 hover:bg-aqua hover:text-white transition-colors">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+</div>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+<div class="group relative bg-white dark:bg-slate-900 rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all border border-aqua/5">
+<div class="relative aspect-[4/5] overflow-hidden bg-gray-100">
+<div class="w-full h-full bg-cover bg-center group-hover:scale-110 transition-transform duration-700" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBFhMFDAM59uMG-ZEDZct1kSuEvrsR8bs_Fx604PSx22gNYg0lA7ItxC-Qagyc1vse3zkS3kT_m0uuV9xTD00vliM0Ec-QJqk-XTx8AFBJij5TdxnvMZS2x_6sflZ6Ulb36goLKb3VyiAcgHXaqrGd_ENYNdMo70JA8ddf6q99Iw5ADL4jK3JcHTwe7pMRxj935uX3UhUz7u4B2DEOz7Zsb4az1Y_o7vpuYWgVfOFnjIrt6Wt1FcO5xAt_fYywNP_icB0MfLtzts4c");'></div>
+<div class="absolute top-4 left-4">
+<span class="bg-accent text-slate-900 text-[10px] font-black px-2 py-1 rounded-md uppercase tracking-tighter">Bestseller</span>
+</div>
+<button class="absolute top-4 right-4 p-2 rounded-full bg-white/90 text-gray-400 hover:text-coral transition-colors shadow-sm">
+<span class="material-symbols-outlined text-[20px]">favorite</span>
+</button>
+</div>
+<div class="p-6">
+<span class="text-[10px] font-bold text-aqua uppercase tracking-widest">Freshwater</span>
+<h3 class="font-bold text-xl mb-1 mt-1 group-hover:text-coral transition-colors">Neon Tetra School</h3>
+<p class="text-gray-500 dark:text-gray-400 text-sm mb-4 italic">Paracheirodon innesi</p>
+<div class="flex items-center justify-between">
+<span class="font-black text-2xl text-slate-800 dark:text-white">$24.00</span>
+<button class="flex items-center gap-2 bg-aqua/10 hover:bg-aqua hover:text-white text-aqua px-4 py-2 rounded-full transition-all font-bold text-sm">
+<span class="material-symbols-outlined text-lg">add_shopping_cart</span>
+                            Add
+                        </button>
+</div>
+</div>
+</div>
+<div class="group relative bg-white dark:bg-slate-900 rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all border border-aqua/5">
+<div class="relative aspect-[4/5] overflow-hidden bg-gray-100">
+<div class="w-full h-full bg-cover bg-center group-hover:scale-110 transition-transform duration-700" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuB0IfQWiGwuZUU7WzeJB_uS2_U3x7bLjybHXZEJEmyH_XUsaK8lEcrLMssqlu84X6wxX8w2zYBw3H1gi8XaBIa-17EffYoy6rOQyLZT6M0ouyhDvJ-x4rr-rz0xG5IN6VTdsKPWxpIrmUIfdHGlPQT10ZGQz4MBGNm3o8u1W2HncsJcamAaTMWSPUtSJxTaqSUGzXVl6uv91ggGMLNI4gohPfGEd5uRAA8KLHNf0PxtP5-vravHXL1KaHEmyUHUEFqTeY5sy6Ll9YA");'></div>
+<button class="absolute top-4 right-4 p-2 rounded-full bg-white/90 text-gray-400 hover:text-coral transition-colors shadow-sm">
+<span class="material-symbols-outlined text-[20px]">favorite</span>
+</button>
+</div>
+<div class="p-6">
+<span class="text-[10px] font-bold text-aqua uppercase tracking-widest">Discus</span>
+<h3 class="font-bold text-xl mb-1 mt-1 group-hover:text-coral transition-colors">Blue Diamond Discus</h3>
+<p class="text-gray-500 dark:text-gray-400 text-sm mb-4 italic">Symphysodon aequifasciatus</p>
+<div class="flex items-center justify-between">
+<span class="font-black text-2xl text-slate-800 dark:text-white">$89.00</span>
+<button class="flex items-center gap-2 bg-aqua/10 hover:bg-aqua hover:text-white text-aqua px-4 py-2 rounded-full transition-all font-bold text-sm">
+<span class="material-symbols-outlined text-lg">add_shopping_cart</span>
+                            Add
+                        </button>
+</div>
+</div>
+</div>
+<div class="group relative bg-white dark:bg-slate-900 rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all border border-aqua/5">
+<div class="relative aspect-[4/5] overflow-hidden bg-gray-100">
+<div class="w-full h-full bg-cover bg-center group-hover:scale-110 transition-transform duration-700" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuALgUgj1DRIygFxaKAbE99_p3-Dw_-AtVI-QzU4Gh567Q1T_Irj9DzcB_fIVXcppSsjvybuRm7EK3aptA60DnOwxELF1g7ElP9OqnpVKal_3EJmoEnhY8bILL7zJluMlGQ7AKKJCp96tc-hWED1siMIvJcAH8LYPBadbc9ScdbPnUINqXVnb_MTQT-HrDc7jG99g_H7v4cAJqwHzJa8sP0MYOScNWb7TtTDH5pcOyacIn5N9rGxsjFBm6bqnMe7ZAGBKpil-bI49iI");'></div>
+<button class="absolute top-4 right-4 p-2 rounded-full bg-white/90 text-gray-400 hover:text-coral transition-colors shadow-sm">
+<span class="material-symbols-outlined text-[20px]">favorite</span>
+</button>
+</div>
+<div class="p-6">
+<span class="text-[10px] font-bold text-aqua uppercase tracking-widest">Goldfish</span>
+<h3 class="font-bold text-xl mb-1 mt-1 group-hover:text-coral transition-colors">Oranda Goldfish</h3>
+<p class="text-gray-500 dark:text-gray-400 text-sm mb-4 italic">Carassius auratus</p>
+<div class="flex items-center justify-between">
+<span class="font-black text-2xl text-slate-800 dark:text-white">$35.00</span>
+<button class="flex items-center gap-2 bg-aqua/10 hover:bg-aqua hover:text-white text-aqua px-4 py-2 rounded-full transition-all font-bold text-sm">
+<span class="material-symbols-outlined text-lg">add_shopping_cart</span>
+                            Add
+                        </button>
+</div>
+</div>
+</div>
+<div class="group relative bg-white dark:bg-slate-900 rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all border border-aqua/5">
+<div class="relative aspect-[4/5] overflow-hidden bg-gray-100">
+<div class="w-full h-full bg-cover bg-center group-hover:scale-110 transition-transform duration-700" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCfqjNe_75jEjJCug6bkBG3nr2VwWRLcTAQXvaoBhMxn70irDOhPINiBT0PMiXcFFDU7aOtoy_3ZCZ_oSzczO87D1Ye-k2RPRpmP4t2agKFm2X41qKG5lVaYi3E93-NW15cxclyVvsTPkFMY4HyA8WmF15RFdN3cJuqiQ0yqbY8GQorCIxjRiuoErEMS6VQaE2kCglB0SA3hcbpByhivqHjRop4fSo48TXJ0Q1uysJhNyf2nGUpO9SJqPqr6OVyXizsYP5uFkCHias");'></div>
+<div class="absolute top-4 left-4">
+<span class="bg-coral text-white text-[10px] font-black px-2 py-1 rounded-md uppercase tracking-tighter">New</span>
+</div>
+<button class="absolute top-4 right-4 p-2 rounded-full bg-white/90 text-gray-400 hover:text-coral transition-colors shadow-sm">
+<span class="material-symbols-outlined text-[20px]">favorite</span>
+</button>
+</div>
+<div class="p-6">
+<span class="text-[10px] font-bold text-aqua uppercase tracking-widest">Saltwater</span>
+<h3 class="font-bold text-xl mb-1 mt-1 group-hover:text-coral transition-colors">Blue Tang</h3>
+<p class="text-gray-500 dark:text-gray-400 text-sm mb-4 italic">Paracanthurus hepatus</p>
+<div class="flex items-center justify-between">
+<span class="font-black text-2xl text-slate-800 dark:text-white">$55.00</span>
+<button class="flex items-center gap-2 bg-aqua/10 hover:bg-aqua hover:text-white text-aqua px-4 py-2 rounded-full transition-all font-bold text-sm">
+<span class="material-symbols-outlined text-lg">add_shopping_cart</span>
+                            Add
+                        </button>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="bg-white dark:bg-slate-900 rounded-3xl p-8 md:p-16 shadow-xl border border-aqua/10 relative overflow-hidden">
+<div class="absolute top-0 right-0 w-32 h-32 bg-accent/10 rounded-full -mr-16 -mt-16 blur-3xl"></div>
+<div class="absolute bottom-0 left-0 w-32 h-32 bg-aqua/10 rounded-full -ml-16 -mb-16 blur-3xl"></div>
+<div class="grid md:grid-cols-3 gap-12 relative z-10">
+<div class="flex flex-col items-center text-center px-4">
+<div class="bg-aqua/10 p-5 rounded-2xl mb-6 text-aqua transform rotate-3">
+<span class="material-symbols-outlined text-5xl">local_shipping</span>
+</div>
+<h3 class="text-xl font-black mb-3 text-slate-800 dark:text-white">Safe Arrival Guarantee</h3>
+<p class="text-gray-500 text-sm leading-relaxed">We use specialized insulated packaging to ensure your fish arrive healthy and stress-free.</p>
+</div>
+<div class="flex flex-col items-center text-center px-4">
+<div class="bg-coral/10 p-5 rounded-2xl mb-6 text-coral transform -rotate-3">
+<span class="material-symbols-outlined text-5xl">verified</span>
+</div>
+<h3 class="text-xl font-black mb-3 text-slate-800 dark:text-white">7-Day Health Warranty</h3>
+<p class="text-gray-500 text-sm leading-relaxed">Peace of mind for your new pets. We stand behind the health of every creature we sell.</p>
+</div>
+<div class="flex flex-col items-center text-center px-4">
+<div class="bg-accent/10 p-5 rounded-2xl mb-6 text-accent transform rotate-6">
+<span class="material-symbols-outlined text-5xl">support_agent</span>
+</div>
+<h3 class="text-xl font-black mb-3 text-slate-800 dark:text-white">Expert Vet Support</h3>
+<p class="text-gray-500 text-sm leading-relaxed">Have questions? Our team of aquatic veterinarians is available to help with care advice.</p>
+</div>
+</div>
+</section>
+<section>
+<div class="text-center mb-12">
+<h2 class="text-3xl md:text-5xl font-black tracking-tight mb-4 text-slate-800 dark:text-white">What Our Customers Say</h2>
+<div class="w-24 h-1.5 bg-coral mx-auto rounded-full"></div>
+</div>
+<div class="grid md:grid-cols-3 gap-8">
+<div class="bg-white dark:bg-slate-900 p-8 rounded-2xl shadow-md border border-gray-100 dark:border-slate-800 relative">
+<span class="material-symbols-outlined text-6xl text-aqua/10 absolute top-4 right-4 font-black">format_quote</span>
+<div class="flex gap-1 text-accent mb-4">
+<span class="material-symbols-outlined fill-1">star</span>
+<span class="material-symbols-outlined fill-1">star</span>
+<span class="material-symbols-outlined fill-1">star</span>
+<span class="material-symbols-outlined fill-1">star</span>
+<span class="material-symbols-outlined fill-1">star</span>
+</div>
+<p class="text-gray-600 dark:text-gray-300 italic mb-6 leading-relaxed">"The Discus I ordered arrived in perfect health and the colors are even more stunning than the photos. Best shipping experience I've had."</p>
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-full bg-aqua/20 flex items-center justify-center text-aqua font-bold">JD</div>
+<div>
+<h4 class="font-bold text-slate-800 dark:text-white">James Dalton</h4>
+<p class="text-xs text-gray-400 uppercase tracking-widest">Verified Buyer</p>
+</div>
+</div>
+</div>
+<div class="bg-white dark:bg-slate-900 p-8 rounded-2xl shadow-md border border-gray-100 dark:border-slate-800 relative">
+<span class="material-symbols-outlined text-6xl text-coral/10 absolute top-4 right-4 font-black">format_quote</span>
+<div class="flex gap-1 text-accent mb-4">
+<span class="material-symbols-outlined fill-1">star</span>
+<span class="material-symbols-outlined fill-1">star</span>
+<span class="material-symbols-outlined fill-1">star</span>
+<span class="material-symbols-outlined fill-1">star</span>
+<span class="material-symbols-outlined fill-1">star</span>
+</div>
+<p class="text-gray-600 dark:text-gray-300 italic mb-6 leading-relaxed">"Excellent customer service! Their experts helped me balance my water chemistry before my saltwater fish arrived. Truly a premium service."</p>
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-full bg-coral/20 flex items-center justify-center text-coral font-bold">SM</div>
+<div>
+<h4 class="font-bold text-slate-800 dark:text-white">Sarah Miller</h4>
+<p class="text-xs text-gray-400 uppercase tracking-widest">Verified Buyer</p>
+</div>
+</div>
+</div>
+<div class="bg-white dark:bg-slate-900 p-8 rounded-2xl shadow-md border border-gray-100 dark:border-slate-800 relative">
+<span class="material-symbols-outlined text-6xl text-accent/10 absolute top-4 right-4 font-black">format_quote</span>
+<div class="flex gap-1 text-accent mb-4">
+<span class="material-symbols-outlined fill-1">star</span>
+<span class="material-symbols-outlined fill-1">star</span>
+<span class="material-symbols-outlined fill-1">star</span>
+<span class="material-symbols-outlined fill-1">star</span>
+<span class="material-symbols-outlined fill-1">star</span>
+</div>
+<p class="text-gray-600 dark:text-gray-300 italic mb-6 leading-relaxed">"The variety is unmatched. I found rare species here that I couldn't find anywhere else. Everything was packed with so much care."</p>
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-full bg-accent/20 flex items-center justify-center text-slate-800 font-bold">RK</div>
+<div>
+<h4 class="font-bold text-slate-800 dark:text-white">Robert K.</h4>
+<p class="text-xs text-gray-400 uppercase tracking-widest">Verified Buyer</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section>
+<div class="flex items-center justify-between mb-10">
+<h2 class="text-2xl md:text-4xl font-black tracking-tight flex items-center gap-3">
+<span class="w-2 h-8 bg-accent rounded-full"></span>
+                From the Journal
+            </h2>
+<a class="text-aqua font-bold flex items-center gap-1 hover:text-coral transition-colors" href="#">
+                Read all posts <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</a>
+</div>
+<div class="grid md:grid-cols-2 gap-10">
+<article class="flex flex-col md:flex-row gap-8 bg-white dark:bg-slate-900 rounded-3xl overflow-hidden hover:shadow-2xl transition-all border border-gray-100 dark:border-slate-800 p-6 group">
+<div class="w-full md:w-2/5 aspect-video md:aspect-square rounded-2xl overflow-hidden shrink-0">
+<div class="w-full h-full bg-cover bg-center group-hover:scale-105 transition-transform duration-500" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCngo6hlkF4TcVsYc_FchNbjDI9JQrFtfUqMrnR_soAoV-xqpIV-tdvFqmZ1IuhOpnv3Oewsquo8S4nPZa-uxvG_tnaVaQVwDhNFGCRO9gQ0r0dzJeX1kuEPTKj78n7tfiNIhajnMNrwm5pRWbr8q589FiuNkauP-0lB0yPyJgG7hbqu6LkWYQ3Z78XcdNxKEW1iq_5hHlBwHCNQLgQhABBtxq9-U63bzc63oDole81Cypmc6LzGMUeNza7otjJRbUMvoW3xAw0RRk");'></div>
+</div>
+<div class="flex-1 flex flex-col justify-center">
+<span class="text-[10px] font-black text-coral mb-3 uppercase tracking-widest">Guides • 5 min read</span>
+<h3 class="text-2xl font-black mb-4 group-hover:text-aqua transition-colors leading-tight">Aquascape Trends 2024: The Minimalist Approach</h3>
+<p class="text-gray-500 dark:text-gray-400 text-sm mb-6 line-clamp-2">Discover how to create serene underwater landscapes using negative space and simple rock formations.</p>
+<a class="text-aqua font-black text-sm flex items-center gap-2 hover:gap-3 transition-all" href="#">Read Article <span class="material-symbols-outlined text-lg">east</span></a>
+</div>
+</article>
+<article class="flex flex-col md:flex-row gap-8 bg-white dark:bg-slate-900 rounded-3xl overflow-hidden hover:shadow-2xl transition-all border border-gray-100 dark:border-slate-800 p-6 group">
+<div class="w-full md:w-2/5 aspect-video md:aspect-square rounded-2xl overflow-hidden shrink-0">
+<div class="w-full h-full bg-cover bg-center group-hover:scale-105 transition-transform duration-500" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBRZQfiRjoAGNtx4SzIrswKzP5SwXXaSsA03hfjh5ZBqwYiM7E4tb7IkEDnjGhjaLHZjH2XITy_noYALSBH9Tj1Pn9Om75BtHuOJ2Jg9di2W9Q-8NE9dsz5UDeDIPKuamNVyh6pyI5DNg58TK2DRtlCP0hUzDasBFNY-kRkcSKrJxdOJN3QsBl0txTzh7iRsTh32as9cTrmSucoD30h6QPTd_d7DBQVpr4vR83dm2E-JK3VwoRVy2sw4MkuBeNDaqEqgrAezl104X4");'></div>
+</div>
+<div class="flex-1 flex flex-col justify-center">
+<span class="text-[10px] font-black text-coral mb-3 uppercase tracking-widest">Care • 8 min read</span>
+<h3 class="text-2xl font-black mb-4 group-hover:text-aqua transition-colors leading-tight">A Beginner's Guide to Water Chemistry</h3>
+<p class="text-gray-500 dark:text-gray-400 text-sm mb-6 line-clamp-2">Understanding pH, ammonia, and nitrates is key to a thriving aquarium. We break it down simply.</p>
+<a class="text-aqua font-black text-sm flex items-center gap-2 hover:gap-3 transition-all" href="#">Read Article <span class="material-symbols-outlined text-lg">east</span></a>
+</div>
+</article>
+</div>
+</section>
+<section class="bg-gradient-to-br from-[#003d4d] via-[#005a6e] to-slate-900 rounded-[3rem] p-10 md:p-20 text-center md:text-left relative overflow-hidden shadow-2xl">
+<div class="absolute -top-24 -right-24 w-64 h-64 bg-aqua opacity-20 blur-[120px] rounded-full pointer-events-none"></div>
+<div class="absolute -bottom-24 -left-24 w-64 h-64 bg-coral opacity-10 blur-[100px] rounded-full pointer-events-none"></div>
+<div class="relative z-10 flex flex-col md:flex-row items-center justify-between gap-12">
+<div class="md:w-1/2">
+<h2 class="text-3xl md:text-5xl font-black text-white mb-4 leading-tight">Join the AquaLuxe Club</h2>
+<p class="text-aqua/80 text-lg">Get weekly care tips, exclusive access to rare species drops, and 10% off your first order.</p>
+</div>
+<div class="md:w-1/2 w-full max-w-md">
+<form class="flex flex-col sm:flex-row gap-3">
+<input class="flex-1 rounded-2xl border-none bg-white/10 backdrop-blur-md text-white placeholder-aqua/50 focus:ring-2 focus:ring-aqua px-6 py-4" placeholder="Enter your email" type="email"/>
+<button class="bg-coral hover:bg-[#ff6a33] text-white font-black py-4 px-8 rounded-2xl transition-all shadow-lg shadow-secondary/20 whitespace-nowrap" type="button">
+                        Subscribe
+                    </button>
+</form>
+</div>
+</div>
+</section>
+</main>
+<footer class="bg-white dark:bg-slate-900 border-t border-aqua/10 pt-20 pb-10">
+<div class="max-w-[1280px] mx-auto px-4 md:px-10">
+<div class="grid grid-cols-2 md:grid-cols-4 gap-12 mb-16">
+<div class="col-span-2 md:col-span-1">
+<div class="flex items-center gap-2 text-aqua mb-6">
+<span class="material-symbols-outlined text-4xl">water_drop</span>
+<span class="text-[#0d131b] dark:text-white text-2xl font-black tracking-tight">AquaLuxe</span>
+</div>
+<p class="text-sm text-gray-500 mb-8 leading-relaxed">
+                    Ethically sourced ornamental fish for the modern aquarist. Bringing the serenity of nature into your home with style.
+                </p>
+<div class="flex gap-4">
+<a class="w-10 h-10 rounded-full bg-gray-50 dark:bg-slate-800 flex items-center justify-center text-gray-400 hover:bg-aqua hover:text-white transition-all" href="#"><span class="material-symbols-outlined">public</span></a>
+<a class="w-10 h-10 rounded-full bg-gray-50 dark:bg-slate-800 flex items-center justify-center text-gray-400 hover:bg-coral hover:text-white transition-all" href="#"><span class="material-symbols-outlined">photo_camera</span></a>
+<a class="w-10 h-10 rounded-full bg-gray-50 dark:bg-slate-800 flex items-center justify-center text-gray-400 hover:bg-accent hover:text-white transition-all" href="#"><span class="material-symbols-outlined">alternate_email</span></a>
+</div>
+</div>
+<div>
+<h4 class="font-black mb-6 text-slate-800 dark:text-white uppercase tracking-widest text-xs">Shop</h4>
+<ul class="space-y-4 text-sm text-gray-500">
+<li><a class="hover:text-aqua transition-colors" href="#">Freshwater Fish</a></li>
+<li><a class="hover:text-aqua transition-colors" href="#">Saltwater Fish</a></li>
+<li><a class="hover:text-aqua transition-colors" href="#">Invertebrates</a></li>
+<li><a class="hover:text-aqua transition-colors" href="#">Aquatic Plants</a></li>
+<li><a class="hover:text-aqua transition-colors" href="#">Tanks &amp; Equipment</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-black mb-6 text-slate-800 dark:text-white uppercase tracking-widest text-xs">Support</h4>
+<ul class="space-y-4 text-sm text-gray-500">
+<li><a class="hover:text-coral transition-colors" href="#">Shipping Policy</a></li>
+<li><a class="hover:text-coral transition-colors" href="#">Live Arrival Guarantee</a></li>
+<li><a class="hover:text-coral transition-colors" href="#">Care Guides</a></li>
+<li><a class="hover:text-coral transition-colors" href="#">FAQ</a></li>
+<li><a class="hover:text-coral transition-colors" href="#">Contact Us</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-black mb-6 text-slate-800 dark:text-white uppercase tracking-widest text-xs">Contact</h4>
+<ul class="space-y-4 text-sm text-gray-500">
+<li class="flex items-start gap-3">
+<span class="material-symbols-outlined text-aqua text-lg mt-0.5">location_on</span>
+<span>123 Ocean Drive,<br/>Coral Springs, FL 33065</span>
+</li>
+<li class="flex items-center gap-3">
+<span class="material-symbols-outlined text-aqua text-lg">phone</span>
+<span>(555) 123-4567</span>
+</li>
+<li class="flex items-center gap-3">
+<span class="material-symbols-outlined text-aqua text-lg">mail</span>
+<span>hello@aqualuxe.com</span>
+</li>
+</ul>
+</div>
+</div>
+<div class="border-t border-gray-100 dark:border-slate-800 pt-10 flex flex-col md:flex-row justify-between items-center gap-6 text-[10px] font-bold uppercase tracking-widest text-gray-400">
+<p>© 2024 AquaLuxe Inc. All rights reserved.</p>
+<div class="flex gap-8">
+<a class="hover:text-aqua transition-colors" href="#">Privacy Policy</a>
+<a class="hover:text-aqua transition-colors" href="#">Terms of Service</a>
+</div>
+</div>
+</div>
+</footer>
+
+</body></html>

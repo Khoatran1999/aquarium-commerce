@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>AquaLux - Your Tank</title>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Theme Configuration -->
+<script>
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "primary": "#136dec",
+              "background-light": "#f8faff",
+              "background-dark": "#101822",
+              "surface-light": "#ffffff",
+            },
+            fontFamily: {
+              "display": ["Inter", "sans-serif"]
+            },
+            borderRadius: {"DEFAULT": "0.5rem", "lg": "0.75rem", "xl": "1rem", "2xl": "1.5rem", "full": "9999px"},
+            boxShadow: {
+                'subtle': '0 1px 2px 0 rgba(0, 0, 0, 0.05)',
+                'card': '0 4px 6px -1px rgba(0, 0, 0, 0.02), 0 2px 4px -1px rgba(0, 0, 0, 0.02)',
+                'floating': '0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.025)',
+            }
+          },
+        },
+      }
+    </script>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 font-display antialiased min-h-screen flex flex-col">
+<!-- Top Navigation -->
+<header class="sticky top-0 z-50 bg-surface-light/80 backdrop-blur-md border-b border-slate-200">
+<div class="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
+<div class="flex items-center justify-between h-16 gap-8">
+<!-- Logo -->
+<div class="flex items-center gap-2 text-slate-900 cursor-pointer">
+<div class="size-8 text-primary">
+<svg class="w-full h-full" fill="none" viewbox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+<path d="M24 4C14 4 5.5 11 4 20C6 32 16 44 24 44C32 44 42 32 44 20C42.5 11 34 4 24 4Z" stroke="currentColor" stroke-linejoin="round" stroke-width="4"></path>
+<path class="opacity-20" d="M24 34C29.5228 34 34 29.5228 34 24C34 18.4772 29.5228 14 24 14C18.4772 14 14 18.4772 14 24C14 29.5228 18.4772 34 24 34Z" fill="currentColor"></path>
+</svg>
+</div>
+<h1 class="text-xl font-bold tracking-tight">AquaLux</h1>
+</div>
+<!-- Nav Links (Desktop) -->
+<nav class="hidden md:flex items-center gap-8">
+<a class="text-sm font-medium text-slate-600 hover:text-primary transition-colors" href="#">Live Stock</a>
+<a class="text-sm font-medium text-slate-600 hover:text-primary transition-colors" href="#">Plants</a>
+<a class="text-sm font-medium text-slate-600 hover:text-primary transition-colors" href="#">Supplies</a>
+<a class="text-sm font-medium text-slate-600 hover:text-primary transition-colors" href="#">Learn</a>
+</nav>
+<!-- Actions -->
+<div class="flex items-center gap-4 flex-1 justify-end md:flex-none">
+<!-- Search -->
+<div class="hidden sm:flex items-center bg-slate-100 rounded-full px-3 py-1.5 w-64 border border-transparent focus-within:border-primary/20 focus-within:bg-white focus-within:ring-2 focus-within:ring-primary/10 transition-all">
+<span class="material-symbols-outlined text-slate-400 text-[20px]">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-sm w-full placeholder:text-slate-400 text-slate-700 h-full py-1" placeholder="Search fish, plants..." type="text"/>
+</div>
+<!-- Icons -->
+<div class="flex items-center gap-2">
+<button class="p-2 rounded-full hover:bg-slate-100 text-slate-700 transition-colors relative">
+<span class="material-symbols-outlined">shopping_cart</span>
+<span class="absolute top-1.5 right-1.5 size-2 bg-primary rounded-full"></span>
+</button>
+<button class="p-2 rounded-full hover:bg-slate-100 text-slate-700 transition-colors hidden sm:block">
+<span class="material-symbols-outlined">person</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</header>
+<!-- Main Content -->
+<main class="flex-grow py-8 px-4 sm:px-6 lg:px-8 max-w-[1280px] mx-auto w-full">
+<!-- Breadcrumbs -->
+<div class="flex items-center gap-2 text-sm text-slate-500 mb-8">
+<a class="hover:text-primary transition-colors" href="#">Home</a>
+<span class="material-symbols-outlined text-[16px]">chevron_right</span>
+<span class="font-medium text-slate-900">Your Tank</span>
+</div>
+<!-- Heading -->
+<div class="mb-8">
+<h2 class="text-3xl md:text-4xl font-black text-slate-900 tracking-tight mb-2">Your Tank</h2>
+<p class="text-slate-500 text-lg">Review your selected ornamental fish and supplies before shipping.</p>
+</div>
+<div class="flex flex-col lg:flex-row gap-8 xl:gap-12 relative">
+<!-- Left Column: Cart Items -->
+<div class="w-full lg:w-2/3 flex flex-col gap-4">
+<!-- Table Header (Desktop) -->
+<div class="hidden md:grid grid-cols-12 gap-4 px-6 text-sm font-semibold text-slate-500 pb-2 border-b border-slate-200">
+<div class="col-span-6">Product</div>
+<div class="col-span-2 text-center">Price</div>
+<div class="col-span-2 text-center">Quantity</div>
+<div class="col-span-2 text-right">Total</div>
+</div>
+<!-- Item 1 -->
+<div class="bg-surface-light rounded-2xl p-4 sm:p-6 shadow-card border border-slate-100 group transition-all hover:border-primary/20 hover:shadow-md">
+<div class="flex flex-col md:grid md:grid-cols-12 gap-6 items-center">
+<!-- Product Info -->
+<div class="flex items-center gap-4 w-full md:col-span-6">
+<div class="relative size-20 sm:size-24 rounded-xl overflow-hidden bg-slate-100 shrink-0">
+<div class="absolute inset-0 bg-cover bg-center" data-alt="School of bright neon tetra fish swimming in aquarium" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCkggkNsp3L7VelsNHiGNnQiepsJpg2vYLNi8LCUwB18ROgCJOnNgsPqbsvv6k6Hj-PMN1sh3Ruog3lsgmUw-uhOeYJo5z-S-ZwpMfhc-uN-bYkKBEIAEnVQW29wQwVBCIFsUAm7A3vA1Hg0s7k8XvhNUW5kb65273bT5ujxrKjui_ocDhPQr-71vHdvdC2N2p5sNivcw_hSxkXwTyiCq2aD76l8Zsfc1WGTOyprcpxj6F_UM52kP_W7lliHNsGNph3e-_Ek2j_MHE');"></div>
+</div>
+<div class="flex flex-col gap-1">
+<h3 class="font-bold text-slate-900 text-lg leading-tight">Neon Tetra</h3>
+<p class="text-sm text-slate-500 italic">Paracheirodon innesi</p>
+<div class="flex items-center gap-1 mt-1 text-xs font-medium text-green-600 bg-green-50 px-2 py-0.5 rounded w-fit">
+<span class="material-symbols-outlined text-[14px]">check_circle</span>
+                                    In Stock
+                                </div>
+</div>
+</div>
+<!-- Price (Mobile: Hidden, Desktop: Shown) -->
+<div class="hidden md:block col-span-2 text-center text-slate-600 font-medium">
+                            $3.50
+                        </div>
+<!-- Controls & Mobile Price Wrapper -->
+<div class="flex items-center justify-between w-full md:contents">
+<!-- Mobile Price Label -->
+<div class="md:hidden font-medium text-slate-900">$3.50</div>
+<!-- Quantity -->
+<div class="md:col-span-2 flex justify-center">
+<div class="flex items-center bg-slate-50 rounded-lg border border-slate-200 h-9">
+<button class="size-9 flex items-center justify-center text-slate-500 hover:text-primary hover:bg-white rounded-l-lg transition-colors">
+<span class="material-symbols-outlined text-[18px]">remove</span>
+</button>
+<input class="w-10 text-center bg-transparent border-none p-0 text-sm font-bold text-slate-900 focus:ring-0" readonly="" type="text" value="10"/>
+<button class="size-9 flex items-center justify-center text-slate-500 hover:text-primary hover:bg-white rounded-r-lg transition-colors">
+<span class="material-symbols-outlined text-[18px]">add</span>
+</button>
+</div>
+</div>
+<!-- Total & Delete -->
+<div class="md:col-span-2 flex items-center justify-end gap-4 md:gap-0 md:justify-end w-auto">
+<span class="font-bold text-slate-900 md:text-right w-full text-lg md:text-base">$35.00</span>
+<button class="md:hidden text-red-500 bg-red-50 p-2 rounded-lg">
+<span class="material-symbols-outlined text-[20px]">delete</span>
+</button>
+</div>
+</div>
+<!-- Desktop Remove Button (Separate row/absolute mostly but here keeping grid flow) -->
+<!-- Cleaner to put it floating or near title, but grid constraint. Let's add a row below or tool tip. -->
+<!-- Alternative: integrated into grid -->
+</div>
+<div class="mt-4 pt-4 border-t border-slate-50 flex justify-between items-center md:hidden">
+<span class="text-xs text-slate-400">Item total</span>
+</div>
+<div class="hidden md:flex justify-end mt-2">
+<button class="text-xs font-medium text-slate-400 hover:text-red-500 flex items-center gap-1 transition-colors">
+<span class="material-symbols-outlined text-[16px]">delete</span>
+                            Remove Item
+                        </button>
+</div>
+</div>
+<!-- Item 2 -->
+<div class="bg-surface-light rounded-2xl p-4 sm:p-6 shadow-card border border-slate-100 group transition-all hover:border-primary/20 hover:shadow-md">
+<div class="flex flex-col md:grid md:grid-cols-12 gap-6 items-center">
+<div class="flex items-center gap-4 w-full md:col-span-6">
+<div class="relative size-20 sm:size-24 rounded-xl overflow-hidden bg-slate-100 shrink-0">
+<div class="absolute inset-0 bg-cover bg-center" data-alt="Blue Ram Cichlid fish with vibrant colors" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDyGnWilYcWnmTvIaVGPf-zHq6mykykCerhnWSFHJ4JVmQzs3Q7e8q5Uf1b0iY0DDd0YNB9yM8Uln4R_NdgZF-XBgYGM5sf-edJoIH-EDrp8lbyavLBCiZToR_fIbQ3iwyY4BuHmaB4G60ZwWX5XBMkfKAP1QkiFAgONw2GhS2hzSpyhI-0bxGdKG9PepoZBhUVY1jbHsC7kRblTPa-xcLt1SpAbuW1jzOgKLP-IEVf6FPohCLchn7vTxLVFERumWjH0BuTrFb7Cqs');"></div>
+</div>
+<div class="flex flex-col gap-1">
+<h3 class="font-bold text-slate-900 text-lg leading-tight">Electric Blue Ram</h3>
+<p class="text-sm text-slate-500 italic">Mikrogeophagus ramirezi</p>
+<div class="flex items-center gap-1 mt-1 text-xs font-medium text-orange-600 bg-orange-50 px-2 py-0.5 rounded w-fit">
+<span class="material-symbols-outlined text-[14px]">warning</span>
+                                    Low Stock
+                                </div>
+</div>
+</div>
+<div class="hidden md:block col-span-2 text-center text-slate-600 font-medium">$12.00</div>
+<div class="flex items-center justify-between w-full md:contents">
+<div class="md:hidden font-medium text-slate-900">$12.00</div>
+<div class="md:col-span-2 flex justify-center">
+<div class="flex items-center bg-slate-50 rounded-lg border border-slate-200 h-9">
+<button class="size-9 flex items-center justify-center text-slate-500 hover:text-primary hover:bg-white rounded-l-lg transition-colors">
+<span class="material-symbols-outlined text-[18px]">remove</span>
+</button>
+<input class="w-10 text-center bg-transparent border-none p-0 text-sm font-bold text-slate-900 focus:ring-0" readonly="" type="text" value="2"/>
+<button class="size-9 flex items-center justify-center text-slate-500 hover:text-primary hover:bg-white rounded-r-lg transition-colors">
+<span class="material-symbols-outlined text-[18px]">add</span>
+</button>
+</div>
+</div>
+<div class="md:col-span-2 flex items-center justify-end gap-4 md:gap-0 md:justify-end w-auto">
+<span class="font-bold text-slate-900 md:text-right w-full text-lg md:text-base">$24.00</span>
+<button class="md:hidden text-red-500 bg-red-50 p-2 rounded-lg">
+<span class="material-symbols-outlined text-[20px]">delete</span>
+</button>
+</div>
+</div>
+<div class="hidden md:flex justify-end mt-2">
+<button class="text-xs font-medium text-slate-400 hover:text-red-500 flex items-center gap-1 transition-colors">
+<span class="material-symbols-outlined text-[16px]">delete</span>
+                                Remove Item
+                            </button>
+</div>
+</div>
+</div>
+<!-- Item 3 -->
+<div class="bg-surface-light rounded-2xl p-4 sm:p-6 shadow-card border border-slate-100 group transition-all hover:border-primary/20 hover:shadow-md">
+<div class="flex flex-col md:grid md:grid-cols-12 gap-6 items-center">
+<div class="flex items-center gap-4 w-full md:col-span-6">
+<div class="relative size-20 sm:size-24 rounded-xl overflow-hidden bg-slate-100 shrink-0">
+<div class="absolute inset-0 bg-cover bg-center" data-alt="Green lush aquatic plants submerged in water" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBQyDRNv-hmLY3nwOTyO8YQc8F1CvVimvFRjpHuHRRmr8YrZBTLMgycdLrANKUwCV-FRd-MxMpY6aAD3d7QXBzomw3PqmQ8fze50-Np4sR1musXt1eGFNZHxuzhviek9aTTotjQTv5vLeNq48l0Y5CGaA8qO-6pIpMFuZSwieq-_v7uuB9pFFbqpC4umWKyOxEO45iGa8Qw1qzjr6wMe55PADJ6Jav_UkkYW85bdrvHxrKv0nOmu5o7fE9MPl6eRSrl5PmP_wSYRPA');"></div>
+</div>
+<div class="flex flex-col gap-1">
+<h3 class="font-bold text-slate-900 text-lg leading-tight">Amazon Sword Plant</h3>
+<p class="text-sm text-slate-500 italic">Echinodorus grisebachii</p>
+<div class="flex items-center gap-1 mt-1 text-xs font-medium text-green-600 bg-green-50 px-2 py-0.5 rounded w-fit">
+<span class="material-symbols-outlined text-[14px]">check_circle</span>
+                                    In Stock
+                                </div>
+</div>
+</div>
+<div class="hidden md:block col-span-2 text-center text-slate-600 font-medium">$8.50</div>
+<div class="flex items-center justify-between w-full md:contents">
+<div class="md:hidden font-medium text-slate-900">$8.50</div>
+<div class="md:col-span-2 flex justify-center">
+<div class="flex items-center bg-slate-50 rounded-lg border border-slate-200 h-9">
+<button class="size-9 flex items-center justify-center text-slate-500 hover:text-primary hover:bg-white rounded-l-lg transition-colors">
+<span class="material-symbols-outlined text-[18px]">remove</span>
+</button>
+<input class="w-10 text-center bg-transparent border-none p-0 text-sm font-bold text-slate-900 focus:ring-0" readonly="" type="text" value="1"/>
+<button class="size-9 flex items-center justify-center text-slate-500 hover:text-primary hover:bg-white rounded-r-lg transition-colors">
+<span class="material-symbols-outlined text-[18px]">add</span>
+</button>
+</div>
+</div>
+<div class="md:col-span-2 flex items-center justify-end gap-4 md:gap-0 md:justify-end w-auto">
+<span class="font-bold text-slate-900 md:text-right w-full text-lg md:text-base">$8.50</span>
+<button class="md:hidden text-red-500 bg-red-50 p-2 rounded-lg">
+<span class="material-symbols-outlined text-[20px]">delete</span>
+</button>
+</div>
+</div>
+<div class="hidden md:flex justify-end mt-2">
+<button class="text-xs font-medium text-slate-400 hover:text-red-500 flex items-center gap-1 transition-colors">
+<span class="material-symbols-outlined text-[16px]">delete</span>
+                                Remove Item
+                            </button>
+</div>
+</div>
+</div>
+<div class="flex justify-between items-center mt-4">
+<a class="flex items-center gap-2 text-sm font-medium text-primary hover:text-blue-700 transition-colors" href="#">
+<span class="material-symbols-outlined text-[18px]">arrow_back</span>
+                        Continue Shopping
+                    </a>
+</div>
+</div>
+<!-- Right Column: Order Summary -->
+<div class="w-full lg:w-1/3 flex flex-col gap-6">
+<div class="bg-surface-light rounded-2xl shadow-floating p-6 border border-slate-100 lg:sticky lg:top-24">
+<h3 class="text-xl font-bold text-slate-900 mb-6">Order Summary</h3>
+<!-- Breakdown -->
+<div class="flex flex-col gap-3 mb-6">
+<div class="flex justify-between text-slate-600">
+<span>Subtotal</span>
+<span class="font-medium text-slate-900">$67.50</span>
+</div>
+<div class="flex justify-between text-slate-600">
+<span>Shipping estimate</span>
+<span class="font-medium text-slate-900">Calculated next</span>
+</div>
+<div class="flex justify-between text-slate-600">
+<span>Tax estimate</span>
+<span class="font-medium text-slate-900">$5.40</span>
+</div>
+</div>
+<!-- Voucher -->
+<div class="mb-6">
+<label class="block text-xs font-semibold text-slate-500 uppercase tracking-wider mb-2">Voucher Code</label>
+<div class="flex gap-2">
+<input class="flex-1 rounded-lg border-slate-200 bg-slate-50 text-sm focus:border-primary focus:ring-primary" placeholder="Enter code" type="text"/>
+<button class="px-4 py-2 bg-slate-100 text-slate-700 font-medium rounded-lg text-sm hover:bg-slate-200 transition-colors">Apply</button>
+</div>
+</div>
+<!-- Divider -->
+<div class="h-px bg-slate-200 w-full mb-6"></div>
+<!-- Total -->
+<div class="flex justify-between items-end mb-8">
+<span class="text-slate-900 font-bold text-lg">Total</span>
+<div class="text-right">
+<div class="text-3xl font-black text-slate-900 tracking-tight">$72.90</div>
+<span class="text-xs text-slate-500">USD</span>
+</div>
+</div>
+<!-- CTA -->
+<button class="w-full bg-primary hover:bg-blue-600 text-white font-bold py-4 px-6 rounded-xl shadow-lg shadow-blue-500/30 transition-all transform active:scale-[0.98] flex items-center justify-center gap-2 mb-4">
+                        Proceed to Checkout
+                        <span class="material-symbols-outlined">arrow_forward</span>
+</button>
+<!-- Trust Badges -->
+<div class="flex flex-col gap-3">
+<div class="flex items-center gap-3 p-3 bg-blue-50/50 rounded-lg border border-blue-100">
+<span class="material-symbols-outlined text-primary text-[24px]">verified_user</span>
+<div class="text-xs text-slate-600">
+<span class="font-bold text-slate-800 block">Secure Checkout</span>
+                                SSL Encrypted Payment
+                            </div>
+</div>
+<div class="flex items-center gap-3 p-3 bg-green-50/50 rounded-lg border border-green-100">
+<span class="material-symbols-outlined text-green-600 text-[24px]">water_drop</span>
+<div class="text-xs text-slate-600">
+<span class="font-bold text-slate-800 block">Live Arrival Guarantee</span>
+                                We ensure your fish arrive safe.
+                            </div>
+</div>
+</div>
+</div>
+<!-- Help Card -->
+<div class="bg-surface-light rounded-2xl p-6 border border-slate-200 text-center">
+<div class="size-12 bg-indigo-50 text-indigo-600 rounded-full flex items-center justify-center mx-auto mb-3">
+<span class="material-symbols-outlined">support_agent</span>
+</div>
+<h4 class="font-bold text-slate-900 mb-1">Need help with your tank?</h4>
+<p class="text-sm text-slate-500 mb-3">Our aquatic experts are here to assist you.</p>
+<a class="text-sm font-semibold text-primary hover:underline" href="#">Contact Support</a>
+</div>
+</div>
+</div>
+</main>
+<!-- Simple Footer -->
+<footer class="bg-white border-t border-slate-200 py-8 mt-auto">
+<div class="max-w-[1280px] mx-auto px-4 text-center text-slate-400 text-sm">
+<p>© 2023 AquaLux Inc. All rights reserved.</p>
+</div>
+</footer>
+</body></html>
