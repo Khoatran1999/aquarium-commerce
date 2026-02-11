@@ -5,8 +5,8 @@ import { Plus, Search, Trash2, Pencil } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
 import type { Product } from '@repo/types';
-import DataTable from '../components/DataTable';
-import ConfirmDialog from '../components/ConfirmDialog';
+import DataTable from '../../components/admin/DataTable';
+import ConfirmDialog from '../../components/admin/ConfirmDialog';
 
 export default function ProductListPage() {
   const navigate = useNavigate();
@@ -112,7 +112,7 @@ export default function ProductListPage() {
       render: (p: Product) => (
         <div className="flex items-center gap-1" onClick={(e) => e.stopPropagation()}>
           <Link
-            to={`/products/${p.id}/edit`}
+            to={`/admin/products/${p.id}/edit`}
             className="hover:bg-muted rounded-lg p-1.5 transition-colors"
           >
             <Pencil className="text-muted-foreground h-4 w-4" />
@@ -137,7 +137,7 @@ export default function ProductListPage() {
           <p className="text-muted-foreground text-sm">{meta?.total ?? 0} products in your store</p>
         </div>
         <Link
-          to="/products/new"
+          to="/admin/products/new"
           className="bg-primary inline-flex items-center gap-2 rounded-lg px-4 py-2.5 text-sm font-medium text-white transition-colors hover:opacity-90"
         >
           <Plus className="h-4 w-4" />
@@ -169,7 +169,7 @@ export default function ProductListPage() {
         total={meta?.total ?? 0}
         loading={isLoading}
         onPageChange={setPage}
-        onRowClick={(p) => navigate(`/products/${p.id}/edit`)}
+        onRowClick={(p) => navigate(`/admin/products/${p.id}/edit`)}
         getRowKey={(p) => p.id}
         emptyMessage="No products found"
       />

@@ -21,21 +21,26 @@ import { toggleTheme, toggleSidebar } from '../store/ui.slice';
 import { logout } from '../store/auth.slice';
 
 const NAV_ITEMS = [
-  { label: 'Dashboard', href: '/', icon: LayoutDashboard },
-  { label: 'Products', href: '/products', icon: Package },
-  { label: 'Orders', href: '/orders', icon: ShoppingCart },
-  { label: 'Inventory', href: '/inventory', icon: Layers },
-  { label: 'Species', href: '/species', icon: Fish },
+  { label: 'Dashboard', href: '/admin', icon: LayoutDashboard },
+  { label: 'Products', href: '/admin/products', icon: Package },
+  { label: 'Orders', href: '/admin/orders', icon: ShoppingCart },
+  { label: 'Inventory', href: '/admin/inventory', icon: Layers },
+  { label: 'Species', href: '/admin/species', icon: Fish },
 ];
 
 function Breadcrumb() {
   const { pathname } = useLocation();
-  const segments = pathname.split('/').filter(Boolean);
+  // Strip /admin prefix for breadcrumb display
+  const adminPath = pathname.replace(/^\/admin\/?/, '');
+  const segments = adminPath.split('/').filter(Boolean);
   if (segments.length === 0)
     return <span className="text-foreground text-sm font-medium">Dashboard</span>;
   return (
     <div className="flex items-center gap-1 text-sm">
-      <NavLink to="/" className="text-muted-foreground hover:text-foreground transition-colors">
+      <NavLink
+        to="/admin"
+        className="text-muted-foreground hover:text-foreground transition-colors"
+      >
         Dashboard
       </NavLink>
       {segments.map((seg, i) => (
@@ -45,7 +50,7 @@ function Breadcrumb() {
             <span className="text-foreground font-medium capitalize">{seg.replace(/-/g, ' ')}</span>
           ) : (
             <NavLink
-              to={'/' + segments.slice(0, i + 1).join('/')}
+              to={'/admin/' + segments.slice(0, i + 1).join('/')}
               className="text-muted-foreground hover:text-foreground capitalize transition-colors"
             >
               {seg.replace(/-/g, ' ')}
@@ -78,7 +83,7 @@ export default function AdminLayout() {
 
   const handleLogout = () => {
     dispatch(logout());
-    navigate('/login');
+    navigate('/admin/login');
   };
 
   const sidebarContent = (
@@ -87,7 +92,7 @@ export default function AdminLayout() {
         <NavLink
           key={item.href}
           to={item.href}
-          end={item.href === '/'}
+          end={item.href === '/admin'}
           onClick={() => setMobileOpen(false)}
           className={({ isActive }) =>
             `flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-colors ${
@@ -231,7 +236,7 @@ export default function AdminLayout() {
                       className="text-muted-foreground hover:bg-muted hover:text-foreground flex w-full items-center gap-2 px-3 py-2 text-sm"
                     >
                       <User className="h-4 w-4" />
-                      Profile
+                      Back to Store
                     </button>
                     <button
                       onClick={handleLogout}

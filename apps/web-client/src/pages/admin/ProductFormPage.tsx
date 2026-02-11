@@ -101,7 +101,7 @@ export default function ProductFormPage() {
     onSuccess: () => {
       toast.success('Product created!');
       queryClient.invalidateQueries({ queryKey: ['admin', 'products'] });
-      navigate('/products');
+      navigate('/admin/products');
     },
     onError: () => toast.error('Failed to create product'),
   });
@@ -111,7 +111,7 @@ export default function ProductFormPage() {
     onSuccess: () => {
       toast.success('Product updated!');
       queryClient.invalidateQueries({ queryKey: ['admin', 'products'] });
-      navigate('/products');
+      navigate('/admin/products');
     },
     onError: () => toast.error('Failed to update product'),
   });
@@ -158,7 +158,7 @@ export default function ProductFormPage() {
       {/* Header */}
       <div className="flex items-center gap-3">
         <button
-          onClick={() => navigate('/products')}
+          onClick={() => navigate('/admin/products')}
           className="hover:bg-muted rounded-lg p-2 transition-colors"
         >
           <ArrowLeft className="text-muted-foreground h-5 w-5" />
@@ -315,7 +315,7 @@ export default function ProductFormPage() {
         <div className="flex justify-end gap-3">
           <button
             type="button"
-            onClick={() => navigate('/products')}
+            onClick={() => navigate('/admin/products')}
             className="border-border text-foreground hover:bg-muted rounded-lg border px-4 py-2.5 text-sm font-medium"
           >
             Cancel

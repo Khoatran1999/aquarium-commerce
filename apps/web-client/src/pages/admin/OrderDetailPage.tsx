@@ -4,7 +4,7 @@ import { adminService } from '@repo/services';
 import { ArrowLeft, User, MapPin, Phone, CreditCard, Truck } from 'lucide-react';
 import toast from 'react-hot-toast';
 import type { OrderStatus } from '@repo/types';
-import StatusBadge from '../components/StatusBadge';
+import StatusBadge from '../../components/admin/StatusBadge';
 
 const STATUS_FLOW: OrderStatus[] = ['PENDING', 'CONFIRMED', 'PREPARING', 'SHIPPING', 'DELIVERED'];
 
@@ -15,7 +15,7 @@ const NEXT_STATUS: Partial<Record<OrderStatus, OrderStatus>> = {
   SHIPPING: 'DELIVERED',
 };
 
-export default function OrderDetailPage() {
+export default function AdminOrderDetailPage() {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
   const queryClient = useQueryClient();
@@ -66,7 +66,7 @@ export default function OrderDetailPage() {
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-3">
           <button
-            onClick={() => navigate('/orders')}
+            onClick={() => navigate('/admin/orders')}
             className="hover:bg-muted rounded-lg p-2 transition-colors"
           >
             <ArrowLeft className="text-muted-foreground h-5 w-5" />

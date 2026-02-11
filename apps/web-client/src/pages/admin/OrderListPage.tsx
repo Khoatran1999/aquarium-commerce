@@ -4,8 +4,8 @@ import { adminService } from '@repo/services';
 import { Search } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import type { Order, OrderStatus } from '@repo/types';
-import DataTable from '../components/DataTable';
-import StatusBadge from '../components/StatusBadge';
+import DataTable from '../../components/admin/DataTable';
+import StatusBadge from '../../components/admin/StatusBadge';
 
 const STATUS_TABS: { label: string; value: OrderStatus | 'ALL' }[] = [
   { label: 'All', value: 'ALL' },
@@ -138,7 +138,7 @@ export default function OrderListPage() {
         total={meta?.total ?? 0}
         loading={isLoading}
         onPageChange={setPage}
-        onRowClick={(o) => navigate(`/orders/${o.id}`)}
+        onRowClick={(o) => navigate(`/admin/orders/${o.id}`)}
         getRowKey={(o) => o.id}
         emptyMessage="No orders found"
       />

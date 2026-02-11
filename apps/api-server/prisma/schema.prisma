@@ -99,6 +99,8 @@ model FishImage {
   species FishSpecies? @relation(fields: [speciesId], references: [id], onDelete: Cascade)
   product Product?     @relation(fields: [productId], references: [id], onDelete: Cascade)
 
+  @@index([productId, isPrimary])
+  @@index([speciesId, isPrimary])
   @@map("fish_images")
 }
 
@@ -132,6 +134,15 @@ model Product {
   reviews       Review[]
   inventoryLogs InventoryLog[]
 
+  @@index([speciesId])
+  @@index([price])
+  @@index([avgRating])
+  @@index([sold])
+  @@index([createdAt])
+  @@index([isActive])
+  @@index([isActive, createdAt])
+  @@index([isActive, avgRating])
+  @@index([isActive, sold])
   @@map("products")
 }
 

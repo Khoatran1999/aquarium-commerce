@@ -8,7 +8,7 @@ import { Plus, Search, Pencil, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import toast from 'react-hot-toast';
 import type { FishSpecies } from '@repo/types';
-import DataTable from '../components/DataTable';
+import DataTable from '../../components/admin/DataTable';
 
 const speciesSchema = z.object({
   name: z.string().min(2, 'Name is required'),

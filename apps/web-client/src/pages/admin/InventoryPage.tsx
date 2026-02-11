@@ -5,8 +5,8 @@ import { Package, AlertTriangle, Plus, Search, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import toast from 'react-hot-toast';
 import type { Product, InventoryLog } from '@repo/types';
-import DataTable from '../components/DataTable';
-import StatsCard from '../components/StatsCard';
+import DataTable from '../../components/admin/DataTable';
+import StatsCard from '../../components/admin/StatsCard';
 
 export default function InventoryPage() {
   const queryClient = useQueryClient();

@@ -1,21 +1,21 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Fish, Eye, EyeOff } from 'lucide-react';
-import { useAppDispatch, useAppSelector } from '../store';
-import { login, clearAuthError } from '../store/auth.slice';
+import { useAppDispatch, useAppSelector } from '../../store';
+import { adminLogin, clearAuthError } from '../../store/auth.slice';
 
-export default function LoginPage() {
+export default function AdminLoginPage() {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const { isAuthenticated, loading, error } = useAppSelector((s) => s.auth);
+  const { isAuthenticated, loading, error, user } = useAppSelector((s) => s.auth);
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
 
   useEffect(() => {
-    if (isAuthenticated) navigate('/', { replace: true });
-  }, [isAuthenticated, navigate]);
+    if (isAuthenticated && user?.role === 'ADMIN') navigate('/admin', { replace: true });
+  }, [isAuthenticated, user, navigate]);
 
   useEffect(() => {
     return () => {
@@ -25,7 +25,7 @@ export default function LoginPage() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    dispatch(login({ email, password }));
+    dispatch(adminLogin({ email, password }));
   };
 
   return (

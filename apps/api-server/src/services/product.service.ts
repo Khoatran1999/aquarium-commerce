@@ -3,6 +3,41 @@ import { prisma } from '../config/prisma.js';
 import { parsePagination, slugify } from '../utils/pagination.js';
 import { ApiError } from '../utils/api-error.js';
 
+// Optimized: Select only necessary fields for list view
+const productListSelect = {
+  id: true,
+  name: true,
+  slug: true,
+  description: true,
+  price: true,
+  size: true,
+  available: true,
+  sold: true,
+  avgRating: true,
+  reviewCount: true,
+  isActive: true,
+  speciesId: true,
+  createdAt: true,
+  species: {
+    select: {
+      id: true,
+      name: true,
+      careLevel: true,
+      waterType: true,
+      temperament: true,
+    },
+  },
+  images: {
+    select: {
+      id: true,
+      url: true,
+      isPrimary: true,
+    },
+    orderBy: { isPrimary: Prisma.SortOrder.desc },
+    take: 1, // Only get primary image for list
+  },
+} satisfies Prisma.ProductSelect;
+
 const productInclude = {
   species: {
     select: {
@@ -108,7 +143,7 @@ export async function listProducts(filters: ProductFilters) {
   }
 
   const [products, total] = await Promise.all([
-    prisma.product.findMany({ where, include: productInclude, skip, take: limit, orderBy }),
+    prisma.product.findMany({ where, select: productListSelect, skip, take: limit, orderBy }),
     prisma.product.count({ where }),
   ]);
 

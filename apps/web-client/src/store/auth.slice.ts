@@ -48,6 +48,23 @@ export const register = createAsyncThunk(
   },
 );
 
+export const adminLogin = createAsyncThunk(
+  'auth/adminLogin',
+  async (payload: LoginPayload, { rejectWithValue }) => {
+    try {
+      const res = await authService.login(payload);
+      if (res.data.user.role !== 'ADMIN') {
+        return rejectWithValue('Access denied. Admin privileges required.');
+      }
+      authService.setToken(res.data.token);
+      return res.data;
+    } catch (err: unknown) {
+      const message = (err as { message?: string })?.message ?? 'Login failed';
+      return rejectWithValue(message);
+    }
+  },
+);
+
 export const fetchMe = createAsyncThunk('auth/fetchMe', async (_, { rejectWithValue }) => {
   try {
     const res = await authService.getMe();
@@ -93,6 +110,22 @@ const authSlice = createSlice({
         state.isAuthenticated = true;
       })
       .addCase(login.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload as string;
+      });
+    // Admin Login
+    builder
+      .addCase(adminLogin.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(adminLogin.fulfilled, (state, action) => {
+        state.loading = false;
+        state.user = action.payload.user;
+        state.token = action.payload.token;
+        state.isAuthenticated = true;
+      })
+      .addCase(adminLogin.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload as string;
       });

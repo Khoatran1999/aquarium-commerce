@@ -2,6 +2,7 @@ import express, { type Express } from 'express';
 import cors from 'cors';
 import helmet from 'helmet';
 import morgan from 'morgan';
+import compression from 'compression';
 import { errorHandler } from './middleware/error-handler.js';
 
 // Route imports
@@ -18,9 +19,10 @@ export function createApp(): Express {
 
   // ── Global middleware ──
   app.use(helmet());
+  app.use(compression()); // Gzip compression
 
   // ── CORS — restrict to known origins ──
-  const allowedOrigins = (process.env.CORS_ORIGINS || 'http://localhost:5173,http://localhost:5174')
+  const allowedOrigins = (process.env.CORS_ORIGINS || 'http://localhost:3000')
     .split(',')
     .map((o) => o.trim());
   app.use(

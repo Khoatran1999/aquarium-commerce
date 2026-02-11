@@ -7,6 +7,12 @@ dist/
 build/
 .next/
 .turbo/
+.vite/
+
+# Compiled JS from TypeScript (Vite uses SWC, no need for tsc output)
+apps/*/src/**/*.js
+packages/*/src/**/*.js
+apps/*/vite.config.js
 
 # Environment
 .env

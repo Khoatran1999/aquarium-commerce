@@ -26,8 +26,8 @@ import {
   ResponsiveContainer,
   Legend,
 } from 'recharts';
-import StatsCard from '../components/StatsCard';
-import StatusBadge from '../components/StatusBadge';
+import StatsCard from '../../components/admin/StatsCard';
+import StatusBadge from '../../components/admin/StatusBadge';
 
 const STATUS_COLORS: Record<string, string> = {
   PENDING: '#f59e0b',
@@ -68,7 +68,6 @@ export default function DashboardPage() {
     ...item,
     revenue: Number(item.revenue),
     orders: Number(item.orders),
-    // Shorten date label
     label: item.date.length > 7 ? item.date.slice(5) : item.date,
   }));
 
@@ -341,7 +340,7 @@ export default function DashboardPage() {
           <div className="flex items-center justify-between px-5 py-4">
             <h2 className="text-foreground text-sm font-semibold">Recent Orders</h2>
             <Link
-              to="/orders"
+              to="/admin/orders"
               className="text-primary flex items-center gap-1 text-xs font-medium hover:underline"
             >
               View All <ArrowRight className="h-3 w-3" />
@@ -369,7 +368,10 @@ export default function DashboardPage() {
                 {(d?.recentOrders ?? []).map((order) => (
                   <tr key={order.id} className="border-border border-t">
                     <td className="text-foreground px-5 py-2.5 font-mono text-xs">
-                      <Link to={`/orders/${order.id}`} className="text-primary hover:underline">
+                      <Link
+                        to={`/admin/orders/${order.id}`}
+                        className="text-primary hover:underline"
+                      >
                         #{order.id.slice(-8)}
                       </Link>
                     </td>
@@ -403,7 +405,10 @@ export default function DashboardPage() {
               <AlertTriangle className="text-warning h-4 w-4" />
               Low Stock
             </h2>
-            <Link to="/inventory" className="text-primary text-xs font-medium hover:underline">
+            <Link
+              to="/admin/inventory"
+              className="text-primary text-xs font-medium hover:underline"
+            >
               Manage
             </Link>
           </div>

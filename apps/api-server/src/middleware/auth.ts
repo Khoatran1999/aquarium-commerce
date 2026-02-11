@@ -16,22 +16,24 @@ declare global {
   }
 }
 
-const JWT_SECRET: string = (() => {
-  const secret = process.env.JWT_SECRET;
-  if (!secret) {
+function getJwtSecret(): string {
+  if (!process.env.JWT_SECRET) {
+    if (process.env.NODE_ENV === 'development') {
+      return 'dev-secret-change-in-production';
+    }
     throw new Error(
       'FATAL: JWT_SECRET environment variable is required. Generate one with: openssl rand -base64 64',
     );
   }
-  return secret;
-})();
+  return process.env.JWT_SECRET;
+}
 
 export function generateToken(payload: AuthPayload): string {
-  return jwt.sign(payload, JWT_SECRET, { expiresIn: '7d' });
+  return jwt.sign(payload, getJwtSecret(), { expiresIn: '7d' });
 }
 
 export function verifyToken(token: string): AuthPayload {
-  return jwt.verify(token, JWT_SECRET) as unknown as AuthPayload;
+  return jwt.verify(token, getJwtSecret()) as unknown as AuthPayload;
 }
 
 /**

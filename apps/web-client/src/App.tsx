@@ -3,7 +3,9 @@ import { lazy, Suspense, useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from './store';
 import { fetchMe } from './store/auth.slice';
 import RootLayout from './layouts/RootLayout';
+import AdminLayout from './layouts/AdminLayout';
 import ProtectedRoute from './components/guards/ProtectedRoute';
+import AdminRoute from './components/guards/AdminRoute';
 import ErrorBoundary from './components/ErrorBoundary';
 
 /* ── Lazy-loaded pages (code-split per route) ─── */
@@ -20,6 +22,16 @@ const LoginPage = lazy(() => import('./pages/LoginPage'));
 const RegisterPage = lazy(() => import('./pages/RegisterPage'));
 const SearchPage = lazy(() => import('./pages/SearchPage'));
 const NotFoundPage = lazy(() => import('./pages/NotFoundPage'));
+
+/* ── Admin pages ──────────────────────────────── */
+const AdminLoginPage = lazy(() => import('./pages/admin/AdminLoginPage'));
+const DashboardPage = lazy(() => import('./pages/admin/DashboardPage'));
+const AdminProductListPage = lazy(() => import('./pages/admin/ProductListPage'));
+const AdminProductFormPage = lazy(() => import('./pages/admin/ProductFormPage'));
+const AdminOrderListPage = lazy(() => import('./pages/admin/OrderListPage'));
+const AdminOrderDetailPage = lazy(() => import('./pages/admin/OrderDetailPage'));
+const InventoryPage = lazy(() => import('./pages/admin/InventoryPage'));
+const SpeciesPage = lazy(() => import('./pages/admin/SpeciesPage'));
 
 function PageLoader() {
   return (
@@ -98,6 +110,26 @@ export default function App() {
 
             {/* 404 */}
             <Route path="*" element={<NotFoundPage />} />
+          </Route>
+
+          {/* ── Admin routes ── */}
+          <Route path="admin/login" element={<AdminLoginPage />} />
+          <Route
+            path="admin"
+            element={
+              <AdminRoute>
+                <AdminLayout />
+              </AdminRoute>
+            }
+          >
+            <Route index element={<DashboardPage />} />
+            <Route path="products" element={<AdminProductListPage />} />
+            <Route path="products/new" element={<AdminProductFormPage />} />
+            <Route path="products/:id/edit" element={<AdminProductFormPage />} />
+            <Route path="orders" element={<AdminOrderListPage />} />
+            <Route path="orders/:id" element={<AdminOrderDetailPage />} />
+            <Route path="inventory" element={<InventoryPage />} />
+            <Route path="species" element={<SpeciesPage />} />
           </Route>
         </Routes>
       </Suspense>
