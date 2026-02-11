@@ -385,6 +385,10 @@ See [DEPLOYMENT.md](DEPLOYMENT.md) for full deployment guides:
 
 ---
 
+Kill port Terminal CMD
+
+for %p in (3000 3001 3002 3003) do @for /f "tokens=5" %a in ('netstat -ano ^| findstr :%p') do taskkill /PID %a /F
+
 ## License
 
 MIT

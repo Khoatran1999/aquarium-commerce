@@ -1,7 +1,6 @@
-import { prisma } from '../config/prisma.js';
+import { prisma, Prisma } from '../config/prisma.js';
 import { parsePagination } from '../utils/pagination.js';
 import { ApiError } from '../utils/api-error.js';
-import type { Prisma } from '@prisma/client';
 
 const orderInclude = {
   items: {

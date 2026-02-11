@@ -1,4 +1,10 @@
-import { PrismaClient } from '@prisma/client';
+import { createRequire } from 'module';
+
+const require = createRequire(import.meta.url);
+const { PrismaClient, Prisma: PrismaNamespace } = require('@prisma/client');
+
+export const Prisma = PrismaNamespace as typeof import('@prisma/client').Prisma;
+export type { Prisma as PrismaTypes } from '@prisma/client';
 
 export const prisma = new PrismaClient({
   log: process.env.NODE_ENV === 'development' ? ['error', 'warn'] : ['error'],
