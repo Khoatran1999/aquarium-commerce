@@ -4,17 +4,10 @@
   "buildCommand": "prisma generate --schema=prisma/schema.prisma && tsc",
   "outputDirectory": "dist",
   "installCommand": "pnpm install",
-  "env": {
-    "DATABASE_URL": "@database_url",
-    "DIRECT_URL": "@direct_url",
-    "JWT_SECRET": "@jwt_secret",
-    "CORS_ORIGINS": "@cors_origins",
-    "NODE_ENV": "production"
-  },
   "build": {
     "env": {
-      "DATABASE_URL": "@database_url",
-      "DIRECT_URL": "@direct_url"
+      "DATABASE_URL": "$DATABASE_URL",
+      "DIRECT_URL": "$DIRECT_URL"
     }
   },
   "rewrites": [
