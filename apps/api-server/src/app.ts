@@ -4,6 +4,7 @@ import helmet from 'helmet';
 import morgan from 'morgan';
 import compression from 'compression';
 import { errorHandler } from './middleware/error-handler.js';
+import { prisma } from './config/prisma.js';
 
 // Route imports
 import authRoutes from './routes/auth.routes.js';
@@ -42,9 +43,34 @@ export function createApp(): Express {
   app.use(express.json());
   app.use(express.urlencoded({ extended: true }));
 
-  // ── Health check ──
+  // ── Health check (no DB required) ──
   app.get('/api/health', (_req, res) => {
-    res.json({ status: 'ok', timestamp: new Date().toISOString() });
+    res.json({ 
+      status: 'ok', 
+      timestamp: new Date().toISOString(),
+      environment: process.env.NODE_ENV || 'unknown'
+    });
+  });
+
+  // ── Simple test endpoint (no DB required) ──
+  app.get('/api/test', (_req, res) => {
+    res.json({ message: 'API is working', env_check: !!process.env.DATABASE_URL });
+  });
+
+  // ── Database connection middleware for DB routes ──
+  const dbRoutes = ['/api/products', '/api/species', '/api/cart', '/api/orders', '/api/reviews', '/api/admin', '/api/auth'];
+  app.use(dbRoutes, async (_req, res, next) => {
+    try {
+      // Test database connection
+      await prisma.$connect();
+      next();
+    } catch (error) {
+      console.error('Database connection failed:', error);
+      res.status(500).json({ 
+        error: 'Database connection failed', 
+        details: process.env.NODE_ENV === 'development' ? error.message : 'Please try again later'
+      });
+    }
   });
 
   // ── API Routes ──
