@@ -14,7 +14,7 @@ export default function handler(req: VercelRequest, res: VercelResponse) {
     res.setHeader('Access-Control-Allow-Origin', process.env.CORS_ORIGINS || '*');
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
     res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-    
+
     // Handle preflight OPTIONS requests
     if (req.method === 'OPTIONS') {
       res.status(200).end();
@@ -25,6 +25,6 @@ export default function handler(req: VercelRequest, res: VercelResponse) {
     app(req, res);
   } catch (error) {
     console.error('Handler error:', error);
-    res.status(500).json({ error: 'Internal server error', message: error.message });
+    res.status(500).json({ error: 'Internal server error', message: (error as Error).message });
   }
 }

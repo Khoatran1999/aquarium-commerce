@@ -45,10 +45,10 @@ export function createApp(): Express {
 
   // ── Health check (no DB required) ──
   app.get('/api/health', (_req, res) => {
-    res.json({ 
-      status: 'ok', 
+    res.json({
+      status: 'ok',
       timestamp: new Date().toISOString(),
-      environment: process.env.NODE_ENV || 'unknown'
+      environment: process.env.NODE_ENV || 'unknown',
     });
   });
 
@@ -58,7 +58,15 @@ export function createApp(): Express {
   });
 
   // ── Database connection middleware for DB routes ──
-  const dbRoutes = ['/api/products', '/api/species', '/api/cart', '/api/orders', '/api/reviews', '/api/admin', '/api/auth'];
+  const dbRoutes = [
+    '/api/products',
+    '/api/species',
+    '/api/cart',
+    '/api/orders',
+    '/api/reviews',
+    '/api/admin',
+    '/api/auth',
+  ];
   app.use(dbRoutes, async (_req, res, next) => {
     try {
       // Test database connection
@@ -66,9 +74,12 @@ export function createApp(): Express {
       next();
     } catch (error) {
       console.error('Database connection failed:', error);
-      res.status(500).json({ 
-        error: 'Database connection failed', 
-        details: process.env.NODE_ENV === 'development' ? error.message : 'Please try again later'
+      res.status(500).json({
+        error: 'Database connection failed',
+        details:
+          process.env.NODE_ENV === 'development'
+            ? (error as Error).message
+            : 'Please try again later',
       });
     }
   });
