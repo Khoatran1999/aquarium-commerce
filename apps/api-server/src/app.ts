@@ -44,7 +44,7 @@ export function createApp(): Express {
   app.use(express.urlencoded({ extended: true }));
 
   // ── Database connection middleware (for serverless) ──
-  app.use(async (req, res, next) => {
+  app.use(async (_req, res, next) => {
     try {
       // Ensure DB connection for each request in serverless environment
       await prisma.$connect();
