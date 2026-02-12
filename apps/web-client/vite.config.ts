@@ -2,6 +2,7 @@ import { defineConfig, type PluginOption } from 'vite';
 import react from '@vitejs/plugin-react-swc';
 import tailwindcss from '@tailwindcss/vite';
 import path from 'path';
+import { fileURLToPath } from 'url';
 import http from 'node:http';
 
 /**
@@ -37,6 +38,9 @@ function adminProxy(): PluginOption {
     },
   };
 }
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 export default defineConfig({
   plugins: [adminProxy(), react(), tailwindcss()],

@@ -1,4 +1,4 @@
-import { memo, useCallback } from 'react';
+import React, { memo, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import { useAppDispatch } from '../store';
 import { addToCart } from '../store/cart.slice';

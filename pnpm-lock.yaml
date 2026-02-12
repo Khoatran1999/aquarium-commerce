@@ -35,6 +35,9 @@ importers:
       eslint-plugin-react-hooks:
         specifier: ^5.1.0
         version: 5.2.0(eslint@9.39.2(jiti@2.6.1))
+      globals:
+        specifier: ^17.3.0
+        version: 17.3.0
       jsdom:
         specifier: ^28.0.0
         version: 28.0.0
@@ -1978,6 +1981,10 @@ packages:
 
   globals@14.0.0:
     resolution: {integrity: sha512-oahGvuMGQlPw/ivIYBjVSrWAfWLBeku5tpPE2fOPLi+WHffIWbuh2tCjhyQhTBPMf5E9jDEH4FOmTYgYwbKwtQ==}
+    engines: {node: '>=18'}
+
+  globals@17.3.0:
+    resolution: {integrity: sha512-yMqGUQVVCkD4tqjOJf3TnrvaaHDMYp4VlUSObbkIiuCPe/ofdMBFIAcBbCSRFWOnos6qRiTVStDwqPLUclaxIw==}
     engines: {node: '>=18'}
 
   goober@2.1.18:
@@ -4615,6 +4622,8 @@ snapshots:
       path-scurry: 2.0.1
 
   globals@14.0.0: {}
+
+  globals@17.3.0: {}
 
   goober@2.1.18(csstype@3.2.3):
     dependencies:

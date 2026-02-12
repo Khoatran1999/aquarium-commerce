@@ -33,7 +33,7 @@ const productListSelect = {
       url: true,
       isPrimary: true,
     },
-    orderBy: { isPrimary: Prisma.SortOrder.desc },
+    orderBy: { isPrimary: 'desc' as const },
     take: 1, // Only get primary image for list
   },
 } satisfies Prisma.ProductSelect;
@@ -49,7 +49,7 @@ const productInclude = {
       temperament: true,
     },
   },
-  images: { orderBy: { isPrimary: Prisma.SortOrder.desc } },
+  images: { orderBy: { isPrimary: 'desc' as const } },
 } satisfies Prisma.ProductInclude;
 
 interface ProductFilters {
