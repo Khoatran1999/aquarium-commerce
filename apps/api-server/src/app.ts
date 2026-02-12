@@ -4,6 +4,7 @@ import helmet from 'helmet';
 import morgan from 'morgan';
 import compression from 'compression';
 import { errorHandler } from './middleware/error-handler.js';
+import { prisma } from './config/prisma.js';
 
 // Route imports
 import authRoutes from './routes/auth.routes.js';
@@ -41,6 +42,18 @@ export function createApp(): Express {
   app.use(morgan('dev'));
   app.use(express.json());
   app.use(express.urlencoded({ extended: true }));
+
+  // ── Database connection middleware (for serverless) ──
+  app.use(async (req, res, next) => {
+    try {
+      // Ensure DB connection for each request in serverless environment
+      await prisma.$connect();
+      next();
+    } catch (error) {
+      console.error('Database connection failed:', error);
+      res.status(500).json({ error: 'Database connection failed' });
+    }
+  });
 
   // ── Health check ──
   app.get('/api/health', (_req, res) => {

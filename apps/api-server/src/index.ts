@@ -4,40 +4,25 @@ import { fileURLToPath } from 'url';
 import { createApp } from './app.js';
 import { prisma } from './config/prisma.js';
 
-// Load .env file from the api-server directory
+// Only load .env for local development
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-dotenv.config({ path: path.resolve(__dirname, '../.env') });
+
+// Don't load .env in production (Vercel provides env vars directly)
+if (process.env.NODE_ENV !== 'production') {
+  dotenv.config({ path: path.resolve(__dirname, '../.env') });
+}
 
 const PORT = process.env.PORT || 3001;
 
+// Create Express app
 const app = createApp();
 
 /**
  * Vercel Serverless Handler
- * This is the entry point for Vercel. It ensures the DB is connected
- * before handling the request.
+ * Vercel expects this exact export pattern for Express apps
  */
-export default async function handler(req: any, res: any) {
-  try {
-    // Ensure DB connection on each serverless invocation (handles cold starts)
-    await prisma.$connect();
-
-    // Handle the request with the Express app
-    return new Promise((resolve, reject) => {
-      app(req, res, (err: any) => {
-        if (err) {
-          reject(err);
-        } else {
-          resolve(res);
-        }
-      });
-    });
-  } catch (error) {
-    console.error('Serverless function error:', error);
-    res.status(500).json({ error: 'Internal Server Error' });
-  }
-}
+export default app;
 
 /**
  * Standalone Server (Local Dev / Railway / Render)
