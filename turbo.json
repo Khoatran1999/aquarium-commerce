@@ -16,11 +16,17 @@
     "type-check": {
       "dependsOn": ["^build"]
     },
+    "api-server#type-check": {
+      "dependsOn": ["db:generate", "^build"]
+    },
     "clean": {
       "cache": false
     },
     "test": {
       "dependsOn": ["^build"],
+      "cache": false
+    },
+    "db:generate": {
       "cache": false
     }
   }

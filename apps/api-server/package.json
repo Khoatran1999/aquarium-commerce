@@ -13,6 +13,7 @@
     "build": "tsc",
     "start": "node dist/index.js",
     "lint": "eslint src/",
+    "pretype-check": "prisma generate",
     "type-check": "tsc --noEmit",
     "clean": "rimraf dist",
     "db:generate": "prisma generate",
