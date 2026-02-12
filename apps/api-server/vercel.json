@@ -1,9 +1,9 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "version": 2,
-  "buildCommand": "cd ../.. && pnpm install && pnpm --filter api-server build",
+  "buildCommand": "cd ../.. && pnpm install && pnpm --filter api-server build && cd apps/api-server",
   "devCommand": "pnpm dev",
-  "installCommand": "pnpm install",
+  "installCommand": "cd ../.. && pnpm install",
   "outputDirectory": "dist",
   "env": {
     "DATABASE_URL": "@database_url",
