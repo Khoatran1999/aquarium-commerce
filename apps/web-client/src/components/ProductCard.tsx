@@ -27,10 +27,10 @@ const ProductCard = memo(function ProductCard({
     (e: React.MouseEvent) => {
       e.preventDefault();
       e.stopPropagation();
-      dispatch(addToCart({ productId: product.id, quantity: 1 }));
+      dispatch(addToCart({ productId: product.id, quantity: 1, product }));
       toast.success(`${product.name} added to cart`);
     },
-    [dispatch, product.id, product.name],
+    [dispatch, product],
   );
 
   const hasDiscount = product.comparePrice && product.comparePrice > product.price;

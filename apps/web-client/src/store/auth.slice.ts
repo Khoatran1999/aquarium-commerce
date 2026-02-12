@@ -19,13 +19,17 @@ const initialState: AuthState = {
   error: null,
 };
 
+import { syncGuestCart } from './cart.slice';
+
 /* ── Thunks ─────────────────────────────── */
 export const login = createAsyncThunk(
   'auth/login',
-  async (payload: LoginPayload, { rejectWithValue }) => {
+  async (payload: LoginPayload, { rejectWithValue, dispatch }) => {
     try {
       const res = await authService.login(payload);
       authService.setToken(res.data.token);
+      // Sync guest cart to server after login
+      dispatch(syncGuestCart());
       return res.data;
     } catch (err: unknown) {
       const message = (err as { message?: string })?.message ?? 'Login failed';
@@ -36,10 +40,12 @@ export const login = createAsyncThunk(
 
 export const register = createAsyncThunk(
   'auth/register',
-  async (payload: RegisterPayload, { rejectWithValue }) => {
+  async (payload: RegisterPayload, { rejectWithValue, dispatch }) => {
     try {
       const res = await authService.register(payload);
       authService.setToken(res.data.token);
+      // Sync guest cart to server after register
+      dispatch(syncGuestCart());
       return res.data;
     } catch (err: unknown) {
       const message = (err as { message?: string })?.message ?? 'Registration failed';

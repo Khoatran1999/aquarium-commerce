@@ -61,7 +61,7 @@ export default function ProductDetailPage() {
   const inStock = product.available > 0;
 
   const handleAddToCart = () => {
-    dispatch(addToCart({ productId: product.id, quantity }))
+    dispatch(addToCart({ productId: product.id, quantity, product }))
       .unwrap()
       .then(() => toast.success(`${product.name} added to cart!`))
       .catch((err: string) => toast.error(err));

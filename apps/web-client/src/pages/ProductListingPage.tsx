@@ -118,8 +118,8 @@ export default function ProductListingPage() {
     ...(filters.temperament ?? []),
   ].filter(Boolean).length;
 
-  const handleAddToCart = (productId: string) => {
-    dispatch(addToCart({ productId, quantity: 1 }))
+  const handleAddToCart = (productId: string, product?: import('@repo/types').Product) => {
+    dispatch(addToCart({ productId, quantity: 1, product }))
       .unwrap()
       .then(() => toast.success('Added to cart!'))
       .catch((err: string) => toast.error(err));
@@ -385,7 +385,7 @@ export default function ProductListingPage() {
                               onClick={(e) => {
                                 e.preventDefault();
                                 e.stopPropagation();
-                                handleAddToCart(p.id);
+                                handleAddToCart(p.id, p);
                               }}
                             >
                               Add to Cart
