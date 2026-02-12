@@ -1,28 +1,16 @@
-import dotenv from 'dotenv';
-import path from 'path';
-import { fileURLToPath } from 'url';
 import { createApp } from './app.js';
-import { prisma } from './config/prisma.js';
-
-// Only load .env for local development
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-
-// Don't load .env in production (Vercel provides env vars directly)
-if (process.env.NODE_ENV !== 'production') {
-  dotenv.config({ path: path.resolve(__dirname, '../.env') });
-}
-
-const PORT = process.env.PORT || 3001;
+import type { VercelRequest, VercelResponse } from '@vercel/node';
 
 // Create Express app
 const app = createApp();
 
 /**
  * Vercel Serverless Handler
- * Vercel expects this exact export pattern for Express apps
+ * Export as named function for Vercel compatibility
  */
-export default app;
+export default function handler(req: VercelRequest, res: VercelResponse) {
+  return app(req, res);
+}
 
 /**
  * Standalone Server (Local Dev / Railway / Render)
