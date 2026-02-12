@@ -22,7 +22,7 @@ export default async function handler(req: any, res: any) {
   try {
     // Ensure DB connection on each serverless invocation (handles cold starts)
     await prisma.$connect();
-    
+
     // Handle the request with the Express app
     return new Promise((resolve, reject) => {
       app(req, res, (err: any) => {
