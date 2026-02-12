@@ -4,7 +4,6 @@ import helmet from 'helmet';
 import morgan from 'morgan';
 import compression from 'compression';
 import { errorHandler } from './middleware/error-handler.js';
-import { prisma } from './config/prisma.js';
 
 // Route imports
 import authRoutes from './routes/auth.routes.js';
