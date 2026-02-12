@@ -15,7 +15,8 @@
     "test:coverage": "vitest run --coverage",
     "clean": "turbo run clean && rimraf node_modules",
     "format": "prettier --write \"**/*.{ts,tsx,js,jsx,json,md,css}\"",
-    "format:check": "prettier --check \"**/*.{ts,tsx,js,jsx,json,md,css}\""
+    "format:check": "prettier --check \"**/*.{ts,tsx,js,jsx,json,md,css}\"",
+    "postinstall": "prisma generate --schema=apps/api-server/prisma/schema.prisma"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^6.9.1",
