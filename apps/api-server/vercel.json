@@ -1,22 +1,9 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "version": 2,
-  "buildCommand": "prisma generate --schema=prisma/schema.prisma && tsc",
+  "buildCommand": "pnpm run db:generate && pnpm run build",
   "outputDirectory": "dist",
   "installCommand": "pnpm install",
-  "env": {
-    "DATABASE_URL": "@DATABASE_URL",
-    "DIRECT_URL": "@DIRECT_URL",
-    "JWT_SECRET": "@JWT_SECRET",
-    "CORS_ORIGINS": "@CORS_ORIGINS",
-    "NODE_ENV": "production"
-  },
-  "build": {
-    "env": {
-      "DATABASE_URL": "@DATABASE_URL",
-      "DIRECT_URL": "@DIRECT_URL"
-    }
-  },
   "rewrites": [
     {
       "source": "/(.*)",
