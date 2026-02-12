@@ -2,6 +2,7 @@
   "name": "aquarium-commerce",
   "private": true,
   "version": "0.0.0",
+  "type": "module",
   "packageManager": "pnpm@9.15.4",
   "scripts": {
     "dev": "turbo run dev",
