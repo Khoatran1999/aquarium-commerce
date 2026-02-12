@@ -1,10 +1,9 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "version": 2,
-  "buildCommand": "cd ../.. && pnpm install && pnpm --filter api-server build && cd apps/api-server",
-  "devCommand": "pnpm dev",
-  "installCommand": "cd ../.. && pnpm install",
+  "buildCommand": "prisma generate && tsc",
   "outputDirectory": "dist",
+  "installCommand": "pnpm install",
   "env": {
     "DATABASE_URL": "@database_url",
     "DIRECT_URL": "@direct_url",
