@@ -1,6 +1,6 @@
+import type { Prisma } from '@prisma/client';
 import { prisma } from '../config/prisma.js';
 import { parsePagination } from '../utils/pagination.js';
-import type { Prisma } from '@prisma/client';
 
 export async function listSpecies(query: {
   page?: string;

@@ -1,4 +1,4 @@
-import { useEffect, useRef, type ReactNode } from 'react';
+import React, { useEffect, useRef, type ReactNode } from 'react';
 import { createPortal } from 'react-dom';
 import { cn } from '../utils/cn';
 import { X } from 'lucide-react';

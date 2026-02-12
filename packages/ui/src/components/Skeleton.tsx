@@ -1,3 +1,4 @@
+import React from 'react';
 import { cn } from '../utils/cn';
 
 export function Skeleton({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) {

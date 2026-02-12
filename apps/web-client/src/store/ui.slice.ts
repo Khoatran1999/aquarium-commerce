@@ -3,12 +3,14 @@ import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
 interface UiState {
   theme: 'light' | 'dark';
   mobileMenuOpen: boolean;
+  sidebarCollapsed: boolean;
 }
 
 const initialState: UiState = {
   theme:
     typeof window !== 'undefined' && localStorage.getItem('theme') === 'dark' ? 'dark' : 'light',
   mobileMenuOpen: false,
+  sidebarCollapsed: false,
 };
 
 const uiSlice = createSlice({
@@ -35,8 +37,12 @@ const uiSlice = createSlice({
     closeMobileMenu(state) {
       state.mobileMenuOpen = false;
     },
+    toggleSidebar(state) {
+      state.sidebarCollapsed = !state.sidebarCollapsed;
+    },
   },
 });
 
-export const { toggleTheme, setTheme, toggleMobileMenu, closeMobileMenu } = uiSlice.actions;
+export const { toggleTheme, setTheme, toggleMobileMenu, closeMobileMenu, toggleSidebar } =
+  uiSlice.actions;
 export default uiSlice.reducer;

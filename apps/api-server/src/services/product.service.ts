@@ -1,7 +1,42 @@
-import { Prisma } from '@prisma/client';
+import type { Prisma } from '@prisma/client';
 import { prisma } from '../config/prisma.js';
 import { parsePagination, slugify } from '../utils/pagination.js';
 import { ApiError } from '../utils/api-error.js';
+
+// Optimized: Select only necessary fields for list view
+const productListSelect = {
+  id: true,
+  name: true,
+  slug: true,
+  description: true,
+  price: true,
+  size: true,
+  available: true,
+  sold: true,
+  avgRating: true,
+  reviewCount: true,
+  isActive: true,
+  speciesId: true,
+  createdAt: true,
+  species: {
+    select: {
+      id: true,
+      name: true,
+      careLevel: true,
+      waterType: true,
+      temperament: true,
+    },
+  },
+  images: {
+    select: {
+      id: true,
+      url: true,
+      isPrimary: true,
+    },
+    orderBy: { isPrimary: 'desc' as const },
+    take: 1, // Only get primary image for list
+  },
+} satisfies Prisma.ProductSelect;
 
 const productInclude = {
   species: {
@@ -14,7 +49,7 @@ const productInclude = {
       temperament: true,
     },
   },
-  images: { orderBy: { isPrimary: Prisma.SortOrder.desc } },
+  images: { orderBy: { isPrimary: 'desc' as const } },
 } satisfies Prisma.ProductInclude;
 
 interface ProductFilters {
@@ -108,7 +143,7 @@ export async function listProducts(filters: ProductFilters) {
   }
 
   const [products, total] = await Promise.all([
-    prisma.product.findMany({ where, include: productInclude, skip, take: limit, orderBy }),
+    prisma.product.findMany({ where, select: productListSelect, skip, take: limit, orderBy }),
     prisma.product.count({ where }),
   ]);
 
