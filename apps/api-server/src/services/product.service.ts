@@ -1,4 +1,5 @@
-import { prisma, Prisma } from '../config/prisma.js';
+import type { Prisma } from '@prisma/client';
+import { prisma } from '../config/prisma.js';
 import { parsePagination, slugify } from '../utils/pagination.js';
 import { ApiError } from '../utils/api-error.js';
 

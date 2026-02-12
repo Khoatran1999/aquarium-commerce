@@ -122,7 +122,7 @@ router.get('/stats', async (req, res, next) => {
     });
 
     const topProductDetails = await Promise.all(
-      topProducts.map(async (tp) => {
+      topProducts.map(async (tp: { productId: string; _sum: { quantity: number | null }; _count: number }) => {
         const product = await prisma.product.findUnique({
           where: { id: tp.productId },
           select: { name: true, price: true, images: { take: 1 } },
