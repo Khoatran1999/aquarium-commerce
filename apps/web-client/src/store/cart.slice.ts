@@ -175,9 +175,7 @@ const cartSlice = createSlice({
       if (!state._rollbackItems) {
         state._rollbackItems = [...state.items];
       }
-      state.items = state.items.map((i) =>
-        i.id === itemId ? { ...i, quantity } : i,
-      );
+      state.items = state.items.map((i) => (i.id === itemId ? { ...i, quantity } : i));
       state.itemCount = calcCount(state.items);
     },
   },
@@ -218,9 +216,7 @@ const cartSlice = createSlice({
         // Save snapshot for rollback
         state._rollbackItems = [...state.items];
         // Optimistic update
-        state.items = state.items.map((i) =>
-          i.id === itemId ? { ...i, quantity } : i,
-        );
+        state.items = state.items.map((i) => (i.id === itemId ? { ...i, quantity } : i));
         state.itemCount = calcCount(state.items);
       })
       .addCase(updateCartItem.fulfilled, (state, action) => {
