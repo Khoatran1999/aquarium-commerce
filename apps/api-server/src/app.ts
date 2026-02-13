@@ -14,6 +14,8 @@ import cartRoutes from './routes/cart.routes.js';
 import orderRoutes from './routes/order.routes.js';
 import reviewRoutes from './routes/review.routes.js';
 import adminRoutes from './routes/admin.routes.js';
+import blogRoutes from './routes/blog.routes.js';
+import wishlistRoutes from './routes/wishlist.routes.js';
 
 export function createApp(): Express {
   const app: Express = express();
@@ -66,6 +68,8 @@ export function createApp(): Express {
     '/api/reviews',
     '/api/admin',
     '/api/auth',
+    '/api/blogs',
+    '/api/wishlist',
   ];
   app.use(dbRoutes, async (_req, res, next) => {
     try {
@@ -92,6 +96,8 @@ export function createApp(): Express {
   app.use('/api/orders', orderRoutes);
   app.use('/api/reviews', reviewRoutes);
   app.use('/api/admin', adminRoutes);
+  app.use('/api/blogs', blogRoutes);
+  app.use('/api/wishlist', wishlistRoutes);
 
   // ── Error handler (must be last) ──
   app.use(errorHandler);

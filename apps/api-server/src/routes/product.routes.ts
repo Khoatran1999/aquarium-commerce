@@ -7,6 +7,36 @@ import { success, paginated } from '../utils/response.js';
 
 const router = Router();
 
+// GET /api/products/new-arrivals — newest products
+router.get('/new-arrivals', async (req, res, next) => {
+  try {
+    const limit = Math.min(20, Math.max(1, parseInt((req.query.limit as string) || '12', 10)));
+    const { products, total, page } = await productService.listProducts({
+      sortBy: 'newest',
+      limit: String(limit),
+      page: '1',
+    });
+    paginated(res, products, { page, limit, total });
+  } catch (err) {
+    next(err);
+  }
+});
+
+// GET /api/products/best-sellers — top selling products
+router.get('/best-sellers', async (req, res, next) => {
+  try {
+    const limit = Math.min(20, Math.max(1, parseInt((req.query.limit as string) || '12', 10)));
+    const { products, total, page } = await productService.listProducts({
+      sortBy: 'popular',
+      limit: String(limit),
+      page: '1',
+    });
+    paginated(res, products, { page, limit, total });
+  } catch (err) {
+    next(err);
+  }
+});
+
 // GET /api/products
 router.get('/', validate(productQuerySchema, 'query'), async (req, res, next) => {
   try {

@@ -113,3 +113,35 @@ export const createProductSchema = z.object({
 });
 
 export const updateProductSchema = createProductSchema.partial();
+
+// ── Blog (Admin) ────────────────────────────────────
+export const createBlogSchema = z.object({
+  title: z.string().min(5, 'Title must be at least 5 characters'),
+  slug: z.string().optional(),
+  excerpt: z.string().max(500).optional(),
+  content: z.string().min(20, 'Content must be at least 20 characters'),
+  coverImage: z.string().url('Invalid cover image URL').optional(),
+  tags: z.array(z.string()).default([]),
+  status: z.enum(['DRAFT', 'PUBLISHED', 'ARCHIVED']).default('DRAFT'),
+});
+
+export const updateBlogSchema = createBlogSchema.partial();
+
+export const updateBlogStatusSchema = z.object({
+  status: z.enum(['DRAFT', 'PUBLISHED', 'ARCHIVED']),
+});
+
+export const blogQuerySchema = z
+  .object({
+    page: z.string().optional(),
+    limit: z.string().optional(),
+    search: z.string().optional(),
+    tag: z.string().optional(),
+    status: z.enum(['DRAFT', 'PUBLISHED', 'ARCHIVED']).optional(),
+  })
+  .passthrough();
+
+// ── Wishlist ────────────────────────────────────────
+export const addToWishlistSchema = z.object({
+  productId: z.string().min(1, 'Product ID is required'),
+});

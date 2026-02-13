@@ -29,6 +29,8 @@ model User {
   orders         Order[]
   reviews        Review[]
   chatSessions   AiChatSession[]
+  blogPosts      BlogPost[]
+  wishlists      Wishlist[]
 
   @@map("users")
 }
@@ -134,6 +136,7 @@ model Product {
   orderItems    OrderItem[]
   reviews       Review[]
   inventoryLogs InventoryLog[]
+  wishlists     Wishlist[]
 
   @@index([speciesId])
   @@index([price])
@@ -305,4 +308,52 @@ model AiChatMessage {
 enum MessageRole {
   USER
   ASSISTANT
+}
+
+// ═══════════════════════════════════════════════
+// Blog
+// ═══════════════════════════════════════════════
+model BlogPost {
+  id          String       @id @default(cuid())
+  title       String
+  slug        String       @unique
+  excerpt     String?      @db.Text
+  content     String       @db.Text
+  coverImage  String?      @map("cover_image")
+  status      BlogStatus   @default(DRAFT)
+  authorId    String       @map("author_id")
+  tags        String[]     @default([])
+  viewCount   Int          @default(0) @map("view_count")
+  publishedAt DateTime?    @map("published_at")
+  createdAt   DateTime     @default(now()) @map("created_at")
+  updatedAt   DateTime     @updatedAt @map("updated_at")
+
+  author User @relation(fields: [authorId], references: [id])
+
+  @@index([status, publishedAt])
+  @@index([slug])
+  @@map("blog_posts")
+}
+
+enum BlogStatus {
+  DRAFT
+  PUBLISHED
+  ARCHIVED
+}
+
+// ═══════════════════════════════════════════════
+// Wishlist
+// ═══════════════════════════════════════════════
+model Wishlist {
+  id        String   @id @default(cuid())
+  userId    String   @map("user_id")
+  productId String   @map("product_id")
+  createdAt DateTime @default(now()) @map("created_at")
+
+  user    User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  product Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, productId])
+  @@index([userId])
+  @@map("wishlists")
 }

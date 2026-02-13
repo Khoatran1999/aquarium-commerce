@@ -6,10 +6,15 @@ import {
   updateProductSchema,
   createSpeciesSchema,
   updateOrderStatusSchema,
+  createBlogSchema,
+  updateBlogSchema,
+  updateBlogStatusSchema,
+  blogQuerySchema,
 } from '../schemas/index.js';
 import * as productService from '../services/product.service.js';
 import * as speciesService from '../services/species.service.js';
 import * as orderService from '../services/order.service.js';
+import * as blogService from '../services/blog.service.js';
 import { prisma } from '../config/prisma.js';
 import { success, paginated } from '../utils/response.js';
 
@@ -323,6 +328,52 @@ router.get('/users', async (req, res, next) => {
     ]);
 
     paginated(res, users, { page, limit, total });
+  } catch (err) {
+    next(err);
+  }
+});
+
+// ── Blog Management ─────────────────────────────────
+router.get('/blogs', validate(blogQuerySchema, 'query'), async (req, res, next) => {
+  try {
+    const { blogs, total, page, limit } = await blogService.listAllBlogs(req.query as any);
+    paginated(res, blogs, { page, limit, total });
+  } catch (err) {
+    next(err);
+  }
+});
+
+router.post('/blogs', validate(createBlogSchema), async (req, res, next) => {
+  try {
+    const blog = await blogService.createBlog(req.body, req.user!.userId);
+    success(res, blog, 'Blog post created successfully', 201);
+  } catch (err) {
+    next(err);
+  }
+});
+
+router.put('/blogs/:id', validate(updateBlogSchema), async (req, res, next) => {
+  try {
+    const blog = await blogService.updateBlog(req.params.id as string, req.body);
+    success(res, blog, 'Blog post updated successfully');
+  } catch (err) {
+    next(err);
+  }
+});
+
+router.patch('/blogs/:id/status', validate(updateBlogStatusSchema), async (req, res, next) => {
+  try {
+    const blog = await blogService.updateBlogStatus(req.params.id as string, req.body.status);
+    success(res, blog, 'Blog status updated');
+  } catch (err) {
+    next(err);
+  }
+});
+
+router.delete('/blogs/:id', async (req, res, next) => {
+  try {
+    await blogService.deleteBlog(req.params.id as string);
+    success(res, null, 'Blog post deleted');
   } catch (err) {
     next(err);
   }
