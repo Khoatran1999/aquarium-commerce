@@ -7,6 +7,7 @@ import {
   ShoppingCart,
   Package,
   Layers,
+  FileText,
   ChevronLeft,
   Sun,
   Moon,
@@ -26,6 +27,7 @@ const NAV_ITEMS = [
   { label: 'Orders', href: '/admin/orders', icon: ShoppingCart },
   { label: 'Inventory', href: '/admin/inventory', icon: Layers },
   { label: 'Species', href: '/admin/species', icon: Fish },
+  { label: 'Blog', href: '/admin/blogs', icon: FileText },
 ];
 
 function Breadcrumb() {

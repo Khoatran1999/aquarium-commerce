@@ -5,12 +5,20 @@ import { addToCart } from '../store/cart.slice';
 import { Button } from '@repo/ui';
 import type { Product } from '@repo/types';
 import toast from 'react-hot-toast';
+import WishlistButton from './WishlistButton';
 
 interface ProductCardProps {
   product: Product;
   /** Show "Add to Cart" button (default: false) */
   showAddToCart?: boolean;
 }
+
+const careLevelStyles: Record<string, string> = {
+  EASY: 'bg-green-50 text-green-700 dark:bg-green-900/30 dark:text-green-300',
+  MODERATE: 'bg-yellow-50 text-yellow-700 dark:bg-yellow-900/30 dark:text-yellow-300',
+  HARD: 'bg-orange-50 text-orange-700 dark:bg-orange-900/30 dark:text-orange-300',
+  EXPERT: 'bg-red-50 text-red-700 dark:bg-red-900/30 dark:text-red-300',
+};
 
 /**
  * Shared product card used across HomePage, ProductListingPage, SearchPage.
@@ -56,11 +64,30 @@ const ProductCard = memo(function ProductCard({
             -{Math.round(((product.comparePrice! - product.price) / product.comparePrice!) * 100)}%
           </span>
         )}
+        <WishlistButton productId={product.id} variant="overlay" size="sm" />
       </div>
 
       <div className="p-4">
         <p className="text-muted-foreground text-xs">{product.species?.name}</p>
         <h3 className="text-foreground mt-1 line-clamp-1 text-sm font-semibold">{product.name}</h3>
+
+        {/* Care Level & Size badges */}
+        <div className="mt-2 flex flex-wrap gap-1.5">
+          {product.species?.careLevel && (
+            <span
+              className={`rounded-full px-2 py-0.5 text-[10px] font-semibold ${careLevelStyles[product.species.careLevel] ?? 'bg-gray-100 text-gray-700'}`}
+            >
+              {product.species.careLevel.charAt(0) +
+                product.species.careLevel.slice(1).toLowerCase()}
+            </span>
+          )}
+          {product.size && (
+            <span className="rounded-full bg-blue-50 px-2 py-0.5 text-[10px] font-semibold text-blue-700 dark:bg-blue-900/30 dark:text-blue-300">
+              Size: {product.size}
+            </span>
+          )}
+        </div>
+
         <div className="mt-2 flex items-baseline gap-2">
           <span className="text-primary text-lg font-bold">${product.price.toFixed(2)}</span>
           {hasDiscount && (

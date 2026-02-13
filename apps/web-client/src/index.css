@@ -97,3 +97,30 @@ body {
 ::-webkit-scrollbar-thumb:hover {
   background: var(--color-primary-dark);
 }
+
+/* ── Swiper carousel overrides ─── */
+.product-carousel .swiper-button-prev,
+.product-carousel .swiper-button-next {
+  color: var(--color-primary);
+  background: white;
+  width: 40px;
+  height: 40px;
+  border-radius: 9999px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+.product-carousel .swiper-button-prev::after,
+.product-carousel .swiper-button-next::after {
+  font-size: 16px;
+  font-weight: bold;
+}
+.product-carousel .swiper-pagination-bullet {
+  background: var(--color-primary);
+}
+.product-carousel .swiper-pagination-bullet-active {
+  background: var(--color-primary-dark);
+}
+.dark .product-carousel .swiper-button-prev,
+.dark .product-carousel .swiper-button-next {
+  background: var(--color-card);
+  color: var(--color-primary-light);
+}

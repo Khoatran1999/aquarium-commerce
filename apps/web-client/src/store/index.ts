@@ -14,6 +14,7 @@ import { useDispatch, useSelector, type TypedUseSelectorHook } from 'react-redux
 import uiReducer from './ui.slice';
 import authReducer from './auth.slice';
 import cartReducer from './cart.slice';
+import wishlistReducer from './wishlist.slice';
 
 /* ── Persist config (cart survives refresh) ── */
 const cartPersistConfig = {
@@ -26,6 +27,7 @@ const rootReducer = combineReducers({
   ui: uiReducer,
   auth: authReducer,
   cart: persistReducer(cartPersistConfig, cartReducer),
+  wishlist: wishlistReducer,
 });
 
 export const store = configureStore({

@@ -34,8 +34,8 @@ router.post('/items', validate(addToCartSchema), async (req, res, next) => {
   }
 });
 
-// PUT /api/cart/items/:itemId
-router.put('/items/:itemId', validate(updateCartItemSchema), async (req, res, next) => {
+// PATCH /api/cart/items/:itemId
+router.patch('/items/:itemId', validate(updateCartItemSchema), async (req, res, next) => {
   try {
     const cart = await cartService.updateCartItem(
       req.user!.userId,

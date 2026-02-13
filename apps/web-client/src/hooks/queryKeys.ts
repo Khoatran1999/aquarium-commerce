@@ -47,4 +47,19 @@ export const queryKeys = {
     sessions: ['ai', 'sessions'] as const,
     messages: (sessionId: string) => ['ai', 'messages', sessionId] as const,
   },
+
+  /* ── Blogs ─── */
+  blogs: {
+    all: ['blogs'] as const,
+    list: (filter?: Record<string, unknown>) => [...queryKeys.blogs.all, 'list', filter] as const,
+    detail: (slug: string) => [...queryKeys.blogs.all, 'detail', slug] as const,
+  },
+
+  /* ── Wishlist ─── */
+  wishlist: {
+    all: ['wishlist'] as const,
+    list: () => [...queryKeys.wishlist.all, 'list'] as const,
+    ids: () => [...queryKeys.wishlist.all, 'ids'] as const,
+    check: (productId: string) => [...queryKeys.wishlist.all, 'check', productId] as const,
+  },
 } as const;

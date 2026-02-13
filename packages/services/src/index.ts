@@ -37,5 +37,7 @@ export { default as reviewService } from './review.service';
 export { default as speciesService } from './species.service';
 export { default as adminService } from './admin.service';
 export { default as aiService } from './ai.service';
+export { default as blogService } from './blog.service';
+export { default as wishlistService } from './wishlist.service';
 
 export type { LoginPayload, RegisterPayload, AuthResponse } from './auth.service';

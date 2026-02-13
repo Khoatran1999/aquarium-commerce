@@ -280,3 +280,51 @@ export interface SocketEvents {
   order_updated: { orderId: string; status: OrderStatus };
   inventory_updated: { productId: string; available: number };
 }
+
+// ── Blog ───────────────────────────────────
+export type BlogStatus = 'DRAFT' | 'PUBLISHED' | 'ARCHIVED';
+
+export interface BlogPost {
+  id: string;
+  title: string;
+  slug: string;
+  excerpt?: string | null;
+  content: string;
+  coverImage?: string | null;
+  status: BlogStatus;
+  authorId: string;
+  tags: string[];
+  viewCount: number;
+  publishedAt?: string | null;
+  createdAt: string;
+  updatedAt: string;
+  author?: Pick<User, 'id' | 'name' | 'avatar'>;
+}
+
+export interface BlogFilter {
+  page?: number;
+  limit?: number;
+  search?: string;
+  tag?: string;
+  status?: BlogStatus;
+}
+
+export interface CreateBlogPayload {
+  title: string;
+  content: string;
+  excerpt?: string;
+  coverImage?: string;
+  tags?: string[];
+  status?: BlogStatus;
+}
+
+export interface UpdateBlogPayload extends Partial<CreateBlogPayload> {}
+
+// ── Wishlist ───────────────────────────────
+export interface WishlistItem {
+  id: string;
+  userId: string;
+  productId: string;
+  createdAt: string;
+  product?: Product;
+}

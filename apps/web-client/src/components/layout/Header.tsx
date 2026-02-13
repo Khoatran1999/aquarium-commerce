@@ -4,10 +4,12 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useAppDispatch, useAppSelector } from '../../store';
 import { toggleTheme, toggleMobileMenu, closeMobileMenu } from '../../store/ui.slice';
 import { logout } from '../../store/auth.slice';
+import { fetchWishlistIds } from '../../store/wishlist.slice';
 
 const NAV_LINKS = [
   { label: 'Shop', href: '/products' },
   { label: 'Species', href: '/products?category=species' },
+  { label: 'Blog', href: '/blog' },
   { label: 'AI Advisor', href: '/ai-chat' },
 ];
 
@@ -17,6 +19,14 @@ export default function Header() {
   const { theme, mobileMenuOpen } = useAppSelector((s) => s.ui);
   const { isAuthenticated, user } = useAppSelector((s) => s.auth);
   const { itemCount } = useAppSelector((s) => s.cart);
+  const wishlistCount = useAppSelector((s) => s.wishlist.ids.length);
+
+  /* Sync wishlist IDs on auth change */
+  useEffect(() => {
+    if (isAuthenticated) {
+      dispatch(fetchWishlistIds());
+    }
+  }, [isAuthenticated, dispatch]);
 
   /* User dropdown state */
   const [userMenuOpen, setUserMenuOpen] = useState(false);
@@ -119,6 +129,20 @@ export default function Header() {
             >
               {theme === 'light' ? <MoonIcon /> : <SunIcon />}
             </button>
+
+            {/* Wishlist icon with badge */}
+            <Link
+              to="/wishlist"
+              className="hover:bg-primary/10 relative rounded-full p-2 transition-colors"
+              aria-label="Wishlist"
+            >
+              <HeartIcon />
+              {wishlistCount > 0 && (
+                <span className="bg-danger absolute -right-0.5 -top-0.5 flex h-5 min-w-5 items-center justify-center rounded-full px-1 text-[10px] font-bold text-white">
+                  {wishlistCount > 99 ? '99+' : wishlistCount}
+                </span>
+              )}
+            </Link>
 
             {/* Cart with badge + mini cart dropdown */}
             <div className="relative" ref={cartRef}>
@@ -341,6 +365,13 @@ export default function Header() {
                   >
                     My Orders
                   </Link>
+                  <Link
+                    to="/wishlist"
+                    onClick={() => dispatch(closeMobileMenu())}
+                    className="text-foreground hover:text-primary text-base font-medium transition-colors"
+                  >
+                    Wishlist {wishlistCount > 0 && `(${wishlistCount})`}
+                  </Link>
                   <button
                     onClick={() => {
                       handleLogout();
@@ -477,6 +508,17 @@ function CloseIcon() {
   return (
     <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
       <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+    </svg>
+  );
+}
+function HeartIcon() {
+  return (
+    <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"
+      />
     </svg>
   );
 }

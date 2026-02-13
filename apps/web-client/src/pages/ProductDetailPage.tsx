@@ -9,6 +9,7 @@ import { Button, Skeleton, Badge, Tabs } from '@repo/ui';
 import type { FishSize } from '@repo/types';
 import toast from 'react-hot-toast';
 import ReviewSection from '../components/product/ReviewSection';
+import WishlistButton from '../components/WishlistButton';
 
 export default function ProductDetailPage() {
   const { slug } = useParams<{ slug: string }>();
@@ -202,6 +203,7 @@ export default function ProductDetailPage() {
               <Button size="lg" className="flex-1" disabled={!inStock} onClick={handleAddToCart}>
                 {inStock ? 'Add to Cart' : 'Out of Stock'}
               </Button>
+              <WishlistButton productId={product.id} variant="inline" size="md" />
             </div>
 
             {/* Quick info */}

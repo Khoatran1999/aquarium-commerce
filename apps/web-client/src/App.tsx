@@ -22,6 +22,9 @@ const LoginPage = lazy(() => import('./pages/LoginPage'));
 const RegisterPage = lazy(() => import('./pages/RegisterPage'));
 const SearchPage = lazy(() => import('./pages/SearchPage'));
 const NotFoundPage = lazy(() => import('./pages/NotFoundPage'));
+const WishlistPage = lazy(() => import('./pages/WishlistPage'));
+const BlogListPage = lazy(() => import('./pages/BlogListPage'));
+const BlogDetailPage = lazy(() => import('./pages/BlogDetailPage'));
 
 /* ── Admin pages ──────────────────────────────── */
 const AdminLoginPage = lazy(() => import('./pages/admin/AdminLoginPage'));
@@ -32,6 +35,8 @@ const AdminOrderListPage = lazy(() => import('./pages/admin/OrderListPage'));
 const AdminOrderDetailPage = lazy(() => import('./pages/admin/OrderDetailPage'));
 const InventoryPage = lazy(() => import('./pages/admin/InventoryPage'));
 const SpeciesPage = lazy(() => import('./pages/admin/SpeciesPage'));
+const AdminBlogListPage = lazy(() => import('./pages/admin/BlogListPage'));
+const AdminBlogFormPage = lazy(() => import('./pages/admin/BlogFormPage'));
 
 function PageLoader() {
   return (
@@ -63,6 +68,8 @@ export default function App() {
             <Route path="products/:slug" element={<ProductDetailPage />} />
             <Route path="cart" element={<CartPage />} />
             <Route path="search" element={<SearchPage />} />
+            <Route path="blog" element={<BlogListPage />} />
+            <Route path="blog/:slug" element={<BlogDetailPage />} />
             <Route path="login" element={<LoginPage />} />
             <Route path="register" element={<RegisterPage />} />
 
@@ -100,6 +107,14 @@ export default function App() {
               }
             />
             <Route
+              path="wishlist"
+              element={
+                <ProtectedRoute>
+                  <WishlistPage />
+                </ProtectedRoute>
+              }
+            />
+            <Route
               path="profile"
               element={
                 <ProtectedRoute>
@@ -130,6 +145,9 @@ export default function App() {
             <Route path="orders/:id" element={<AdminOrderDetailPage />} />
             <Route path="inventory" element={<InventoryPage />} />
             <Route path="species" element={<SpeciesPage />} />
+            <Route path="blogs" element={<AdminBlogListPage />} />
+            <Route path="blogs/new" element={<AdminBlogFormPage />} />
+            <Route path="blogs/:id/edit" element={<AdminBlogFormPage />} />
           </Route>
         </Routes>
       </Suspense>

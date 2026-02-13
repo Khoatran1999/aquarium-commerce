@@ -7,6 +7,10 @@ import type {
   User,
   InventoryLog,
   DashboardStats,
+  BlogPost,
+  BlogStatus,
+  CreateBlogPayload,
+  UpdateBlogPayload,
   ApiResponse,
   PaginatedResponse,
 } from '@repo/types';
@@ -108,6 +112,37 @@ const adminService = {
   // ── Users ──────────────────────────────────
   async getUsers(params?: { page?: number; limit?: number }): Promise<PaginatedResponse<User[]>> {
     const { data } = await apiClient.get('/api/admin/users', { params });
+    return data;
+  },
+
+  // ── Blogs ──────────────────────────────────
+  async getBlogs(params?: {
+    page?: number;
+    limit?: number;
+    status?: BlogStatus;
+    search?: string;
+  }): Promise<PaginatedResponse<BlogPost[]>> {
+    const { data } = await apiClient.get('/api/admin/blogs', { params });
+    return data;
+  },
+
+  async createBlog(payload: CreateBlogPayload): Promise<ApiResponse<BlogPost>> {
+    const { data } = await apiClient.post('/api/admin/blogs', payload);
+    return data;
+  },
+
+  async updateBlog(id: string, payload: UpdateBlogPayload): Promise<ApiResponse<BlogPost>> {
+    const { data } = await apiClient.put(`/api/admin/blogs/${id}`, payload);
+    return data;
+  },
+
+  async deleteBlog(id: string): Promise<ApiResponse<null>> {
+    const { data } = await apiClient.delete(`/api/admin/blogs/${id}`);
+    return data;
+  },
+
+  async updateBlogStatus(id: string, status: BlogStatus): Promise<ApiResponse<BlogPost>> {
+    const { data } = await apiClient.patch(`/api/admin/blogs/${id}/status`, { status });
     return data;
   },
 };

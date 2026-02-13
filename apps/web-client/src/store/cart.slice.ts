@@ -8,12 +8,18 @@ interface CartState {
   items: CartItem[];
   itemCount: number;
   loading: boolean;
+  /** Per-item operation tracking: itemId → 'update' | 'remove' */
+  pendingOps: Record<string, 'update' | 'remove'>;
+  /** Snapshot for rollback on failed optimistic updates */
+  _rollbackItems: CartItem[] | null;
 }
 
 const initialState: CartState = {
   items: [],
   itemCount: 0,
   loading: false,
+  pendingOps: {},
+  _rollbackItems: null,
 };
 
 /* ── Helpers ────────────────────────────── */
@@ -156,10 +162,23 @@ const cartSlice = createSlice({
     clearCart(state) {
       state.items = [];
       state.itemCount = 0;
+      state.pendingOps = {};
+      state._rollbackItems = null;
     },
     setCartItems(state, action: PayloadAction<CartItem[]>) {
       state.items = action.payload;
       state.itemCount = calcCount(action.payload);
+    },
+    /** Optimistic local-only quantity update (no API) — used before debounced thunk */
+    setItemQuantityLocal(state, action: PayloadAction<{ itemId: string; quantity: number }>) {
+      const { itemId, quantity } = action.payload;
+      if (!state._rollbackItems) {
+        state._rollbackItems = [...state.items];
+      }
+      state.items = state.items.map((i) =>
+        i.id === itemId ? { ...i, quantity } : i,
+      );
+      state.itemCount = calcCount(state.items);
     },
   },
   extraReducers: (builder) => {
@@ -191,32 +210,66 @@ const cartSlice = createSlice({
         state.loading = false;
       });
 
-    // Update item
+    // Update item — optimistic
     builder
-      .addCase(updateCartItem.pending, (state) => {
-        state.loading = true;
+      .addCase(updateCartItem.pending, (state, action) => {
+        const { itemId, quantity } = action.meta.arg;
+        state.pendingOps[itemId] = 'update';
+        // Save snapshot for rollback
+        state._rollbackItems = [...state.items];
+        // Optimistic update
+        state.items = state.items.map((i) =>
+          i.id === itemId ? { ...i, quantity } : i,
+        );
+        state.itemCount = calcCount(state.items);
       })
       .addCase(updateCartItem.fulfilled, (state, action) => {
-        state.loading = false;
+        const { itemId } = action.meta.arg;
+        delete state.pendingOps[itemId];
+        state._rollbackItems = null;
+        // Use server data as source of truth
         state.items = action.payload.items ?? [];
         state.itemCount = calcCount(state.items);
       })
-      .addCase(updateCartItem.rejected, (state) => {
-        state.loading = false;
+      .addCase(updateCartItem.rejected, (state, action) => {
+        const { itemId } = action.meta.arg;
+        delete state.pendingOps[itemId];
+        // Rollback to previous state
+        if (state._rollbackItems) {
+          state.items = state._rollbackItems;
+          state.itemCount = calcCount(state.items);
+          state._rollbackItems = null;
+        }
       });
 
-    // Remove item
+    // Remove item — optimistic
     builder
-      .addCase(removeCartItem.pending, (state) => {
-        state.loading = true;
+      .addCase(removeCartItem.pending, (state, action) => {
+        const itemId = action.meta.arg;
+        state.pendingOps[itemId] = 'remove';
+        // Save snapshot for rollback
+        state._rollbackItems = [...state.items];
+        // Optimistic removal
+        state.items = state.items.filter((i) => i.id !== itemId);
+        state.itemCount = calcCount(state.items);
       })
       .addCase(removeCartItem.fulfilled, (state, action) => {
-        state.loading = false;
+        const itemId = action.meta.arg;
+        delete state.pendingOps[itemId];
+        state._rollbackItems = null;
+        // Use server data as source of truth
         state.items = action.payload.items ?? [];
         state.itemCount = calcCount(state.items);
       })
-      .addCase(removeCartItem.rejected, (state) => {
-        state.loading = false;
+      .addCase(removeCartItem.rejected, (state, action) => {
+        const itemId = action.meta.arg;
+        delete state.pendingOps[itemId];
+        // Rollback
+        if (state._rollbackItems) {
+          state.items = state._rollbackItems;
+          state.itemCount = calcCount(state.items);
+          state._rollbackItems = null;
+        }
       });
 
     // Sync guest cart after login
@@ -235,5 +288,5 @@ const cartSlice = createSlice({
   },
 });
 
-export const { clearCart, setCartItems } = cartSlice.actions;
+export const { clearCart, setCartItems, setItemQuantityLocal } = cartSlice.actions;
 export default cartSlice.reducer;

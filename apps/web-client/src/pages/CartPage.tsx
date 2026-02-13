@@ -1,32 +1,56 @@
+import { useRef, useCallback } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useAppDispatch, useAppSelector } from '../store';
-import { updateCartItem, removeCartItem } from '../store/cart.slice';
+import { updateCartItem, removeCartItem, setItemQuantityLocal } from '../store/cart.slice';
 import { Button } from '@repo/ui';
 import toast from 'react-hot-toast';
 
 export default function CartPage() {
   const dispatch = useAppDispatch();
-  const { items, itemCount, loading } = useAppSelector((s) => s.cart);
+  const { items, itemCount, pendingOps } = useAppSelector((s) => s.cart);
+  /** Debounce timers for quantity updates — prevents flooding the API */
+  const debounceTimers = useRef<Record<string, ReturnType<typeof setTimeout>>>({});
 
   const subtotal = items.reduce((sum, i) => sum + i.price * i.quantity, 0);
   const shippingFee = subtotal > 0 ? (subtotal >= 100 ? 0 : 9.99) : 0;
   const total = subtotal + shippingFee;
 
-  const handleUpdateQty = (itemId: string, quantity: number) => {
-    if (quantity < 1) return;
-    dispatch(updateCartItem({ itemId, quantity }))
-      .unwrap()
-      .catch((err: string) => toast.error(err));
-  };
+  const handleUpdateQty = useCallback(
+    (itemId: string, quantity: number) => {
+      if (quantity < 1) return;
+      // Instant local UI update
+      dispatch(setItemQuantityLocal({ itemId, quantity }));
+      // Cancel any pending debounce for this item
+      if (debounceTimers.current[itemId]) {
+        clearTimeout(debounceTimers.current[itemId]);
+      }
+      // Debounce the API call so rapid clicks only send the final value
+      debounceTimers.current[itemId] = setTimeout(() => {
+        dispatch(updateCartItem({ itemId, quantity }))
+          .unwrap()
+          .catch((err: string) => toast.error(err));
+        delete debounceTimers.current[itemId];
+      }, 500);
+    },
+    [dispatch],
+  );
 
-  const handleRemove = (itemId: string) => {
-    dispatch(removeCartItem(itemId))
-      .unwrap()
-      .then(() => toast.success('Item removed'))
-      .catch((err: string) => toast.error(err));
-  };
+  const handleRemove = useCallback(
+    (itemId: string) => {
+      // Cancel any pending quantity update for this item
+      if (debounceTimers.current[itemId]) {
+        clearTimeout(debounceTimers.current[itemId]);
+        delete debounceTimers.current[itemId];
+      }
+      dispatch(removeCartItem(itemId))
+        .unwrap()
+        .then(() => toast.success('Item removed'))
+        .catch((err: string) => toast.error(err));
+    },
+    [dispatch],
+  );
 
   return (
     <>
@@ -98,7 +122,7 @@ export default function CartPage() {
                         <div className="border-border flex items-center rounded-lg border">
                           <button
                             onClick={() => handleUpdateQty(item.id, item.quantity - 1)}
-                            disabled={loading || item.quantity <= 1}
+                            disabled={item.quantity <= 1 || pendingOps[item.id] === 'remove'}
                             className="text-foreground hover:bg-muted h-8 w-8 text-sm font-semibold transition-colors disabled:opacity-40"
                           >
                             -
@@ -108,7 +132,7 @@ export default function CartPage() {
                           </span>
                           <button
                             onClick={() => handleUpdateQty(item.id, item.quantity + 1)}
-                            disabled={loading}
+                            disabled={pendingOps[item.id] === 'remove'}
                             className="text-foreground hover:bg-muted h-8 w-8 text-sm font-semibold transition-colors disabled:opacity-40"
                           >
                             +

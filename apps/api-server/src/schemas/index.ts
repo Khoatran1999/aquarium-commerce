@@ -34,7 +34,7 @@ export const productQuerySchema = z
 
 // ── Cart ────────────────────────────────────────────
 export const addToCartSchema = z.object({
-  productId: z.string().uuid('Invalid product ID'),
+  productId: z.string().min(1, 'Product ID is required'),
   quantity: z.number().int().min(1, 'Minimum quantity is 1'),
 });
 
@@ -65,7 +65,7 @@ export const updateOrderStatusSchema = z.object({
 
 // ── Review ──────────────────────────────────────────
 export const createReviewSchema = z.object({
-  productId: z.string().uuid('Invalid product ID'),
+  productId: z.string().min(1, 'Product ID is required'),
   rating: z.number().int().min(1).max(5, 'Rating must be between 1-5'),
   comment: z.string().min(10, 'Comment must be at least 10 characters').optional(),
 });
@@ -96,7 +96,7 @@ export const createProductSchema = z.object({
   description: z.string().optional(),
   price: z.number().min(0, 'Price must be >= 0'),
   compareAtPrice: z.number().min(0).optional(),
-  speciesId: z.string().uuid(),
+  speciesId: z.string().min(1, 'Species ID is required'),
   size: z.enum(['XS', 'S', 'M', 'L', 'XL']).optional(),
   age: z.string().optional(),
   gender: z.string().optional(),

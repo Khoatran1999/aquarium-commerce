@@ -4,6 +4,9 @@ import { motion } from 'framer-motion';
 import { useProducts } from '../hooks';
 import { Skeleton } from '@repo/ui';
 import ProductCard from '../components/ProductCard';
+import NewArrivalsSection from '../components/NewArrivalsSection';
+import BestSellersSection from '../components/BestSellersSection';
+import BlogSection from '../components/BlogSection';
 import type { Product } from '@repo/types';
 
 /* ── Constants ────────────────────────────── */
@@ -185,6 +188,12 @@ export default function HomePage() {
         </motion.div>
       </section>
 
+      {/* ── New Arrivals (carousel) ─── */}
+      <NewArrivalsSection />
+
+      {/* ── Best Sellers (carousel) ─── */}
+      <BestSellersSection />
+
       {/* ── Featured Products ─── */}
       <section className="bg-muted/50 py-20">
         <div className="mx-auto max-w-[1280px] px-4 md:px-10">
@@ -229,6 +238,9 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+
+      {/* ── Blog Section ─── */}
+      <BlogSection />
 
       {/* ── AI Advisor Banner ─── */}
       <section className="mx-auto max-w-[1280px] px-4 py-20 md:px-10">
