@@ -26,10 +26,7 @@ const wishlistInclude = {
 } satisfies Prisma.WishlistInclude;
 
 /** Get user's complete wishlist */
-export async function getUserWishlist(
-  userId: string,
-  filters?: { page?: string; limit?: string },
-) {
+export async function getUserWishlist(userId: string, filters?: { page?: string; limit?: string }) {
   const { page, limit, skip } = parsePagination(filters ?? {});
 
   const where: Prisma.WishlistWhereInput = { userId };
