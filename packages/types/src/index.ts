@@ -318,7 +318,7 @@ export interface CreateBlogPayload {
   status?: BlogStatus;
 }
 
-export interface UpdateBlogPayload extends Partial<CreateBlogPayload> {}
+export type UpdateBlogPayload = Partial<CreateBlogPayload>;
 
 // ── Wishlist ───────────────────────────────
 export interface WishlistItem {

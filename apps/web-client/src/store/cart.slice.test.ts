@@ -38,7 +38,13 @@ const mockItems: CartItem[] = [
 ];
 
 describe('cart slice', () => {
-  const initialState = { items: [], itemCount: 0, loading: false };
+  const initialState = {
+    items: [],
+    itemCount: 0,
+    loading: false,
+    pendingOps: {},
+    _rollbackItems: null,
+  };
 
   describe('reducers', () => {
     it('has correct initial state', () => {
@@ -47,8 +53,14 @@ describe('cart slice', () => {
     });
 
     it('clearCart resets items and count', () => {
-      const populated = { items: mockItems, itemCount: 5, loading: false };
-      const state = cartReducer(populated, clearCart());
+      const populated = {
+        items: mockItems,
+        itemCount: 5,
+        loading: false,
+        pendingOps: {},
+        _rollbackItems: null,
+      };
+      const state = cartReducer(populated as any, clearCart());
       expect(state.items).toEqual([]);
       expect(state.itemCount).toBe(0);
     });
@@ -60,7 +72,13 @@ describe('cart slice', () => {
     });
 
     it('setCartItems with empty array sets count to 0', () => {
-      const populated = { items: mockItems, itemCount: 5, loading: false };
+      const populated = {
+        items: mockItems,
+        itemCount: 5,
+        loading: false,
+        pendingOps: {},
+        _rollbackItems: null,
+      };
       const state = cartReducer(populated, setCartItems([]));
       expect(state.items).toEqual([]);
       expect(state.itemCount).toBe(0);
@@ -84,14 +102,32 @@ describe('cart slice', () => {
       expect(state.loading).toBe(true);
     });
 
-    it('sets loading=true on cart/updateItem.pending', () => {
-      const state = cartReducer(initialState, { type: 'cart/updateItem/pending' });
-      expect(state.loading).toBe(true);
+    it('tracks pending ops on cart/updateItem.pending', () => {
+      const action = {
+        type: 'cart/updateItem/pending',
+        meta: {
+          arg: { itemId: '1', quantity: 5 },
+          requestId: 'req1',
+          requestStatus: 'pending' as const,
+        },
+      };
+      const stateWithItems = { ...initialState, items: mockItems, itemCount: 5 };
+      const state = cartReducer(stateWithItems as any, action);
+      expect(state.pendingOps['1']).toBe('update');
+      // Optimistic quantity update
+      expect(state.items.find((i) => i.id === '1')?.quantity).toBe(5);
     });
 
-    it('sets loading=true on cart/removeItem.pending', () => {
-      const state = cartReducer(initialState, { type: 'cart/removeItem/pending' });
-      expect(state.loading).toBe(true);
+    it('tracks pending ops on cart/removeItem.pending', () => {
+      const action = {
+        type: 'cart/removeItem/pending',
+        meta: { arg: '1', requestId: 'req1', requestStatus: 'pending' as const },
+      };
+      const stateWithItems = { ...initialState, items: mockItems, itemCount: 5 };
+      const state = cartReducer(stateWithItems as any, action);
+      expect(state.pendingOps['1']).toBe('remove');
+      // Optimistic removal
+      expect(state.items.find((i) => i.id === '1')).toBeUndefined();
     });
   });
 });

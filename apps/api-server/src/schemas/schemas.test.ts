@@ -77,17 +77,17 @@ describe('loginSchema', () => {
 });
 
 describe('addToCartSchema', () => {
-  it('passes with valid UUID and quantity', () => {
+  it('passes with valid product ID and quantity', () => {
     const result = addToCartSchema.safeParse({
-      productId: '550e8400-e29b-41d4-a716-446655440000',
+      productId: 'cmlgmqzvu003eul0kkubq5k3n',
       quantity: 2,
     });
     expect(result.success).toBe(true);
   });
 
-  it('fails with non-UUID productId', () => {
+  it('fails with empty productId', () => {
     const result = addToCartSchema.safeParse({
-      productId: 'abc',
+      productId: '',
       quantity: 1,
     });
     expect(result.success).toBe(false);
@@ -95,7 +95,7 @@ describe('addToCartSchema', () => {
 
   it('fails with quantity < 1', () => {
     const result = addToCartSchema.safeParse({
-      productId: '550e8400-e29b-41d4-a716-446655440000',
+      productId: 'cmlgmqzvu003eul0kkubq5k3n',
       quantity: 0,
     });
     expect(result.success).toBe(false);

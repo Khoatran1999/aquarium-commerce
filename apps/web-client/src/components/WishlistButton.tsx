@@ -1,4 +1,4 @@
-import { memo, useCallback } from 'react';
+import React, { memo, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useAppDispatch, useAppSelector } from '../store';
 import { addWishlistItem, removeWishlistItem } from '../store/wishlist.slice';

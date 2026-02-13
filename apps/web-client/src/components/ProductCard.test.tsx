@@ -6,6 +6,8 @@ import { configureStore } from '@reduxjs/toolkit';
 import ProductCard from './ProductCard';
 import cartReducer from '../store/cart.slice';
 import uiReducer from '../store/ui.slice';
+import authReducer from '../store/auth.slice';
+import wishlistReducer from '../store/wishlist.slice';
 import type { Product } from '@repo/types';
 
 const mockProduct: Product = {
@@ -52,6 +54,8 @@ describe('ProductCard', () => {
       reducer: {
         cart: cartReducer,
         ui: uiReducer,
+        auth: authReducer,
+        wishlist: wishlistReducer,
       },
     });
 
