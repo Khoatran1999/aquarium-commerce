@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { ArrowUp } from 'lucide-react';
 
 /** Floating button that appears after scrolling down 400px */
 export default function BackToTop() {
@@ -22,18 +23,7 @@ export default function BackToTop() {
           aria-label="Back to top"
           className="bg-primary hover:bg-primary-dark fixed bottom-5 right-5 z-50 flex h-10 w-10 items-center justify-center rounded-full text-white shadow-lg transition-colors"
         >
-          <svg
-            width="18"
-            height="18"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2.5"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          >
-            <path d="M12 19V5M5 12l7-7 7 7" />
-          </svg>
+          <ArrowUp size={18} strokeWidth={2.5} />
         </motion.button>
       )}
     </AnimatePresence>

@@ -1,6 +1,7 @@
 import { Helmet } from 'react-helmet-async';
 import { Link, useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import { Fish } from 'lucide-react';
 import { Button } from '@repo/ui';
 
 export default function OrderSuccessPage() {
@@ -76,11 +77,11 @@ export default function OrderSuccessPage() {
 
           {/* Fun fish animation */}
           <motion.div
-            className="mt-12 text-5xl"
+            className="mt-12"
             animate={{ x: [0, 10, -10, 0] }}
             transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
           >
-            🐠
+            <Fish size={48} className="text-primary" />
           </motion.div>
         </motion.div>
       </div>

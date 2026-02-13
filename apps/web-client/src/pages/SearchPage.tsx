@@ -2,6 +2,7 @@ import { Helmet } from 'react-helmet-async';
 import { useSearchParams, Link } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import { motion } from 'framer-motion';
+import { Search, Fish } from 'lucide-react';
 import { productService } from '@repo/services';
 import type { Product } from '@repo/types';
 import { Skeleton, Button } from '@repo/ui';
@@ -41,7 +42,9 @@ export default function SearchPage() {
           </div>
         ) : (
           <div className="flex min-h-[40vh] flex-col items-center justify-center text-center">
-            <p className="text-5xl">🔍</p>
+            <div className="mb-4">
+              <Search size={48} className="text-muted-foreground/40" />
+            </div>
             <h1 className="text-foreground mt-4 text-xl font-bold">Search Products</h1>
             <p className="text-muted-foreground mt-2">
               Enter a search term to find your perfect fish.
@@ -59,7 +62,9 @@ export default function SearchPage() {
 
         {!isLoading && q && products.length === 0 && (
           <div className="py-20 text-center">
-            <p className="text-5xl">🐠</p>
+            <div className="mb-3 flex justify-center">
+              <Fish size={48} className="text-muted-foreground/40" />
+            </div>
             <p className="text-foreground mt-3 text-lg font-semibold">No results found</p>
             <p className="text-muted-foreground mt-1 text-sm">
               Try a different search term or browse our collection.

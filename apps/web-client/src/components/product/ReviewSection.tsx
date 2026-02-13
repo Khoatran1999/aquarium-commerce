@@ -1,10 +1,12 @@
 import { useState } from 'react';
+import { Star } from 'lucide-react';
 import { Button, Alert } from '@repo/ui';
 import { reviewService } from '@repo/services';
 import { useQueryClient } from '@tanstack/react-query';
 import { queryKeys } from '../../hooks/queryKeys';
 import type { Review } from '@repo/types';
 import toast from 'react-hot-toast';
+import { StarRating } from '../icons';
 
 interface ReviewSectionProps {
   productId: string;
@@ -61,9 +63,8 @@ export default function ReviewSection({
           <p className="text-foreground text-5xl font-bold">
             {avgRating > 0 ? avgRating.toFixed(1) : '—'}
           </p>
-          <div className="text-accent mt-1 text-lg">
-            {'★'.repeat(Math.round(avgRating))}
-            {'☆'.repeat(5 - Math.round(avgRating))}
+          <div className="text-accent mt-1">
+            <StarRating rating={avgRating} size={20} />
           </div>
           <p className="text-muted-foreground mt-1 text-sm">
             {reviewCount} review{reviewCount !== 1 ? 's' : ''}
@@ -71,7 +72,10 @@ export default function ReviewSection({
           <div className="mt-4 flex flex-col gap-1.5">
             {distribution.map((d) => (
               <div key={d.star} className="flex items-center gap-2 text-xs">
-                <span className="text-muted-foreground w-6">{d.star}★</span>
+                <span className="text-muted-foreground flex w-6 items-center gap-0.5">
+                  {d.star}
+                  <Star size={10} className="fill-accent text-accent" />
+                </span>
                 <div className="bg-muted h-2 flex-1 overflow-hidden rounded-full">
                   <div
                     className="bg-accent h-full rounded-full transition-all"
@@ -91,25 +95,16 @@ export default function ReviewSection({
             <div className="border-border mb-8 rounded-xl border p-5">
               <h3 className="text-foreground mb-3 font-semibold">Write a Review</h3>
               {/* Star selector */}
-              <div className="mb-3 flex gap-1">
-                {[1, 2, 3, 4, 5].map((star) => (
-                  <button
-                    key={star}
-                    type="button"
-                    onClick={() => setRating(star)}
-                    onMouseEnter={() => setHoverRating(star)}
-                    onMouseLeave={() => setHoverRating(0)}
-                    className="text-2xl transition-colors"
-                  >
-                    <span
-                      className={
-                        star <= (hoverRating || rating) ? 'text-accent' : 'text-muted-foreground/30'
-                      }
-                    >
-                      ★
-                    </span>
-                  </button>
-                ))}
+              <div className="mb-3">
+                <StarRating
+                  rating={rating}
+                  size={24}
+                  interactive
+                  onRate={setRating}
+                  hoverRating={hoverRating}
+                  onHover={setHoverRating}
+                  onLeave={() => setHoverRating(0)}
+                />
               </div>
               <textarea
                 value={comment}
@@ -158,10 +153,7 @@ export default function ReviewSection({
                         {r.user?.name ?? 'Anonymous'}
                       </p>
                       <div className="flex items-center gap-2">
-                        <span className="text-accent text-xs">
-                          {'★'.repeat(r.rating)}
-                          {'☆'.repeat(5 - r.rating)}
-                        </span>
+                        <StarRating rating={r.rating} size={12} />
                         <span className="text-muted-foreground text-xs">
                           {new Date(r.createdAt).toLocaleDateString()}
                         </span>

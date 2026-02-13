@@ -2,6 +2,7 @@ import { useRef, useCallback } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
+import { ShoppingCart, Trash2 } from 'lucide-react';
 import { useAppDispatch, useAppSelector } from '../store';
 import { updateCartItem, removeCartItem, setItemQuantityLocal } from '../store/cart.slice';
 import { Button } from '@repo/ui';
@@ -69,7 +70,9 @@ export default function CartPage() {
 
         {items.length === 0 ? (
           <div className="flex flex-col items-center justify-center py-20 text-center">
-            <div className="mb-4 text-6xl">🛒</div>
+            <div className="mb-4">
+              <ShoppingCart size={56} className="text-muted-foreground/40" />
+            </div>
             <h2 className="text-foreground text-xl font-semibold">Your cart is empty</h2>
             <p className="text-muted-foreground mt-2">
               Discover our amazing ornamental fish collection.
@@ -148,19 +151,7 @@ export default function CartPage() {
                             className="text-muted-foreground hover:text-danger transition-colors"
                             aria-label="Remove item"
                           >
-                            <svg
-                              className="h-5 w-5"
-                              fill="none"
-                              viewBox="0 0 24 24"
-                              stroke="currentColor"
-                              strokeWidth={2}
-                            >
-                              <path
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
-                              />
-                            </svg>
+                            <Trash2 size={20} />
                           </button>
                         </div>
                       </div>

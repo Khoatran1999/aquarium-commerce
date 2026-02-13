@@ -1,4 +1,5 @@
 import React, { Component, type ReactNode } from 'react';
+import { Fish } from 'lucide-react';
 
 interface Props {
   children: ReactNode;
@@ -34,7 +35,9 @@ export default class ErrorBoundary extends Component<Props, State> {
 
       return (
         <div className="flex min-h-[70vh] flex-col items-center justify-center px-4 text-center">
-          <div className="mb-6 text-6xl">🐡</div>
+          <div className="mb-6">
+            <Fish size={56} className="text-muted-foreground/40 mx-auto" />
+          </div>
           <h1 className="text-foreground mb-2 text-2xl font-bold">Something went wrong</h1>
           <p className="text-muted-foreground mb-6 max-w-md text-sm">
             An unexpected error occurred. Please try refreshing the page or go back to the homepage.

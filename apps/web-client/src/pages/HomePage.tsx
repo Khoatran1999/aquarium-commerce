@@ -1,37 +1,39 @@
 import { Helmet } from 'react-helmet-async';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import { Fish, Shell, Waves, Palmtree, ArrowRight, MessageCircle, Sparkles } from 'lucide-react';
 import { useProducts } from '../hooks';
 import { Skeleton } from '@repo/ui';
 import ProductCard from '../components/ProductCard';
 import NewArrivalsSection from '../components/NewArrivalsSection';
 import BestSellersSection from '../components/BestSellersSection';
 import BlogSection from '../components/BlogSection';
+import { StarRating } from '../components/icons';
 import type { Product } from '@repo/types';
 
 /* ── Constants ────────────────────────────── */
 const CATEGORIES = [
   {
     name: 'Freshwater Fish',
-    icon: '🐠',
+    icon: Fish,
     href: '/products?waterType=FRESHWATER',
     color: 'from-cyan-500/20 to-blue-500/20',
   },
   {
     name: 'Saltwater Fish',
-    icon: '🐡',
+    icon: Shell,
     href: '/products?waterType=SALTWATER',
     color: 'from-blue-500/20 to-indigo-500/20',
   },
   {
     name: 'Mini Aquarium',
-    icon: '🐟',
+    icon: Waves,
     href: '/products?size=XS&size=S',
     color: 'from-teal-500/20 to-emerald-500/20',
   },
   {
     name: 'Koi Fish',
-    icon: '🎏',
+    icon: Palmtree,
     href: '/products?search=koi',
     color: 'from-orange-500/20 to-red-500/20',
   },
@@ -137,15 +139,7 @@ export default function HomePage() {
               className="bg-secondary hover:bg-secondary-dark inline-flex items-center gap-2 rounded-full px-8 py-3.5 text-base font-bold text-white shadow-lg transition-all hover:scale-105"
             >
               Shop Now
-              <svg
-                className="h-5 w-5"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                strokeWidth={2}
-              >
-                <path strokeLinecap="round" strokeLinejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
-              </svg>
+              <ArrowRight size={20} />
             </Link>
           </motion.div>
         </motion.div>
@@ -175,9 +169,9 @@ export default function HomePage() {
                 className="bg-card border-border shadow-card hover:shadow-elevated group flex flex-col items-center gap-4 rounded-2xl border p-8 transition-all hover:-translate-y-1"
               >
                 <span
-                  className={`flex h-20 w-20 items-center justify-center rounded-2xl bg-gradient-to-br text-4xl ${cat.color}`}
+                  className={`flex h-20 w-20 items-center justify-center rounded-2xl bg-gradient-to-br ${cat.color}`}
                 >
-                  {cat.icon}
+                  <cat.icon size={36} className="text-foreground" />
                 </span>
                 <span className="text-foreground group-hover:text-primary text-sm font-semibold transition-colors">
                   {cat.name}
@@ -251,8 +245,8 @@ export default function HomePage() {
           viewport={{ once: true }}
         >
           <div className="relative z-10 flex flex-col items-center text-center md:items-start md:text-left">
-            <span className="mb-4 inline-block rounded-full bg-white/10 px-4 py-1.5 text-sm font-semibold text-white/90">
-              ✨ AI-Powered
+            <span className="mb-4 inline-flex items-center gap-1.5 rounded-full bg-white/10 px-4 py-1.5 text-sm font-semibold text-white/90">
+              <Sparkles size={14} /> AI-Powered
             </span>
             <h2 className="mb-4 text-3xl font-bold text-white md:text-4xl">
               Not sure what fish to get?
@@ -266,19 +260,7 @@ export default function HomePage() {
               className="bg-accent hover:bg-accent-dark inline-flex items-center gap-2 rounded-full px-8 py-3 font-bold text-slate-900 transition-all hover:scale-105"
             >
               Talk to AI Advisor
-              <svg
-                className="h-5 w-5"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                strokeWidth={2}
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"
-                />
-              </svg>
+              <MessageCircle size={20} />
             </Link>
           </div>
           {/* Decorative circles */}
@@ -308,9 +290,8 @@ export default function HomePage() {
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1 }}
               >
-                <div className="text-accent mb-3 text-sm">
-                  {'★'.repeat(t.rating)}
-                  {'☆'.repeat(5 - t.rating)}
+                <div className="text-accent mb-3">
+                  <StarRating rating={t.rating} size={14} />
                 </div>
                 <p className="text-foreground mb-4 text-sm leading-relaxed">"{t.text}"</p>
                 <p className="text-muted-foreground text-xs font-semibold">— {t.name}</p>

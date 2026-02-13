@@ -3,6 +3,7 @@ import { Helmet } from 'react-helmet-async';
 import { Link } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import { motion, AnimatePresence } from 'framer-motion';
+import { Package } from 'lucide-react';
 import { orderService } from '@repo/services';
 import type { Order, OrderStatus } from '@repo/types';
 import { Skeleton } from '@repo/ui';
@@ -139,7 +140,9 @@ export default function OrdersPage() {
         {/* Orders */}
         {!isLoading && filtered.length === 0 && (
           <div className="py-20 text-center">
-            <p className="text-5xl">📦</p>
+            <div className="mb-3 flex justify-center">
+              <Package size={48} className="text-muted-foreground/40" />
+            </div>
             <p className="text-muted-foreground mt-3">No orders found</p>
             <Link
               to="/products"

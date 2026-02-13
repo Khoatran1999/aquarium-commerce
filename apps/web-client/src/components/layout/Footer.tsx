@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import { Facebook, Instagram, Youtube } from 'lucide-react';
 
 const FOOTER_SECTIONS = [
   {
@@ -52,14 +53,18 @@ export default function Footer() {
             </p>
             {/* Social icons */}
             <div className="mt-4 flex gap-3">
-              {['facebook', 'instagram', 'youtube'].map((s) => (
+              {[
+                { name: 'facebook', icon: Facebook },
+                { name: 'instagram', icon: Instagram },
+                { name: 'youtube', icon: Youtube },
+              ].map((s) => (
                 <a
-                  key={s}
+                  key={s.name}
                   href="#"
-                  className="bg-muted text-muted-foreground hover:text-primary hover:bg-primary/10 flex h-9 w-9 items-center justify-center rounded-full text-xs font-bold uppercase transition-colors"
-                  aria-label={s}
+                  className="bg-muted text-muted-foreground hover:text-primary hover:bg-primary/10 flex h-9 w-9 items-center justify-center rounded-full transition-colors"
+                  aria-label={s.name}
                 >
-                  {s[0].toUpperCase()}
+                  <s.icon size={16} />
                 </a>
               ))}
             </div>

@@ -1,11 +1,13 @@
 import React, { memo, useCallback } from 'react';
 import { Link } from 'react-router-dom';
+import { Fish } from 'lucide-react';
 import { useAppDispatch } from '../store';
 import { addToCart } from '../store/cart.slice';
 import { Button } from '@repo/ui';
 import type { Product } from '@repo/types';
 import toast from 'react-hot-toast';
 import WishlistButton from './WishlistButton';
+import { StarRating } from './icons';
 
 interface ProductCardProps {
   product: Product;
@@ -57,7 +59,9 @@ const ProductCard = memo(function ProductCard({
             loading="lazy"
           />
         ) : (
-          <div className="bg-muted flex h-full w-full items-center justify-center text-4xl">🐟</div>
+          <div className="bg-muted flex h-full w-full items-center justify-center">
+            <Fish size={48} className="text-muted-foreground/40" />
+          </div>
         )}
         {hasDiscount && (
           <span className="bg-danger absolute left-3 top-3 rounded-full px-2.5 py-1 text-xs font-bold text-white">
@@ -99,7 +103,7 @@ const ProductCard = memo(function ProductCard({
 
         {product.avgRating > 0 && (
           <div className="mt-1.5 flex items-center gap-1">
-            <span className="text-accent text-xs">★</span>
+            <StarRating rating={1} max={1} size={12} />
             <span className="text-muted-foreground text-xs">
               {product.avgRating.toFixed(1)} ({product.reviewCount})
             </span>

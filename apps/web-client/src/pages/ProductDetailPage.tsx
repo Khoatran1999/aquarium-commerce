@@ -2,6 +2,17 @@ import { useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import { motion } from 'framer-motion';
+import {
+  Thermometer,
+  FlaskConical,
+  Fish,
+  Ruler,
+  Utensils,
+  Hourglass,
+  Globe,
+  Droplets,
+} from 'lucide-react';
+import type { LucideIcon } from 'lucide-react';
 import { useProduct, useProducts, useReviews } from '../hooks';
 import { useAppDispatch, useAppSelector } from '../store';
 import { addToCart } from '../store/cart.slice';
@@ -10,6 +21,7 @@ import type { FishSize } from '@repo/types';
 import toast from 'react-hot-toast';
 import ReviewSection from '../components/product/ReviewSection';
 import WishlistButton from '../components/WishlistButton';
+import { StarRating } from '../components/icons';
 
 export default function ProductDetailPage() {
   const { slug } = useParams<{ slug: string }>();
@@ -143,7 +155,7 @@ export default function ProductDetailPage() {
             {/* Rating */}
             {product.avgRating > 0 && (
               <div className="flex items-center gap-2">
-                <span className="text-accent">{'★'.repeat(Math.round(product.avgRating))}</span>
+                <StarRating rating={product.avgRating} size={16} />
                 <span className="text-muted-foreground text-sm">
                   {product.avgRating.toFixed(1)} ({product.reviewCount} reviews)
                 </span>
@@ -244,43 +256,47 @@ export default function ProductDetailPage() {
                       <div className="grid gap-4 sm:grid-cols-2">
                         {product.species.minTemp != null && product.species.maxTemp != null && (
                           <CareCard
-                            icon="🌡️"
+                            icon={Thermometer}
                             title="Temperature"
                             value={`${product.species.minTemp}°C – ${product.species.maxTemp}°C`}
                           />
                         )}
                         {product.species.minPh != null && product.species.maxPh != null && (
                           <CareCard
-                            icon="⚗️"
+                            icon={FlaskConical}
                             title="pH Level"
                             value={`${product.species.minPh} – ${product.species.maxPh}`}
                           />
                         )}
                         {product.species.minTankSize && (
                           <CareCard
-                            icon="🐠"
+                            icon={Fish}
                             title="Min Tank Size"
                             value={`${product.species.minTankSize} liters`}
                           />
                         )}
                         {product.species.maxSize && (
                           <CareCard
-                            icon="📏"
+                            icon={Ruler}
                             title="Max Size"
                             value={`${product.species.maxSize} cm`}
                           />
                         )}
                         {product.species.diet && (
-                          <CareCard icon="🍽️" title="Diet" value={product.species.diet} />
+                          <CareCard icon={Utensils} title="Diet" value={product.species.diet} />
                         )}
                         {product.species.lifespan && (
-                          <CareCard icon="⏳" title="Lifespan" value={product.species.lifespan} />
+                          <CareCard
+                            icon={Hourglass}
+                            title="Lifespan"
+                            value={product.species.lifespan}
+                          />
                         )}
                         {product.species.origin && (
-                          <CareCard icon="🌍" title="Origin" value={product.species.origin} />
+                          <CareCard icon={Globe} title="Origin" value={product.species.origin} />
                         )}
                         <CareCard
-                          icon="💧"
+                          icon={Droplets}
                           title="Water Type"
                           value={product.species.waterType.replace('_', ' ')}
                         />
@@ -353,10 +369,18 @@ function InfoRow({ label, value }: { label: string; value: string }) {
   );
 }
 
-function CareCard({ icon, title, value }: { icon: string; title: string; value: string }) {
+function CareCard({
+  icon: Icon,
+  title,
+  value,
+}: {
+  icon: LucideIcon;
+  title: string;
+  value: string;
+}) {
   return (
     <div className="bg-muted/50 flex items-start gap-3 rounded-xl p-4">
-      <span className="text-2xl">{icon}</span>
+      <Icon size={24} className="text-primary mt-0.5 shrink-0" />
       <div>
         <p className="text-muted-foreground text-xs">{title}</p>
         <p className="text-foreground text-sm font-semibold">{value}</p>

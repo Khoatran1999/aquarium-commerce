@@ -1,5 +1,6 @@
 import React, { memo, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { Heart } from 'lucide-react';
 import { useAppDispatch, useAppSelector } from '../store';
 import { addWishlistItem, removeWishlistItem } from '../store/wishlist.slice';
 import { useNavigate } from 'react-router-dom';
@@ -65,24 +66,21 @@ const WishlistButton = memo(function WishlistButton({
       aria-label={isWishlisted ? 'Remove from wishlist' : 'Add to wishlist'}
     >
       <AnimatePresence mode="wait" initial={false}>
-        <motion.svg
+        <motion.div
           key={isWishlisted ? 'filled' : 'outline'}
           className={`${iconSize} ${isWishlisted ? 'text-red-500' : 'text-gray-500'}`}
-          viewBox="0 0 24 24"
-          fill={isWishlisted ? 'currentColor' : 'none'}
-          stroke="currentColor"
-          strokeWidth={2}
           initial={{ scale: 0.5, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
           exit={{ scale: 0.5, opacity: 0 }}
           transition={{ duration: 0.15 }}
         >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"
+          <Heart
+            className="h-full w-full"
+            fill={isWishlisted ? 'currentColor' : 'none'}
+            stroke="currentColor"
+            strokeWidth={2}
           />
-        </motion.svg>
+        </motion.div>
       </AnimatePresence>
     </button>
   );

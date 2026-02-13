@@ -5,6 +5,7 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { motion } from 'framer-motion';
+import { Banknote, Building2, Smartphone, Check } from 'lucide-react';
 import { useAppSelector, useAppDispatch } from '../store';
 import { clearCart } from '../store/cart.slice';
 import { orderService } from '@repo/services';
@@ -22,14 +23,19 @@ const checkoutSchema = z.object({
 type CheckoutForm = z.infer<typeof checkoutSchema>;
 
 const PAYMENT_METHODS = [
-  { value: 'COD', label: 'Cash on Delivery', icon: '💵', desc: 'Pay when you receive your order' },
+  {
+    value: 'COD',
+    label: 'Cash on Delivery',
+    icon: Banknote,
+    desc: 'Pay when you receive your order',
+  },
   {
     value: 'BANK_TRANSFER',
     label: 'Bank Transfer',
-    icon: '🏦',
+    icon: Building2,
     desc: 'Transfer to our bank account',
   },
-  { value: 'E_WALLET', label: 'E-Wallet', icon: '📱', desc: 'Pay via digital wallet' },
+  { value: 'E_WALLET', label: 'E-Wallet', icon: Smartphone, desc: 'Pay via digital wallet' },
 ] as const;
 
 export default function CheckoutPage() {
@@ -178,7 +184,9 @@ export default function CheckoutPage() {
                         {...register('paymentMethod')}
                         onChange={() => setValue('paymentMethod', pm.value)}
                       />
-                      <span className="text-2xl">{pm.icon}</span>
+                      <span className="text-primary">
+                        <pm.icon size={24} />
+                      </span>
                       <div>
                         <p className="text-foreground font-semibold">{pm.label}</p>
                         <p className="text-muted-foreground text-xs">{pm.desc}</p>
@@ -189,7 +197,7 @@ export default function CheckoutPage() {
                           initial={{ scale: 0 }}
                           animate={{ scale: 1 }}
                         >
-                          ✓
+                          <Check size={14} />
                         </motion.div>
                       )}
                     </label>

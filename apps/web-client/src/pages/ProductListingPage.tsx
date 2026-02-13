@@ -2,6 +2,7 @@ import { useState, useMemo, useCallback } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { Link, useSearchParams } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
+import { LayoutGrid, List, Fish, X } from 'lucide-react';
 import { useProducts, useSpeciesList } from '../hooks';
 import { useAppDispatch } from '../store';
 import { addToCart } from '../store/cart.slice';
@@ -282,13 +283,13 @@ export default function ProductListingPage() {
                 onClick={() => setViewMode('grid')}
                 className={`p-2 ${viewMode === 'grid' ? 'bg-primary text-white' : 'text-muted-foreground'} rounded-l-lg transition-colors`}
               >
-                <GridIcon />
+                <LayoutGrid size={16} />
               </button>
               <button
                 onClick={() => setViewMode('list')}
                 className={`p-2 ${viewMode === 'list' ? 'bg-primary text-white' : 'text-muted-foreground'} rounded-r-lg transition-colors`}
               >
-                <ListIcon />
+                <List size={16} />
               </button>
             </div>
           </div>
@@ -319,7 +320,9 @@ export default function ProductListingPage() {
               </div>
             ) : products.length === 0 ? (
               <div className="flex flex-col items-center justify-center py-20 text-center">
-                <div className="text-muted-foreground mb-4 text-6xl">🐟</div>
+                <div className="mb-4">
+                  <Fish size={56} className="text-muted-foreground/40" />
+                </div>
                 <h3 className="text-foreground text-lg font-semibold">No products found</h3>
                 <p className="text-muted-foreground mt-2 text-sm">
                   Try adjusting your filters or search terms.
@@ -443,7 +446,7 @@ export default function ProductListingPage() {
                   onClick={() => setShowMobileFilters(false)}
                   className="text-muted-foreground p-2"
                 >
-                  ✕
+                  <X size={20} />
                 </button>
               </div>
               {FilterSidebar}
@@ -489,25 +492,5 @@ function FilterCheckboxGroup<T extends string>({
         ))}
       </div>
     </div>
-  );
-}
-
-function GridIcon() {
-  return (
-    <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-      <path
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zm10 0a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zm10 0a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"
-      />
-    </svg>
-  );
-}
-
-function ListIcon() {
-  return (
-    <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-      <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16M4 18h16" />
-    </svg>
   );
 }

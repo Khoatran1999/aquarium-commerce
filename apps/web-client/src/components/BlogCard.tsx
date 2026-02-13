@@ -1,5 +1,6 @@
 import { memo } from 'react';
 import { Link } from 'react-router-dom';
+import { FileText } from 'lucide-react';
 import type { BlogPost } from '@repo/types';
 
 interface BlogCardProps {
@@ -30,7 +31,7 @@ const BlogCard = memo(function BlogCard({ blog }: BlogCardProps) {
           />
         ) : (
           <div className="from-primary/20 to-secondary/20 flex h-full w-full items-center justify-center bg-gradient-to-br">
-            <span className="text-4xl">📝</span>
+            <FileText size={40} className="text-primary/40" />
           </div>
         )}
       </div>

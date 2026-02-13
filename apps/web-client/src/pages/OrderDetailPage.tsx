@@ -2,6 +2,7 @@ import { Helmet } from 'react-helmet-async';
 import { useParams, Link } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import { motion } from 'framer-motion';
+import { Search, Fish, Check } from 'lucide-react';
 import { orderService } from '@repo/services';
 import type { OrderStatus } from '@repo/types';
 import { Skeleton } from '@repo/ui';
@@ -46,7 +47,7 @@ function ProgressBar({ status }: { status: OrderStatus }) {
                 animate={{ scale: 1 }}
                 transition={{ delay: i * 0.1 }}
               >
-                {done ? '✓' : i + 1}
+                {done ? <Check size={14} /> : i + 1}
               </motion.div>
               {i < STEPS.length - 1 && (
                 <div className="bg-muted relative mx-1 h-1 flex-1 overflow-hidden rounded-full">
@@ -98,7 +99,9 @@ export default function OrderDetailPage() {
   if (!order) {
     return (
       <div className="flex min-h-[50vh] flex-col items-center justify-center text-center">
-        <p className="text-5xl">🔍</p>
+        <div className="mb-3 flex justify-center">
+          <Search size={48} className="text-muted-foreground/40" />
+        </div>
         <p className="text-foreground mt-3 text-lg font-semibold">Order not found</p>
         <Link to="/orders" className="text-primary mt-2 text-sm hover:underline">
           Back to Orders
@@ -164,8 +167,8 @@ export default function OrderDetailPage() {
                       className="h-14 w-14 rounded-xl object-cover"
                     />
                   ) : (
-                    <div className="bg-muted flex h-14 w-14 items-center justify-center rounded-xl text-xl">
-                      🐟
+                    <div className="bg-muted flex h-14 w-14 items-center justify-center rounded-xl">
+                      <Fish size={24} className="text-muted-foreground/40" />
                     </div>
                   )}
                   <div className="min-w-0 flex-1">

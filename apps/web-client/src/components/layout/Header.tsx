@@ -1,6 +1,18 @@
 import { useState, useRef, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
+import {
+  Search,
+  ShoppingCart,
+  User,
+  ClipboardList,
+  LogOut,
+  Moon,
+  Sun,
+  Menu,
+  X,
+  Heart,
+} from 'lucide-react';
 import { useAppDispatch, useAppSelector } from '../../store';
 import { toggleTheme, toggleMobileMenu, closeMobileMenu } from '../../store/ui.slice';
 import { logout } from '../../store/auth.slice';
@@ -108,7 +120,7 @@ export default function Header() {
           <div className="flex items-center gap-2">
             {/* Search (desktop) */}
             <label className="bg-muted focus-within:border-primary hidden h-10 w-64 items-center rounded-full border border-transparent px-4 transition-all lg:flex">
-              <SearchIcon className="text-muted-foreground h-5 w-5" />
+              <Search className="text-muted-foreground h-5 w-5" size={20} />
               <input
                 className="placeholder-muted-foreground ml-2 w-full border-none bg-transparent text-sm focus:outline-none focus:ring-0"
                 placeholder="Search fish species..."
@@ -127,7 +139,7 @@ export default function Header() {
               className="hover:bg-primary/10 rounded-full p-2 transition-colors"
               aria-label="Toggle theme"
             >
-              {theme === 'light' ? <MoonIcon /> : <SunIcon />}
+              {theme === 'light' ? <Moon size={20} /> : <Sun size={20} />}
             </button>
 
             {/* Wishlist icon with badge */}
@@ -136,7 +148,7 @@ export default function Header() {
               className="hover:bg-primary/10 relative rounded-full p-2 transition-colors"
               aria-label="Wishlist"
             >
-              <HeartIcon />
+              <Heart size={24} />
               {wishlistCount > 0 && (
                 <span className="bg-danger absolute -right-0.5 -top-0.5 flex h-5 min-w-5 items-center justify-center rounded-full px-1 text-[10px] font-bold text-white">
                   {wishlistCount > 99 ? '99+' : wishlistCount}
@@ -151,7 +163,7 @@ export default function Header() {
                 className="hover:bg-primary/10 relative rounded-full p-2 transition-colors"
                 aria-label="Cart"
               >
-                <CartIcon />
+                <ShoppingCart size={24} />
                 {itemCount > 0 && (
                   <motion.span
                     key={itemCount}
@@ -282,21 +294,21 @@ export default function Header() {
                       onClick={() => setUserMenuOpen(false)}
                       className="text-foreground hover:bg-muted flex w-full items-center gap-2 px-4 py-2.5 text-sm transition-colors"
                     >
-                      <UserIcon className="h-4 w-4" /> Profile
+                      <User className="h-4 w-4" size={16} /> Profile
                     </Link>
                     <Link
                       to="/orders"
                       onClick={() => setUserMenuOpen(false)}
                       className="text-foreground hover:bg-muted flex w-full items-center gap-2 px-4 py-2.5 text-sm transition-colors"
                     >
-                      <OrderIcon className="h-4 w-4" /> My Orders
+                      <ClipboardList className="h-4 w-4" size={16} /> My Orders
                     </Link>
                     <div className="border-border my-1 border-t" />
                     <button
                       onClick={handleLogout}
                       className="text-danger hover:bg-danger/5 flex w-full items-center gap-2 px-4 py-2.5 text-sm transition-colors"
                     >
-                      <LogoutIcon className="h-4 w-4" /> Sign out
+                      <LogOut className="h-4 w-4" size={16} /> Sign out
                     </button>
                   </div>
                 )}
@@ -307,7 +319,7 @@ export default function Header() {
                 className="hover:bg-primary/10 rounded-full p-2 transition-colors"
                 aria-label="Sign in"
               >
-                <UserIcon />
+                <User size={24} />
               </Link>
             )}
 
@@ -317,7 +329,7 @@ export default function Header() {
               onClick={() => dispatch(toggleMobileMenu())}
               aria-label="Menu"
             >
-              <MenuIcon />
+              <Menu size={24} />
             </button>
           </div>
         </div>
@@ -334,7 +346,7 @@ export default function Header() {
             <div className="mb-8 flex items-center justify-between">
               <span className="text-foreground text-lg font-bold">Menu</span>
               <button onClick={() => dispatch(closeMobileMenu())}>
-                <CloseIcon />
+                <X size={24} />
               </button>
             </div>
             <div className="flex flex-col gap-4">
@@ -396,129 +408,5 @@ export default function Header() {
         </div>
       )}
     </>
-  );
-}
-
-/* ── Inline SVG icons (no extra deps) ─── */
-function SearchIcon({ className = 'h-6 w-6' }: { className?: string }) {
-  return (
-    <svg
-      className={className}
-      fill="none"
-      viewBox="0 0 24 24"
-      stroke="currentColor"
-      strokeWidth={2}
-    >
-      <path
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        d="M21 21l-4.35-4.35M11 19a8 8 0 100-16 8 8 0 000 16z"
-      />
-    </svg>
-  );
-}
-function CartIcon() {
-  return (
-    <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-      <path
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2 9m5-9v9m4-9v9m5-9l2 9"
-      />
-    </svg>
-  );
-}
-function UserIcon({ className = 'h-6 w-6' }: { className?: string }) {
-  return (
-    <svg
-      className={className}
-      fill="none"
-      viewBox="0 0 24 24"
-      stroke="currentColor"
-      strokeWidth={2}
-    >
-      <path
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14c-4.42 0-8 1.79-8 4v2h16v-2c0-2.21-3.58-4-8-4z"
-      />
-    </svg>
-  );
-}
-function OrderIcon({ className = 'h-6 w-6' }: { className?: string }) {
-  return (
-    <svg
-      className={className}
-      fill="none"
-      viewBox="0 0 24 24"
-      stroke="currentColor"
-      strokeWidth={2}
-    >
-      <path
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"
-      />
-    </svg>
-  );
-}
-function LogoutIcon({ className = 'h-6 w-6' }: { className?: string }) {
-  return (
-    <svg
-      className={className}
-      fill="none"
-      viewBox="0 0 24 24"
-      stroke="currentColor"
-      strokeWidth={2}
-    >
-      <path
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"
-      />
-    </svg>
-  );
-}
-function MoonIcon() {
-  return (
-    <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-      <path
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        d="M21 12.79A9 9 0 1111.21 3a7 7 0 009.79 9.79z"
-      />
-    </svg>
-  );
-}
-function SunIcon() {
-  return (
-    <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
-      <path d="M12 18a6 6 0 100-12 6 6 0 000 12zM12 0v2m0 20v2M4.22 4.22l1.42 1.42m12.72 12.72l1.42 1.42M0 12h2m20 0h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" />
-    </svg>
-  );
-}
-function MenuIcon() {
-  return (
-    <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-      <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16M4 18h16" />
-    </svg>
-  );
-}
-function CloseIcon() {
-  return (
-    <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-      <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
-    </svg>
-  );
-}
-function HeartIcon() {
-  return (
-    <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-      <path
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"
-      />
-    </svg>
   );
 }

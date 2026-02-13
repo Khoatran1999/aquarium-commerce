@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import { motion, AnimatePresence } from 'framer-motion';
+import { Heart, Fish } from 'lucide-react';
 import { useWishlist, queryKeys } from '../hooks';
 import { useQueryClient } from '@tanstack/react-query';
 import { useAppDispatch } from '../store';
@@ -50,7 +51,9 @@ export default function WishlistPage() {
           </div>
         ) : items.length === 0 ? (
           <div className="flex min-h-[40vh] flex-col items-center justify-center text-center">
-            <span className="mb-4 text-6xl">💝</span>
+            <div className="mb-4">
+              <Heart size={56} className="text-red-400" />
+            </div>
             <h2 className="text-foreground mb-2 text-xl font-semibold">Your wishlist is empty</h2>
             <p className="text-muted-foreground mb-6">
               Save your favorite fish to come back to them later.
@@ -85,19 +88,7 @@ export default function WishlistPage() {
                         className="absolute right-2 top-2 z-10 flex h-8 w-8 items-center justify-center rounded-full bg-white/80 text-red-500 shadow-sm backdrop-blur-sm transition-all hover:bg-red-50 hover:shadow-md"
                         aria-label="Remove from wishlist"
                       >
-                        <svg
-                          className="h-4 w-4"
-                          fill="currentColor"
-                          viewBox="0 0 24 24"
-                          stroke="currentColor"
-                          strokeWidth={2}
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"
-                          />
-                        </svg>
+                        <Heart size={16} fill="currentColor" />
                       </button>
 
                       <Link to={`/products/${product.slug}`}>
@@ -110,8 +101,8 @@ export default function WishlistPage() {
                               loading="lazy"
                             />
                           ) : (
-                            <div className="bg-muted flex h-full w-full items-center justify-center text-4xl">
-                              🐟
+                            <div className="bg-muted flex h-full w-full items-center justify-center">
+                              <Fish size={40} className="text-muted-foreground/40" />
                             </div>
                           )}
                         </div>
