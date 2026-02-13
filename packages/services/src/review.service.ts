@@ -6,7 +6,7 @@ const reviewService = {
     productId: string,
     params?: { page?: number; limit?: number },
   ): Promise<PaginatedResponse<Review[]>> {
-    const { data } = await apiClient.get(`/api/products/${productId}/reviews`, { params });
+    const { data } = await apiClient.get(`/api/reviews/product/${productId}`, { params });
     return data;
   },
 
