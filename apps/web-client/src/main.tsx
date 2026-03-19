@@ -8,6 +8,7 @@ import { HelmetProvider } from 'react-helmet-async';
 import { Toaster } from 'react-hot-toast';
 
 import { store, persistor } from './store';
+import { CartFlyProvider } from './context/CartFlyContext';
 import App from './App';
 import './index.css';
 
@@ -29,7 +30,9 @@ createRoot(document.getElementById('root')!).render(
         <QueryClientProvider client={queryClient}>
           <HelmetProvider>
             <BrowserRouter>
-              <App />
+              <CartFlyProvider>
+                <App />
+              </CartFlyProvider>
               <Toaster
                 position="top-right"
                 toastOptions={{

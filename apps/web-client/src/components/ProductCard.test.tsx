@@ -8,6 +8,7 @@ import cartReducer from '../store/cart.slice';
 import uiReducer from '../store/ui.slice';
 import authReducer from '../store/auth.slice';
 import wishlistReducer from '../store/wishlist.slice';
+import { CartFlyProvider } from '../context/CartFlyContext';
 import type { Product } from '@repo/types';
 
 const mockProduct: Product = {
@@ -60,11 +61,13 @@ describe('ProductCard', () => {
     });
 
     return render(
-      <Provider store={store}>
-        <BrowserRouter>
-          <ProductCard product={product} showAddToCart={showAddToCart} />
-        </BrowserRouter>
-      </Provider>,
+      <CartFlyProvider>
+        <Provider store={store}>
+          <BrowserRouter>
+            <ProductCard product={product} showAddToCart={showAddToCart} />
+          </BrowserRouter>
+        </Provider>
+      </CartFlyProvider>,
     );
   };
 
@@ -84,7 +87,8 @@ describe('ProductCard', () => {
   it('shows rating and review count', () => {
     renderProductCard(mockProduct);
 
-    expect(screen.getByText(/4\.5 \(12\)/)).toBeInTheDocument();
+    expect(screen.getByText('4.5')).toBeInTheDocument();
+    expect(screen.getByText(/\(12\)/)).toBeInTheDocument();
   });
 
   it('displays primary image', () => {
