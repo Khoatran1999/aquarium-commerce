@@ -1,0 +1,15 @@
+{
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash -c 'FILE=$(echo \"$CLAUDE_TOOL_INPUT\" | python3 -c \"import sys,json; d=json.load(sys.stdin); print(d.get(\\\"file_path\\\",\\\"\\\"))\" 2>/dev/null); case \"$FILE\" in *.tsx|*.ts|*.js|*.jsx) cd /c/Users/ADMIN/Desktop/ReactJS/aquarium-commerce && pnpm exec prettier --write \"$FILE\" 2>/dev/null && echo \"[hook] formatted: $FILE\" ;; esac'"
+          }
+        ]
+      }
+    ]
+  }
+}
