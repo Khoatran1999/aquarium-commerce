@@ -2,7 +2,7 @@ import { useMemo } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { Link } from 'react-router-dom';
 import { motion, useReducedMotion } from 'framer-motion';
-import { Fish, Shell, Waves, Palmtree, ArrowRight, MessageCircle, Sparkles, ShieldCheck, Truck, Star } from 'lucide-react';
+import { Fish, Shell, Waves, Palmtree, ArrowRight, ShieldCheck, Truck, Star } from 'lucide-react';
 import { useProducts } from '../hooks';
 import { Skeleton } from '@repo/ui';
 import ProductCard from '../components/ProductCard';
@@ -65,23 +65,23 @@ const TESTIMONIALS = [
   {
     name: 'Emily R.',
     role: 'Hobbyist',
-    text: 'Fast shipping and the AI advisor helped me pick the perfect tank mates for my setup.',
+    text: 'Fast shipping and great customer support helped me pick the perfect tank mates for my setup.',
     rating: 4,
     initials: 'ER',
   },
 ];
 
 const STATS = [
-  { value: '10K+', label: 'Fish Delivered' },
-  { value: '500+', label: 'Species Available' },
-  { value: '98%', label: 'Live Arrival Rate' },
-  { value: '4.9★', label: 'Customer Rating' },
+  { value: '10K+', label: 'Fish Delivered', ariaValue: '10K+' },
+  { value: '500+', label: 'Species Available', ariaValue: '500+' },
+  { value: '98%', label: 'Live Arrival Rate', ariaValue: '98%' },
+  { value: '4.9★', label: 'Customer Rating', ariaValue: '4.9 star' },
 ];
 
 const TRUST_BADGES = [
   { icon: Truck, label: 'Nationwide Delivery' },
   { icon: ShieldCheck, label: 'Live Arrival Guaranteed' },
-  { icon: Star, label: '4.9★ Rated Service' },
+  { icon: Star, label: '4.9-star Rated Service' },
 ];
 
 const fadeUp = {
@@ -231,13 +231,6 @@ export default function HomePage() {
               Shop Now
               <ArrowRight size={18} className="transition-transform duration-200 group-hover:translate-x-1" />
             </Link>
-            <Link
-              to="/ai-chat"
-              className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/8 px-6 py-3.5 text-base font-semibold text-white/90 backdrop-blur-sm transition-all duration-200 hover:bg-white/15 hover:border-white/35"
-            >
-              <Sparkles size={16} />
-              AI Advisor
-            </Link>
           </motion.div>
 
           {/* Trust badges */}
@@ -248,7 +241,7 @@ export default function HomePage() {
           >
             {TRUST_BADGES.map((badge) => (
               <div key={badge.label} className="flex items-center gap-1.5 text-white/50">
-                <badge.icon size={13} className="text-[#00CCEE]/70" />
+                <badge.icon size={13} className="text-[#00CCEE]/70" aria-hidden="true" />
                 <span className="text-xs font-medium">{badge.label}</span>
               </div>
             ))}
@@ -264,12 +257,15 @@ export default function HomePage() {
               <motion.div
                 key={stat.label}
                 className="flex flex-col items-center gap-0.5 py-5"
-                initial={{ opacity: 0, y: 12 }}
-                whileInView={{ opacity: 1, y: 0 }}
+                initial={shouldReduceMotion ? {} : { opacity: 0, y: 12 }}
+                whileInView={shouldReduceMotion ? {} : { opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.08, duration: 0.4 }}
               >
-                <span className="text-2xl font-black text-[#0094C4] dark:text-[#00CCEE]">
+                <span
+                  className="tabular-nums text-2xl font-black text-[#0094C4] dark:text-[#00CCEE]"
+                  aria-label={stat.ariaValue}
+                >
                   {stat.value}
                 </span>
                 <span className="text-xs font-medium text-[#547698] dark:text-[#6496B8]">
@@ -292,7 +288,7 @@ export default function HomePage() {
           <p className="mb-2 text-xs font-bold uppercase tracking-widest text-[#0094C4] dark:text-[#00CCEE]">
             Explore
           </p>
-          <h2 className="text-3xl font-bold text-[#0A1825] dark:text-[#D6EAFF] md:text-4xl">
+          <h2 className="text-balance text-3xl font-bold text-[#0A1825] dark:text-[#D6EAFF] md:text-4xl">
             Shop by Category
           </h2>
         </motion.div>
@@ -314,7 +310,7 @@ export default function HomePage() {
                 <div
                   className={`relative flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br shadow-md ${cat.gradient}`}
                 >
-                  <cat.icon size={30} className="text-white" />
+                  <cat.icon size={30} className="text-white" aria-hidden="true" />
                   <div className="absolute inset-0 rounded-2xl bg-white/10 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
                 </div>
 
@@ -344,15 +340,15 @@ export default function HomePage() {
         <div className="mx-auto max-w-[1280px] px-4 md:px-10">
           <motion.div
             className="mb-10 flex items-end justify-between"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            initial={shouldReduceMotion ? {} : { opacity: 0, y: 20 }}
+            whileInView={shouldReduceMotion ? {} : { opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
             <div>
               <p className="mb-1 text-xs font-bold uppercase tracking-widest text-[#0094C4] dark:text-[#00CCEE]">
                 Top Picks
               </p>
-              <h2 className="text-3xl font-bold text-[#0A1825] dark:text-[#D6EAFF]">
+              <h2 className="text-balance text-3xl font-bold text-[#0A1825] dark:text-[#D6EAFF]">
                 Featured Fish
               </h2>
               <p className="mt-1.5 text-sm text-[#547698] dark:text-[#6496B8]">
@@ -380,8 +376,8 @@ export default function HomePage() {
               : products.map((p, i) => (
                   <motion.div
                     key={p.id}
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
+                    initial={shouldReduceMotion ? {} : { opacity: 0, y: 20 }}
+                    whileInView={shouldReduceMotion ? {} : { opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ delay: i * 0.05, duration: 0.4 }}
                   >
@@ -404,70 +400,19 @@ export default function HomePage() {
       {/* ── Blog Section ─── */}
       <BlogSection />
 
-      {/* ── AI Advisor Banner ─── */}
-      <section className="mx-auto max-w-[1280px] px-4 py-20 md:px-10">
-        <motion.div
-          className="relative overflow-hidden rounded-3xl"
-          style={{
-            background:
-              'linear-gradient(135deg, #002D45 0%, #004060 40%, #003355 70%, #001E33 100%)',
-          }}
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-        >
-          {/* Decorative mesh */}
-          <div
-            className="pointer-events-none absolute inset-0"
-            style={{
-              background:
-                'radial-gradient(ellipse 60% 80% at 100% 50%, rgba(0,204,238,0.12) 0%, transparent 60%), radial-gradient(circle at 10% 20%, rgba(0,148,196,0.15) 0%, transparent 40%)',
-            }}
-          />
-
-          {/* Decorative circles */}
-          <div className="pointer-events-none absolute -right-16 -top-16 h-72 w-72 rounded-full border border-white/5 bg-white/[0.03]" />
-          <div className="pointer-events-none absolute -bottom-8 right-16 h-40 w-40 rounded-full border border-white/5 bg-white/[0.03]" />
-          <div className="pointer-events-none absolute right-40 top-8 h-20 w-20 rounded-full border border-[#00CCEE]/10 bg-[#00CCEE]/[0.04]" />
-
-          <div className="relative z-10 flex flex-col items-start gap-6 p-10 md:flex-row md:items-center md:justify-between md:p-14">
-            <div className="max-w-lg">
-              <span className="mb-5 inline-flex items-center gap-2 rounded-full border border-[#00CCEE]/25 bg-[#00CCEE]/10 px-4 py-1.5 text-xs font-semibold text-[#00CCEE]">
-                <Sparkles size={13} /> AI-Powered Recommendations
-              </span>
-              <h2 className="mb-4 text-3xl font-black leading-tight text-white md:text-4xl">
-                Not sure what fish to get?
-              </h2>
-              <p className="text-base leading-relaxed text-white/60">
-                Our AI Advisor analyzes your tank setup, experience level, and preferences to
-                recommend the perfect fish for your aquarium.
-              </p>
-            </div>
-            <Link
-              to="/ai-chat"
-              className="group shrink-0 inline-flex items-center gap-2.5 rounded-2xl bg-gradient-to-r from-[#FFB300] to-[#FF8C00] px-8 py-4 text-base font-bold text-[#0A1825] shadow-[0_4px_20px_rgba(255,179,0,0.4)] transition-all duration-200 hover:shadow-[0_6px_28px_rgba(255,179,0,0.55)] hover:scale-[1.03]"
-            >
-              Talk to AI Advisor
-              <MessageCircle size={18} className="transition-transform duration-200 group-hover:scale-110" />
-            </Link>
-          </div>
-        </motion.div>
-      </section>
-
       {/* ── Testimonials ─── */}
       <section className="bg-[#E4EFF8]/50 py-20 dark:bg-[#071F36]/40">
         <div className="mx-auto max-w-[1280px] px-4 md:px-10">
           <motion.div
             className="mb-12 text-center"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            initial={shouldReduceMotion ? {} : { opacity: 0, y: 20 }}
+            whileInView={shouldReduceMotion ? {} : { opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
             <p className="mb-2 text-xs font-bold uppercase tracking-widest text-[#0094C4] dark:text-[#00CCEE]">
               Reviews
             </p>
-            <h2 className="text-3xl font-bold text-[#0A1825] dark:text-[#D6EAFF] md:text-4xl">
+            <h2 className="text-balance text-3xl font-bold text-[#0A1825] dark:text-[#D6EAFF] md:text-4xl">
               What Our Customers Say
             </h2>
           </motion.div>
@@ -477,8 +422,8 @@ export default function HomePage() {
               <motion.div
                 key={t.name}
                 className="relative overflow-hidden rounded-2xl border border-[#CCE0ED] bg-white p-7 shadow-sm transition-shadow hover:shadow-md dark:border-[#0D2C45] dark:bg-[#041628]"
-                initial={{ opacity: 0, y: 24 }}
-                whileInView={{ opacity: 1, y: 0 }}
+                initial={shouldReduceMotion ? {} : { opacity: 0, y: 24 }}
+                whileInView={shouldReduceMotion ? {} : { opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1, duration: 0.5 }}
               >
@@ -491,11 +436,16 @@ export default function HomePage() {
                 </div>
 
                 {/* Stars */}
-                <div className="mb-4 flex gap-0.5">
+                <div
+                  className="mb-4 flex gap-0.5"
+                  aria-label={`${t.rating} out of 5 stars`}
+                  role="img"
+                >
                   {Array.from({ length: 5 }).map((_, si) => (
                     <Star
                       key={si}
                       size={14}
+                      aria-hidden="true"
                       className={si < t.rating ? 'fill-[#FFB300] text-[#FFB300]' : 'text-[#CCE0ED] dark:text-[#0D2C45]'}
                     />
                   ))}

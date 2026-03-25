@@ -24,7 +24,6 @@ const NAV_LINKS = [
   { label: 'Shop', href: '/products' },
   { label: 'Species', href: '/products?category=species' },
   { label: 'Blog', href: '/blog' },
-  { label: 'AI Advisor', href: '/ai-chat' },
 ];
 
 export default function Header() {
