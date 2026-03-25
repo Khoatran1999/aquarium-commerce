@@ -53,13 +53,13 @@
 
 /* ── Dark Mode — Midnight Abyss ─── */
 .dark {
-  --color-background: #050D1A;
-  --color-foreground: #EDF5FF;
-  --color-card: #091E34;
-  --color-card-foreground: #EDF5FF;
-  --color-muted: #0C2640;
-  --color-muted-foreground: #7AAFC9;
-  --color-border: #173C5C;
+  --color-background: #000F1E;
+  --color-foreground: #D6EAFF;
+  --color-card: #041628;
+  --color-card-foreground: #D6EAFF;
+  --color-muted: #071F36;
+  --color-muted-foreground: #6496B8;
+  --color-border: #0D2C45;
   --color-primary: #00CCEE;
   --color-primary-dark: #00A8CC;
   --color-primary-light: #55DDFF;

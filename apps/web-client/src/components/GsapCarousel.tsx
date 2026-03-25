@@ -215,14 +215,14 @@ export default function GsapCarousel({ products, autoplayDelay = 4000 }: GsapCar
           <button
             onClick={prev}
             aria-label="Previous"
-            className="absolute -left-4 top-1/2 z-10 -translate-y-1/2 flex h-10 w-10 items-center justify-center rounded-full border border-[#CCE0ED] bg-white text-[#0A1825] shadow-md transition-all duration-200 hover:border-[#0094C4] hover:text-[#0094C4] hover:shadow-lg active:scale-95 dark:border-[#0D2C45] dark:bg-[#041628] dark:text-[#D6EAFF] dark:hover:border-[#00CCEE] dark:hover:text-[#00CCEE] dark:hover:shadow-[0_4px_16px_rgba(0,204,238,0.2)] md:-left-5"
+            className="absolute -left-4 top-1/2 z-10 -translate-y-1/2 flex h-10 w-10 cursor-pointer items-center justify-center rounded-full border border-border bg-card text-foreground shadow-md transition-all duration-200 hover:border-primary hover:text-primary hover:shadow-lg active:scale-95 md:-left-5"
           >
             <ChevronLeft size={18} />
           </button>
           <button
             onClick={next}
             aria-label="Next"
-            className="absolute -right-4 top-1/2 z-10 -translate-y-1/2 flex h-10 w-10 items-center justify-center rounded-full border border-[#CCE0ED] bg-white text-[#0A1825] shadow-md transition-all duration-200 hover:border-[#0094C4] hover:text-[#0094C4] hover:shadow-lg active:scale-95 dark:border-[#0D2C45] dark:bg-[#041628] dark:text-[#D6EAFF] dark:hover:border-[#00CCEE] dark:hover:text-[#00CCEE] dark:hover:shadow-[0_4px_16px_rgba(0,204,238,0.2)] md:-right-5"
+            className="absolute -right-4 top-1/2 z-10 -translate-y-1/2 flex h-10 w-10 cursor-pointer items-center justify-center rounded-full border border-border bg-card text-foreground shadow-md transition-all duration-200 hover:border-primary hover:text-primary hover:shadow-lg active:scale-95 md:-right-5"
           >
             <ChevronRight size={18} />
           </button>
@@ -238,7 +238,7 @@ export default function GsapCarousel({ products, autoplayDelay = 4000 }: GsapCar
               ref={(el) => { dotsRef.current[i] = el; }}
               onClick={() => scrollTo(i)}
               aria-label={`Go to slide ${i + 1}`}
-              className="h-2 w-2 rounded-full bg-[#0094C4] opacity-40 dark:bg-[#00CCEE]"
+              className="h-2 w-2 cursor-pointer rounded-full bg-primary opacity-40"
               style={{ transformOrigin: 'center center' }}
             />
           ))}

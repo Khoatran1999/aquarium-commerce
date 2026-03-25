@@ -205,7 +205,8 @@ export default function SpeciesPage() {
             e.stopPropagation();
             openEdit(s);
           }}
-          className="hover:bg-muted rounded-lg p-1.5 transition-colors"
+          aria-label="Edit species"
+          className="hover:bg-muted cursor-pointer rounded-lg p-1.5 transition-colors"
         >
           <Pencil className="text-muted-foreground h-4 w-4" />
         </button>
@@ -225,7 +226,7 @@ export default function SpeciesPage() {
         </div>
         <button
           onClick={openCreate}
-          className="bg-primary inline-flex items-center gap-2 rounded-lg px-4 py-2.5 text-sm font-medium text-white hover:opacity-90"
+          className="bg-primary inline-flex cursor-pointer items-center gap-2 rounded-lg px-4 py-2.5 text-sm font-medium text-white transition-colors hover:opacity-90"
         >
           <Plus className="h-4 w-4" />
           Add Species
@@ -280,7 +281,11 @@ export default function SpeciesPage() {
               onClick={(e) => e.stopPropagation()}
               className="bg-card border-border relative z-10 mx-4 my-8 w-full max-w-lg rounded-xl border p-6 shadow-lg"
             >
-              <button onClick={closeForm} className="text-muted-foreground absolute right-3 top-3">
+              <button
+                onClick={closeForm}
+                aria-label="Close species form"
+                className="text-muted-foreground hover:text-foreground absolute right-3 top-3 cursor-pointer rounded p-0.5 transition-colors"
+              >
                 <X className="h-4 w-4" />
               </button>
               <h3 className="text-foreground mb-4 text-lg font-semibold">
@@ -439,14 +444,14 @@ export default function SpeciesPage() {
                   <button
                     type="button"
                     onClick={closeForm}
-                    className="border-border text-foreground hover:bg-muted rounded-lg border px-4 py-2 text-sm font-medium"
+                    className="border-border text-foreground hover:bg-muted cursor-pointer rounded-lg border px-4 py-2 text-sm font-medium transition-colors"
                   >
                     Cancel
                   </button>
                   <button
                     type="submit"
                     disabled={isSaving}
-                    className="bg-primary rounded-lg px-4 py-2 text-sm font-medium text-white disabled:opacity-50"
+                    className="bg-primary cursor-pointer rounded-lg px-4 py-2 text-sm font-medium text-white transition-colors hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-50"
                   >
                     {isSaving ? 'Saving...' : editId ? 'Update' : 'Create'}
                   </button>

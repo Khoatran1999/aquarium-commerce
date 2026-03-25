@@ -109,13 +109,13 @@ export default function BlogListPage() {
           {b.tags.slice(0, 3).map((tag) => (
             <span
               key={tag}
-              className="bg-primary/10 text-primary rounded px-1.5 py-0.5 text-[10px] font-medium"
+              className="bg-primary/10 text-primary rounded px-1.5 py-0.5 text-xs font-medium"
             >
               {tag}
             </span>
           ))}
           {b.tags.length > 3 && (
-            <span className="text-muted-foreground text-[10px]">+{b.tags.length - 3}</span>
+            <span className="text-muted-foreground text-xs">+{b.tags.length - 3}</span>
           )}
         </div>
       ),
@@ -142,8 +142,8 @@ export default function BlogListPage() {
         <div className="flex items-center gap-1" onClick={(e) => e.stopPropagation()}>
           <button
             onClick={() => togglePublish(b)}
-            className="hover:bg-muted rounded-lg p-1.5 transition-colors"
-            title={b.status === 'PUBLISHED' ? 'Unpublish' : 'Publish'}
+            aria-label={b.status === 'PUBLISHED' ? 'Unpublish post' : 'Publish post'}
+            className="hover:bg-muted cursor-pointer rounded-lg p-1.5 transition-colors"
           >
             {b.status === 'PUBLISHED' ? (
               <EyeOff className="text-muted-foreground h-4 w-4" />
@@ -153,13 +153,15 @@ export default function BlogListPage() {
           </button>
           <Link
             to={`/admin/blogs/${b.id}/edit`}
+            aria-label="Edit post"
             className="hover:bg-muted rounded-lg p-1.5 transition-colors"
           >
             <Pencil className="text-muted-foreground h-4 w-4" />
           </Link>
           <button
             onClick={() => setDeleteTarget(b)}
-            className="hover:bg-danger/10 rounded-lg p-1.5 transition-colors"
+            aria-label="Delete post"
+            className="hover:bg-danger/10 cursor-pointer rounded-lg p-1.5 transition-colors"
           >
             <Trash2 className="text-danger h-4 w-4" />
           </button>
@@ -195,7 +197,7 @@ export default function BlogListPage() {
                 setStatusFilter(tab.value);
                 setPage(1);
               }}
-              className={`rounded-lg px-3 py-1.5 text-sm font-medium transition-colors ${
+              className={`cursor-pointer rounded-lg px-3 py-1.5 text-sm font-medium transition-colors ${
                 statusFilter === tab.value
                   ? 'bg-primary text-white'
                   : 'text-muted-foreground hover:bg-muted'

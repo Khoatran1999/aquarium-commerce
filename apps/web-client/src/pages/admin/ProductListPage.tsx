@@ -113,13 +113,15 @@ export default function ProductListPage() {
         <div className="flex items-center gap-1" onClick={(e) => e.stopPropagation()}>
           <Link
             to={`/admin/products/${p.id}/edit`}
+            aria-label="Edit product"
             className="hover:bg-muted rounded-lg p-1.5 transition-colors"
           >
             <Pencil className="text-muted-foreground h-4 w-4" />
           </Link>
           <button
             onClick={() => setDeleteTarget(p)}
-            className="hover:bg-danger/10 rounded-lg p-1.5 transition-colors"
+            aria-label="Delete product"
+            className="hover:bg-danger/10 cursor-pointer rounded-lg p-1.5 transition-colors"
           >
             <Trash2 className="text-danger h-4 w-4" />
           </button>

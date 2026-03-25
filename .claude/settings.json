@@ -10,7 +10,18 @@
       "Bash(python3 -c \"import sys,json; d=json.load\\(sys.stdin\\); print\\(json.dumps\\(d.get\\(''''scripts'''',{}\\), indent=2\\)\\)\")",
       "Bash(npx tsx:*)",
       "WebFetch(domain:raw.githubusercontent.com)",
-      "Bash(pnpm lint:*)"
+      "Bash(pnpm lint:*)",
+      "Read(//c/Users/ADMIN/Desktop/ReactJS/aquarium-commerce/apps/web-client/src/pages 2>/dev/**)",
+      "Bash(python skills/ui-ux-pro-max/scripts/search.py \"aquarium fish e-commerce luxury ocean premium\" --design-system -p \"AquaLuxe Commerce\" -f markdown)",
+      "Read(//usr/**)",
+      "Read(//usr/local/**)",
+      "Bash(pnpm --filter web-client lint)",
+      "Bash(cmd /c \"pnpm --filter web-client lint 2>&1\")",
+      "Bash(cmd /c \"pnpm --filter web-client type-check 2>&1\")",
+      "Edit(C:/Users/ADMIN/Desktop/ReactJS/aquarium-commerce/**)",
+      "Write(C:/Users/ADMIN/Desktop/ReactJS/aquarium-commerce/**)",
+      "Bash(pnpm*)",
+      "Bash(cd*)"
     ]
   }
 }

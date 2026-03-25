@@ -47,7 +47,9 @@ function ToolbarButton({
       onClick={onClick}
       disabled={disabled}
       title={title}
-      className={`rounded p-1.5 transition-colors ${
+      aria-label={title}
+      aria-pressed={active}
+      className={`cursor-pointer rounded p-1.5 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary ${
         active
           ? 'bg-primary/15 text-primary'
           : 'text-muted-foreground hover:bg-muted hover:text-foreground'

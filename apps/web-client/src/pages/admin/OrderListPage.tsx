@@ -103,7 +103,7 @@ export default function OrderListPage() {
               setStatusFilter(tab.value);
               setPage(1);
             }}
-            className={`px-3 py-2 text-sm font-medium transition-colors ${
+            className={`cursor-pointer px-3 py-2 text-sm font-medium transition-colors ${
               statusFilter === tab.value
                 ? 'border-primary text-primary border-b-2'
                 : 'text-muted-foreground hover:text-foreground'

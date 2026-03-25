@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
-import { MapPin, Mail, Phone } from 'lucide-react';
+import { MapPin, Mail, Phone, Sparkles, ShieldCheck } from 'lucide-react';
+import LogoIcon from '../LogoIcon';
 
 /* Social icon SVGs (replacing deprecated lucide brand icons) */
 const FacebookIcon = () => (
@@ -16,7 +17,39 @@ const InstagramIcon = () => (
 );
 const YoutubeIcon = () => (
   <svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor">
-    <path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 0 0 1.46 6.42 29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58 2.78 2.78 0 0 0 1.95 1.96C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.96A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z" /><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="white" />
+    <path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 0 0 1.46 6.42 29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58 2.78 2.78 0 0 0 1.95 1.96C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.96A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z" />
+    <polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="white" />
+  </svg>
+);
+
+/* Payment method SVG icons */
+const VisaIcon = () => (
+  <svg viewBox="0 0 48 32" width="42" height="28" aria-label="Visa" role="img">
+    <rect width="48" height="32" rx="4" fill="#1A1F71" />
+    <text x="24" y="22" textAnchor="middle" fill="white" fontSize="14" fontWeight="700" fontFamily="Arial, sans-serif" letterSpacing="0.5">
+      VISA
+    </text>
+  </svg>
+);
+
+const MastercardIcon = () => (
+  <svg viewBox="0 0 48 32" width="42" height="28" aria-label="Mastercard" role="img">
+    <rect width="48" height="32" rx="4" fill="#252525" />
+    <circle cx="18" cy="16" r="9" fill="#EB001B" />
+    <circle cx="30" cy="16" r="9" fill="#F79E1B" />
+    <path d="M24 9.27A9 9 0 0 1 27.73 16 9 9 0 0 1 24 22.73 9 9 0 0 1 20.27 16 9 9 0 0 1 24 9.27z" fill="#FF5F00" />
+  </svg>
+);
+
+const PayPalIcon = () => (
+  <svg viewBox="0 0 48 32" width="42" height="28" aria-label="PayPal" role="img">
+    <rect width="48" height="32" rx="4" fill="#F3F6FF" />
+    <text x="24" y="14" textAnchor="middle" fill="#003087" fontSize="8" fontWeight="700" fontFamily="Arial, sans-serif">
+      Pay
+    </text>
+    <text x="24" y="24" textAnchor="middle" fill="#009cde" fontSize="8" fontWeight="700" fontFamily="Arial, sans-serif">
+      Pal
+    </text>
   </svg>
 );
 
@@ -24,28 +57,28 @@ const FOOTER_SECTIONS = [
   {
     title: 'Shop',
     links: [
-      { label: 'Freshwater Fish', href: '/products?waterType=FRESHWATER' },
-      { label: 'Saltwater Fish', href: '/products?waterType=SALTWATER' },
-      { label: 'Mini Fish', href: '/products?size=S' },
-      { label: 'All Products', href: '/products' },
+      { label: 'Freshwater Fish', href: '/products?waterType=FRESHWATER', highlight: false },
+      { label: 'Saltwater Fish', href: '/products?waterType=SALTWATER', highlight: false },
+      { label: 'Mini Fish', href: '/products?size=S', highlight: false },
+      { label: 'All Products', href: '/products', highlight: false },
     ],
   },
   {
     title: 'Support',
     links: [
-      { label: 'Care Guides', href: '/products' },
-      { label: 'Return Policy', href: '#' },
-      { label: 'Shipping Info', href: '#' },
-      { label: 'Contact Us', href: '#' },
+      { label: 'Care Guides', href: '/products', highlight: false },
+      { label: 'Return Policy', href: '#', highlight: false },
+      { label: 'Shipping Info', href: '#', highlight: false },
+      { label: 'Contact Us', href: '#', highlight: false },
     ],
   },
   {
     title: 'Company',
     links: [
-      { label: 'About Us', href: '#' },
-      { label: 'AI Advisor', href: '/ai-chat' },
-      { label: 'Terms of Service', href: '#' },
-      { label: 'Privacy Policy', href: '#' },
+      { label: 'About Us', href: '#', highlight: false },
+      { label: 'AI Advisor', href: '/ai-chat', highlight: true },
+      { label: 'Terms of Service', href: '#', highlight: false },
+      { label: 'Privacy Policy', href: '#', highlight: false },
     ],
   },
 ];
@@ -58,9 +91,9 @@ const SOCIAL_LINKS = [
 
 export default function Footer() {
   return (
-    <footer className="relative overflow-hidden border-t border-[#CCE0ED] bg-[#F2F8FC] dark:border-[#0D2C45] dark:bg-[#000F1E]">
+    <footer className="relative overflow-hidden border-t border-border bg-background">
       {/* Decorative top gradient bar */}
-      <div className="h-px w-full bg-gradient-to-r from-transparent via-[#0094C4]/60 to-transparent dark:via-[#00CCEE]/50" />
+      <div className="h-px w-full bg-gradient-to-r from-transparent via-primary/60 to-transparent" />
 
       {/* Subtle background pattern */}
       <div
@@ -75,21 +108,16 @@ export default function Footer() {
         <div className="grid grid-cols-2 gap-10 md:grid-cols-5 lg:gap-12">
           {/* Brand column */}
           <div className="col-span-2 md:col-span-2">
-            <Link to="/" className="mb-5 flex items-center gap-2.5">
-              <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-[#0094C4] to-[#0077A3] shadow-md dark:from-[#00CCEE] dark:to-[#0094C4]">
-                <svg className="h-5 w-5 text-white" viewBox="0 0 48 48" fill="none">
-                  <path
-                    d="M42.17 20.17L27.83 5.83c1.31 1.31.57 4.36-1.63 7.94a38.3 38.3 0 0 1-5.55 6.89 38.3 38.3 0 0 1-6.89 5.55c-3.58 2.2-6.63 2.93-7.94 1.63L20.17 42.17c1.31 1.31 4.36.57 7.94-1.63a38.3 38.3 0 0 0 6.89-5.55 38.3 38.3 0 0 0 5.55-6.89c2.2-3.58 2.93-6.63 1.63-7.94z"
-                    fill="currentColor"
-                  />
-                </svg>
+            <Link to="/" className="mb-5 flex items-center gap-2.5 cursor-pointer">
+              <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-primary to-primary-dark shadow-md">
+                <LogoIcon />
               </div>
-              <span className="text-xl font-bold text-[#0A1825] dark:text-[#D6EAFF]">
-                Aqua<span className="text-[#0094C4] dark:text-[#00CCEE]">Luxe</span>
+              <span className="text-xl font-bold text-foreground">
+                Aqua<span className="text-primary">Luxe</span>
               </span>
             </Link>
 
-            <p className="mb-6 max-w-xs text-sm leading-relaxed text-[#547698] dark:text-[#6496B8]">
+            <p className="mb-6 max-w-xs text-sm leading-relaxed text-muted-foreground">
               Premium ornamental fish, delivered nationwide. Wide variety of species with guaranteed
               quality and live arrival.
             </p>
@@ -102,11 +130,8 @@ export default function Footer() {
                 { icon: Phone, text: '+84 28 1234 5678' },
               ].map((item) => (
                 <div key={item.text} className="flex items-center gap-2.5">
-                  <item.icon
-                    size={13}
-                    className="shrink-0 text-[#0094C4] dark:text-[#00CCEE]"
-                  />
-                  <span className="text-xs text-[#547698] dark:text-[#6496B8]">{item.text}</span>
+                  <item.icon size={13} className="shrink-0 text-primary" aria-hidden="true" />
+                  <span className="text-xs text-muted-foreground">{item.text}</span>
                 </div>
               ))}
             </div>
@@ -117,7 +142,7 @@ export default function Footer() {
                 <a
                   key={s.name}
                   href={s.href}
-                  className="group flex h-9 w-9 items-center justify-center rounded-xl border border-[#CCE0ED] bg-white text-[#547698] shadow-sm transition-all duration-200 hover:border-[#0094C4] hover:bg-[#0094C4] hover:text-white hover:shadow-md dark:border-[#0D2C45] dark:bg-[#041628] dark:text-[#6496B8] dark:hover:border-[#00CCEE] dark:hover:bg-[#00CCEE] dark:hover:text-[#000F1E]"
+                  className="group flex h-9 w-9 cursor-pointer items-center justify-center rounded-xl border border-border bg-card text-muted-foreground shadow-sm transition-all duration-200 hover:border-primary hover:bg-primary hover:text-white hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
                   aria-label={s.name}
                 >
                   <s.icon />
@@ -129,18 +154,28 @@ export default function Footer() {
           {/* Link sections */}
           {FOOTER_SECTIONS.map((section) => (
             <div key={section.title}>
-              <h4 className="mb-4 text-xs font-bold uppercase tracking-widest text-[#0094C4] dark:text-[#00CCEE]">
+              <h4 className="mb-4 text-xs font-bold uppercase tracking-widest text-primary">
                 {section.title}
               </h4>
               <ul className="flex flex-col gap-2.5">
                 {section.links.map((link) => (
                   <li key={link.label}>
-                    <Link
-                      to={link.href}
-                      className="text-sm text-[#547698] transition-colors duration-150 hover:text-[#0094C4] dark:text-[#6496B8] dark:hover:text-[#00CCEE]"
-                    >
-                      {link.label}
-                    </Link>
+                    {link.highlight ? (
+                      <Link
+                        to={link.href}
+                        className="inline-flex cursor-pointer items-center gap-1.5 text-sm font-bold text-primary transition-colors duration-150 hover:text-primary-dark focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+                      >
+                        <Sparkles className="h-3.5 w-3.5 shrink-0" aria-hidden="true" />
+                        {link.label}
+                      </Link>
+                    ) : (
+                      <Link
+                        to={link.href}
+                        className="cursor-pointer text-sm text-muted-foreground transition-colors duration-150 hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+                      >
+                        {link.label}
+                      </Link>
+                    )}
                   </li>
                 ))}
               </ul>
@@ -148,19 +183,42 @@ export default function Footer() {
           ))}
         </div>
 
+        {/* Payment methods row */}
+        <div className="mt-10 flex flex-wrap items-center justify-center gap-3 border-t border-border pt-8 sm:justify-start">
+          <span className="mr-1 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+            Accepted payments
+          </span>
+          <div className="flex items-center gap-2">
+            <div className="overflow-hidden rounded-md shadow-card opacity-90 hover:opacity-100 transition-opacity">
+              <VisaIcon />
+            </div>
+            <div className="overflow-hidden rounded-md shadow-card opacity-90 hover:opacity-100 transition-opacity">
+              <MastercardIcon />
+            </div>
+            <div className="overflow-hidden rounded-md shadow-card opacity-90 hover:opacity-100 transition-opacity">
+              <PayPalIcon />
+            </div>
+          </div>
+          {/* Secure checkout badge */}
+          <div className="ml-auto flex items-center gap-1.5 rounded-full border border-border bg-card px-3 py-1.5 shadow-card sm:ml-auto">
+            <ShieldCheck className="h-3.5 w-3.5 shrink-0 text-primary" aria-hidden="true" />
+            <span className="text-xs font-semibold text-foreground">Secure Checkout</span>
+          </div>
+        </div>
+
         {/* Bottom bar */}
-        <div className="mt-12 flex flex-col items-center justify-between gap-3 border-t border-[#CCE0ED] pt-6 text-xs text-[#547698] dark:border-[#0D2C45] dark:text-[#6496B8] sm:flex-row">
+        <div className="mt-6 flex flex-col items-center justify-between gap-3 border-t border-border pt-6 text-xs text-muted-foreground sm:flex-row">
           <span>© {new Date().getFullYear()} AquaLuxe. All rights reserved.</span>
           <div className="flex items-center gap-4">
-            <a href="#" className="transition-colors hover:text-[#0094C4] dark:hover:text-[#00CCEE]">
-              Privacy
-            </a>
-            <a href="#" className="transition-colors hover:text-[#0094C4] dark:hover:text-[#00CCEE]">
-              Terms
-            </a>
-            <a href="#" className="transition-colors hover:text-[#0094C4] dark:hover:text-[#00CCEE]">
-              Cookies
-            </a>
+            {['Privacy', 'Terms', 'Cookies'].map((label) => (
+              <a
+                key={label}
+                href="#"
+                className="cursor-pointer transition-colors hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+              >
+                {label}
+              </a>
+            ))}
           </div>
         </div>
       </div>

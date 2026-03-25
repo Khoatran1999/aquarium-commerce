@@ -56,8 +56,8 @@ const WishlistButton = memo(function WishlistButton({
 
   const baseClasses =
     variant === 'overlay'
-      ? `absolute right-2 top-2 z-10 ${sizeClass} flex items-center justify-center rounded-full bg-white/80 backdrop-blur-sm shadow-sm transition-all hover:bg-white hover:shadow-md`
-      : `${sizeClass} flex items-center justify-center rounded-full border border-border transition-all hover:bg-muted`;
+      ? `absolute right-2 top-2 z-10 ${sizeClass} flex items-center justify-center rounded-full bg-card/80 backdrop-blur-sm shadow-sm transition-all hover:bg-card hover:shadow-md cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary`
+      : `${sizeClass} flex items-center justify-center rounded-full border border-border transition-all hover:bg-muted cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary`;
 
   return (
     <button
@@ -68,7 +68,7 @@ const WishlistButton = memo(function WishlistButton({
       <AnimatePresence mode="wait" initial={false}>
         <motion.div
           key={isWishlisted ? 'filled' : 'outline'}
-          className={`${iconSize} ${isWishlisted ? 'text-red-500' : 'text-gray-500'}`}
+          className={`${iconSize} ${isWishlisted ? 'text-secondary' : 'text-muted-foreground'}`}
           initial={{ scale: 0.5, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
           exit={{ scale: 0.5, opacity: 0 }}

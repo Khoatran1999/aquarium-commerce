@@ -71,14 +71,14 @@ export default function CartPage() {
         {items.length === 0 ? (
           <div className="flex flex-col items-center justify-center py-20 text-center">
             <div className="mb-4">
-              <ShoppingCart size={56} className="text-muted-foreground/40" />
+              <ShoppingCart size={56} className="text-border" />
             </div>
             <h2 className="text-foreground text-xl font-semibold">Your cart is empty</h2>
             <p className="text-muted-foreground mt-2">
               Discover our amazing ornamental fish collection.
             </p>
             <Link to="/products">
-              <Button className="mt-6">Browse Products</Button>
+              <Button className="mt-6 cursor-pointer">Browse Products</Button>
             </Link>
           </div>
         ) : (
@@ -126,7 +126,8 @@ export default function CartPage() {
                           <button
                             onClick={() => handleUpdateQty(item.id, item.quantity - 1)}
                             disabled={item.quantity <= 1 || pendingOps[item.id] === 'remove'}
-                            className="text-foreground hover:bg-muted h-8 w-8 text-sm font-semibold transition-colors disabled:opacity-40"
+                            aria-label="Decrease quantity"
+                            className="text-foreground hover:bg-muted cursor-pointer h-8 w-8 text-sm font-semibold transition-colors disabled:opacity-40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
                           >
                             -
                           </button>
@@ -136,7 +137,8 @@ export default function CartPage() {
                           <button
                             onClick={() => handleUpdateQty(item.id, item.quantity + 1)}
                             disabled={pendingOps[item.id] === 'remove'}
-                            className="text-foreground hover:bg-muted h-8 w-8 text-sm font-semibold transition-colors disabled:opacity-40"
+                            aria-label="Increase quantity"
+                            className="text-foreground hover:bg-muted cursor-pointer h-8 w-8 text-sm font-semibold transition-colors disabled:opacity-40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
                           >
                             +
                           </button>
@@ -148,7 +150,7 @@ export default function CartPage() {
                           </span>
                           <button
                             onClick={() => handleRemove(item.id)}
-                            className="text-muted-foreground hover:text-danger transition-colors"
+                            className="text-muted-foreground hover:text-danger cursor-pointer transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
                             aria-label="Remove item"
                           >
                             <Trash2 size={20} />
@@ -192,7 +194,7 @@ export default function CartPage() {
                   </div>
                 </div>
                 <Link to="/checkout">
-                  <Button size="lg" className="mt-6 w-full">
+                  <Button size="lg" className="mt-6 w-full cursor-pointer">
                     Proceed to Checkout
                   </Button>
                 </Link>

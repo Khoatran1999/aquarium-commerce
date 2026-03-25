@@ -14,6 +14,7 @@ import {
   Heart,
   ChevronRight,
 } from 'lucide-react';
+import LogoIcon from '../LogoIcon';
 import { useAppDispatch, useAppSelector } from '../../store';
 import { toggleTheme, toggleMobileMenu, closeMobileMenu } from '../../store/ui.slice';
 import { logout } from '../../store/auth.slice';
@@ -62,7 +63,10 @@ export default function Header() {
 
   const [scrolled, setScrolled] = useState(false);
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 12);
+    const onScroll = () => {
+      const isScrolled = window.scrollY > 12;
+      setScrolled((prev) => (prev === isScrolled ? prev : isScrolled));
+    };
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
@@ -92,26 +96,21 @@ export default function Header() {
       <header
         className={`sticky top-0 z-50 w-full transition-all duration-300 ${
           scrolled
-            ? 'border-b border-[#CCE0ED]/80 bg-white/90 shadow-sm backdrop-blur-xl dark:border-[#0D2C45]/80 dark:bg-[#000F1E]/92'
-            : 'border-b border-transparent bg-white/70 backdrop-blur-lg dark:bg-[#000F1E]/80'
+            ? 'border-b border-border/80 bg-background/90 shadow-sm backdrop-blur-xl dark:bg-background/92'
+            : 'border-b border-transparent bg-background/70 backdrop-blur-lg'
         }`}
       >
         {/* Top accent line */}
-        <div className="h-0.5 w-full bg-gradient-to-r from-transparent via-[#0094C4] to-transparent opacity-60 dark:via-[#00CCEE]" />
+        <div className="h-0.5 w-full bg-gradient-to-r from-transparent via-primary to-transparent opacity-60" />
 
         <div className="mx-auto flex max-w-[1280px] items-center justify-between gap-4 px-4 py-3 md:px-10">
           {/* Logo */}
           <Link to="/" className="flex items-center gap-2.5 shrink-0">
-            <div className="relative flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-[#0094C4] to-[#0077A3] shadow-md dark:from-[#00CCEE] dark:to-[#0094C4]">
-              <svg className="h-5 w-5 text-white" viewBox="0 0 48 48" fill="none">
-                <path
-                  d="M42.17 20.17L27.83 5.83c1.31 1.31.57 4.36-1.63 7.94a38.3 38.3 0 0 1-5.55 6.89 38.3 38.3 0 0 1-6.89 5.55c-3.58 2.2-6.63 2.93-7.94 1.63L20.17 42.17c1.31 1.31 4.36.57 7.94-1.63a38.3 38.3 0 0 0 6.89-5.55 38.3 38.3 0 0 0 5.55-6.89c2.2-3.58 2.93-6.63 1.63-7.94z"
-                  fill="currentColor"
-                />
-              </svg>
+            <div className="relative flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-primary to-primary-dark shadow-md">
+              <LogoIcon />
             </div>
-            <span className="text-xl font-bold tracking-tight text-[#0A1825] dark:text-[#D6EAFF]">
-              Aqua<span className="text-[#0094C4] dark:text-[#00CCEE]">Luxe</span>
+            <span className="text-xl font-bold tracking-tight text-foreground">
+              Aqua<span className="text-primary">Luxe</span>
             </span>
           </Link>
 
@@ -123,15 +122,15 @@ export default function Header() {
                 to={link.href}
                 className={`relative rounded-lg px-4 py-2 text-sm font-medium transition-all duration-200 ${
                   isActive(link.href)
-                    ? 'bg-[#0094C4]/10 text-[#0094C4] dark:bg-[#00CCEE]/10 dark:text-[#00CCEE]'
-                    : 'text-[#0A1825]/75 hover:bg-[#0094C4]/8 hover:text-[#0094C4] dark:text-[#D6EAFF]/70 dark:hover:bg-[#00CCEE]/8 dark:hover:text-[#00CCEE]'
+                    ? 'bg-primary/10 text-primary'
+                    : 'text-foreground/75 hover:bg-primary/8 hover:text-primary'
                 }`}
               >
                 {link.label}
                 {isActive(link.href) && (
                   <motion.span
                     layoutId="nav-indicator"
-                    className="absolute inset-x-3 -bottom-0.5 h-0.5 rounded-full bg-[#0094C4] dark:bg-[#00CCEE]"
+                    className="absolute inset-x-3 -bottom-0.5 h-0.5 rounded-full bg-primary"
                   />
                 )}
               </Link>
@@ -141,11 +140,15 @@ export default function Header() {
           {/* Actions */}
           <div className="flex items-center gap-1">
             {/* Search (desktop) */}
-            <label className="hidden h-9 w-56 cursor-text items-center gap-2 rounded-full border border-[#CCE0ED] bg-[#F2F8FC] px-3.5 transition-all duration-200 focus-within:border-[#0094C4] focus-within:shadow-[0_0_0_3px_rgba(0,148,196,0.12)] lg:flex dark:border-[#0D2C45] dark:bg-[#071F36] dark:focus-within:border-[#00CCEE] dark:focus-within:shadow-[0_0_0_3px_rgba(0,204,238,0.12)]">
-              <Search className="h-4 w-4 shrink-0 text-[#547698] dark:text-[#6496B8]" />
+            <label className="hidden h-9 w-56 cursor-text items-center gap-2 rounded-full border border-border bg-background px-3.5 transition-all duration-200 focus-within:border-primary focus-within:shadow-[0_0_0_3px_rgba(0,148,196,0.12)] lg:flex dark:focus-within:shadow-[0_0_0_3px_rgba(0,204,238,0.12)]">
+              <Search className="h-4 w-4 shrink-0 text-muted-foreground" />
               <input
-                className="w-full border-none bg-transparent text-sm text-[#0A1825] placeholder-[#547698] focus:outline-none focus:ring-0 dark:text-[#D6EAFF] dark:placeholder-[#6496B8]"
-                placeholder="Search fish species..."
+                type="search"
+                name="q"
+                autoComplete="off"
+                spellCheck={false}
+                className="w-full border-none bg-transparent text-sm text-foreground placeholder-muted-foreground focus:outline-none focus:ring-0"
+                placeholder="Search fish species…"
                 onKeyDown={(e) => {
                   if (e.key === 'Enter') {
                     const v = (e.target as HTMLInputElement).value.trim();
@@ -158,7 +161,7 @@ export default function Header() {
             {/* Theme toggle */}
             <button
               onClick={() => dispatch(toggleTheme())}
-              className="rounded-full p-2 text-[#547698] transition-all duration-200 hover:bg-[#0094C4]/10 hover:text-[#0094C4] dark:text-[#6496B8] dark:hover:bg-[#00CCEE]/10 dark:hover:text-[#00CCEE]"
+              className="cursor-pointer rounded-full p-2 text-muted-foreground transition-all duration-200 hover:bg-primary/10 hover:text-primary"
               aria-label="Toggle theme"
             >
               <AnimatePresence mode="wait" initial={false}>
@@ -178,12 +181,12 @@ export default function Header() {
             {/* Wishlist */}
             <Link
               to="/wishlist"
-              className="relative rounded-full p-2 text-[#547698] transition-all duration-200 hover:bg-[#FF5252]/10 hover:text-[#FF5252] dark:text-[#6496B8] dark:hover:bg-[#FF6B6B]/10 dark:hover:text-[#FF6B6B]"
+              className="relative cursor-pointer rounded-full p-2 text-muted-foreground transition-all duration-200 hover:bg-secondary/10 hover:text-secondary"
               aria-label="Wishlist"
             >
               <Heart size={20} />
               {wishlistCount > 0 && (
-                <span className="absolute -right-0.5 -top-0.5 flex h-4.5 min-w-[18px] items-center justify-center rounded-full bg-[#FF5252] px-1 text-[9px] font-bold text-white dark:bg-[#FF6B6B]">
+                <span className="absolute -right-0.5 -top-0.5 flex h-[18px] min-w-[18px] items-center justify-center rounded-full bg-secondary px-1 text-xs font-bold text-white">
                   {wishlistCount > 99 ? '99+' : wishlistCount}
                 </span>
               )}
@@ -194,14 +197,16 @@ export default function Header() {
               <button
                 ref={cartIconRef}
                 onClick={() => setCartOpen((p) => !p)}
-                className="relative rounded-full p-2 text-[#547698] transition-all duration-200 hover:bg-[#0094C4]/10 hover:text-[#0094C4] dark:text-[#6496B8] dark:hover:bg-[#00CCEE]/10 dark:hover:text-[#00CCEE]"
+                className="relative cursor-pointer rounded-full p-2 text-muted-foreground transition-all duration-200 hover:bg-primary/10 hover:text-primary"
                 aria-label="Cart"
+                aria-expanded={cartOpen}
+                aria-haspopup="true"
               >
                 <ShoppingCart size={20} />
                 {itemCount > 0 && (
                   <motion.span
                     key={itemCount}
-                    className="absolute -right-0.5 -top-0.5 flex h-4.5 min-w-[18px] items-center justify-center rounded-full bg-[#0094C4] px-1 text-[9px] font-bold text-white dark:bg-[#00CCEE] dark:text-[#000F1E]"
+                    className="absolute -right-0.5 -top-0.5 flex h-[18px] min-w-[18px] items-center justify-center rounded-full bg-primary px-1 text-xs font-bold text-white dark:text-background"
                     animate={cartBounce ? { scale: [1, 1.45, 1] } : {}}
                     transition={{ duration: 0.3 }}
                   >
@@ -218,13 +223,16 @@ export default function Header() {
                     animate={{ opacity: 1, y: 0, scale: 1 }}
                     exit={{ opacity: 0, y: 10, scale: 0.96 }}
                     transition={{ duration: 0.18, ease: 'easeOut' }}
-                    className="absolute right-0 top-full mt-2 w-80 overflow-hidden rounded-2xl border border-[#CCE0ED] bg-white shadow-xl dark:border-[#0D2C45] dark:bg-[#041628]"
+                    role="dialog"
+                    aria-modal="true"
+                    aria-label="Cart preview"
+                    className="absolute right-0 top-full mt-2 w-80 overflow-hidden rounded-2xl border border-border bg-card shadow-elevated"
                   >
                     {/* Cart header */}
-                    <div className="border-b border-[#CCE0ED] px-4 py-3 dark:border-[#0D2C45]">
-                      <p className="text-sm font-semibold text-[#0A1825] dark:text-[#D6EAFF]">
+                    <div className="border-b border-border px-4 py-3">
+                      <p className="text-sm font-semibold text-card-foreground">
                         Cart{' '}
-                        <span className="ml-1 rounded-full bg-[#E4EFF8] px-2 py-0.5 text-xs font-bold text-[#0094C4] dark:bg-[#071F36] dark:text-[#00CCEE]">
+                        <span className="ml-1 rounded-full bg-muted px-2 py-0.5 text-xs font-bold text-primary">
                           {itemCount}
                         </span>
                       </p>
@@ -232,14 +240,12 @@ export default function Header() {
 
                     {cartItems.length === 0 ? (
                       <div className="flex flex-col items-center gap-2 py-8">
-                        <ShoppingCart size={32} className="text-[#CCE0ED] dark:text-[#0D2C45]" />
-                        <p className="text-sm text-[#547698] dark:text-[#6496B8]">
-                          Your cart is empty
-                        </p>
+                        <ShoppingCart size={32} className="text-border" />
+                        <p className="text-sm text-muted-foreground">Your cart is empty</p>
                         <Link
                           to="/products"
                           onClick={() => setCartOpen(false)}
-                          className="mt-1 text-sm font-semibold text-[#0094C4] hover:underline dark:text-[#00CCEE]"
+                          className="mt-1 text-sm font-semibold text-primary hover:underline"
                         >
                           Browse Products
                         </Link>
@@ -250,39 +256,39 @@ export default function Header() {
                           {cartItems.slice(0, 3).map((item) => (
                             <div
                               key={item.id}
-                              className="flex items-center gap-3 border-b border-[#F2F8FC] px-4 py-3 last:border-0 dark:border-[#071F36]"
+                              className="flex items-center gap-3 border-b border-background px-4 py-3 last:border-0 dark:border-muted"
                             >
                               <img
                                 src={item.product?.images?.[0]?.url ?? '/placeholder-fish.jpg'}
                                 alt={item.product?.name ?? ''}
+                                width={44}
+                                height={44}
                                 className="h-11 w-11 shrink-0 rounded-xl object-cover"
                               />
                               <div className="min-w-0 flex-1">
-                                <p className="line-clamp-1 text-xs font-semibold text-[#0A1825] dark:text-[#D6EAFF]">
+                                <p className="line-clamp-1 text-xs font-semibold text-card-foreground">
                                   {item.product?.name}
                                 </p>
-                                <p className="text-xs text-[#547698] dark:text-[#6496B8]">
+                                <p className="text-xs text-muted-foreground">
                                   {item.quantity} × ${item.price.toFixed(2)}
                                 </p>
                               </div>
-                              <span className="shrink-0 text-sm font-bold text-[#0094C4] dark:text-[#00CCEE]">
+                              <span className="shrink-0 text-sm font-bold text-primary">
                                 ${(item.price * item.quantity).toFixed(2)}
                               </span>
                             </div>
                           ))}
                           {cartItems.length > 3 && (
-                            <p className="px-4 py-2 text-center text-xs text-[#547698] dark:text-[#6496B8]">
+                            <p className="px-4 py-2 text-center text-xs text-muted-foreground">
                               +{cartItems.length - 3} more item{cartItems.length - 3 !== 1 ? 's' : ''}
                             </p>
                           )}
                         </div>
 
-                        <div className="border-t border-[#CCE0ED] p-4 dark:border-[#0D2C45]">
+                        <div className="border-t border-border p-4">
                           <div className="mb-3 flex items-center justify-between">
-                            <span className="text-sm text-[#547698] dark:text-[#6496B8]">
-                              Subtotal
-                            </span>
-                            <span className="text-base font-bold text-[#0A1825] dark:text-[#D6EAFF]">
+                            <span className="text-sm text-muted-foreground">Subtotal</span>
+                            <span className="text-base font-bold text-foreground">
                               ${cartSubtotal.toFixed(2)}
                             </span>
                           </div>
@@ -290,14 +296,14 @@ export default function Header() {
                             <Link
                               to="/cart"
                               onClick={() => setCartOpen(false)}
-                              className="flex-1 rounded-xl border border-[#CCE0ED] py-2 text-center text-xs font-semibold text-[#0A1825] transition-colors hover:bg-[#E4EFF8] dark:border-[#0D2C45] dark:text-[#D6EAFF] dark:hover:bg-[#071F36]"
+                              className="flex-1 cursor-pointer rounded-xl border border-border py-2 text-center text-xs font-semibold text-foreground transition-colors hover:bg-muted"
                             >
                               View Cart
                             </Link>
                             <Link
                               to="/checkout"
                               onClick={() => setCartOpen(false)}
-                              className="flex-1 rounded-xl bg-gradient-to-r from-[#0094C4] to-[#0077A3] py-2 text-center text-xs font-semibold text-white shadow-md transition-opacity hover:opacity-90 dark:from-[#00CCEE] dark:to-[#0094C4] dark:text-[#000F1E]"
+                              className="flex-1 cursor-pointer rounded-xl bg-gradient-to-r from-primary to-primary-dark py-2 text-center text-xs font-semibold text-white shadow-md transition-opacity hover:opacity-90 dark:text-background"
                             >
                               Checkout
                             </Link>
@@ -315,17 +321,19 @@ export default function Header() {
               <div className="relative" ref={userMenuRef}>
                 <button
                   onClick={() => setUserMenuOpen((p) => !p)}
-                  className="flex items-center gap-2 rounded-full p-1 transition-all duration-200 hover:ring-2 hover:ring-[#0094C4]/30 dark:hover:ring-[#00CCEE]/30"
+                  className="flex cursor-pointer items-center gap-2 rounded-full p-1 transition-all duration-200 hover:ring-2 hover:ring-primary/30"
                   aria-label="User menu"
+                  aria-expanded={userMenuOpen}
+                  aria-haspopup="true"
                 >
                   {user?.avatar ? (
                     <img
                       src={user.avatar}
                       alt={user.name}
-                      className="h-8 w-8 rounded-full object-cover ring-2 ring-[#CCE0ED] dark:ring-[#0D2C45]"
+                      className="h-8 w-8 rounded-full object-cover ring-2 ring-border"
                     />
                   ) : (
-                    <span className="flex h-8 w-8 items-center justify-center rounded-full bg-gradient-to-br from-[#0094C4] to-[#0077A3] text-xs font-bold text-white dark:from-[#00CCEE] dark:to-[#0094C4] dark:text-[#000F1E]">
+                    <span className="flex h-8 w-8 items-center justify-center rounded-full bg-gradient-to-br from-primary to-primary-dark text-xs font-bold text-white dark:text-background">
                       {user?.name?.charAt(0).toUpperCase() ?? 'U'}
                     </span>
                   )}
@@ -338,15 +346,13 @@ export default function Header() {
                       animate={{ opacity: 1, y: 0, scale: 1 }}
                       exit={{ opacity: 0, y: 8, scale: 0.96 }}
                       transition={{ duration: 0.16 }}
-                      className="absolute right-0 top-full mt-2 w-56 overflow-hidden rounded-2xl border border-[#CCE0ED] bg-white shadow-xl dark:border-[#0D2C45] dark:bg-[#041628]"
+                      className="absolute right-0 top-full mt-2 w-56 overflow-hidden rounded-2xl border border-border bg-card shadow-elevated"
                     >
-                      <div className="border-b border-[#CCE0ED] px-4 py-3 dark:border-[#0D2C45]">
-                        <p className="truncate text-sm font-semibold text-[#0A1825] dark:text-[#D6EAFF]">
+                      <div className="border-b border-border px-4 py-3">
+                        <p className="truncate text-sm font-semibold text-card-foreground">
                           {user?.name}
                         </p>
-                        <p className="truncate text-xs text-[#547698] dark:text-[#6496B8]">
-                          {user?.email}
-                        </p>
+                        <p className="truncate text-xs text-muted-foreground">{user?.email}</p>
                       </div>
 
                       {[
@@ -357,18 +363,18 @@ export default function Header() {
                           key={item.to}
                           to={item.to}
                           onClick={() => setUserMenuOpen(false)}
-                          className="flex items-center gap-3 px-4 py-2.5 text-sm text-[#0A1825] transition-colors hover:bg-[#F2F8FC] dark:text-[#D6EAFF] dark:hover:bg-[#071F36]"
+                          className="flex cursor-pointer items-center gap-3 px-4 py-2.5 text-sm text-foreground transition-colors hover:bg-background dark:hover:bg-muted"
                         >
-                          <item.icon size={15} className="text-[#547698] dark:text-[#6496B8]" />
+                          <item.icon size={15} className="text-muted-foreground" />
                           {item.label}
                         </Link>
                       ))}
 
-                      <div className="mx-4 my-1 border-t border-[#CCE0ED] dark:border-[#0D2C45]" />
+                      <div className="mx-4 my-1 border-t border-border" />
 
                       <button
                         onClick={handleLogout}
-                        className="flex w-full items-center gap-3 px-4 py-2.5 text-sm text-[#ef4444] transition-colors hover:bg-red-50 dark:hover:bg-red-900/10"
+                        className="flex w-full cursor-pointer items-center gap-3 px-4 py-2.5 text-sm text-danger transition-colors hover:bg-red-50 dark:hover:bg-red-900/10"
                       >
                         <LogOut size={15} />
                         Sign out
@@ -380,7 +386,7 @@ export default function Header() {
             ) : (
               <Link
                 to="/login"
-                className="hidden rounded-xl border border-[#CCE0ED] bg-white px-4 py-2 text-sm font-semibold text-[#0A1825] shadow-sm transition-all hover:border-[#0094C4] hover:text-[#0094C4] dark:border-[#0D2C45] dark:bg-[#071F36] dark:text-[#D6EAFF] dark:hover:border-[#00CCEE] dark:hover:text-[#00CCEE] sm:flex"
+                className="flex cursor-pointer rounded-xl border border-border bg-card px-4 py-2 text-sm font-semibold text-foreground shadow-sm transition-all hover:border-primary hover:text-primary"
               >
                 Sign in
               </Link>
@@ -388,9 +394,11 @@ export default function Header() {
 
             {/* Mobile menu toggle */}
             <button
-              className="rounded-full p-2 text-[#547698] transition-colors hover:bg-[#E4EFF8] dark:text-[#6496B8] dark:hover:bg-[#071F36] md:hidden"
+              className="cursor-pointer rounded-full p-2 text-muted-foreground transition-colors hover:bg-muted md:hidden"
               onClick={() => dispatch(toggleMobileMenu())}
               aria-label="Menu"
+              aria-expanded={mobileMenuOpen}
+              aria-controls="mobile-nav"
             >
               <Menu size={22} />
             </button>
@@ -410,37 +418,59 @@ export default function Header() {
               onClick={() => dispatch(closeMobileMenu())}
             />
             <motion.nav
-              className="absolute right-0 top-0 h-full w-72 overflow-y-auto border-l border-[#CCE0ED] bg-white shadow-2xl dark:border-[#0D2C45] dark:bg-[#041628]"
+              id="mobile-nav"
+              aria-label="Mobile navigation"
+              className="absolute right-0 top-0 h-full w-72 overflow-y-auto border-l border-border bg-card shadow-2xl"
               initial={{ x: '100%' }}
               animate={{ x: 0 }}
               exit={{ x: '100%' }}
               transition={{ type: 'spring', damping: 28, stiffness: 280 }}
             >
               {/* Mobile menu header */}
-              <div className="flex items-center justify-between border-b border-[#CCE0ED] px-5 py-4 dark:border-[#0D2C45]">
+              <div className="flex items-center justify-between border-b border-border px-5 py-4">
                 <Link
                   to="/"
                   onClick={() => dispatch(closeMobileMenu())}
                   className="flex items-center gap-2"
                 >
-                  <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-gradient-to-br from-[#0094C4] to-[#0077A3] dark:from-[#00CCEE] dark:to-[#0094C4]">
-                    <svg className="h-4 w-4 text-white" viewBox="0 0 48 48" fill="none">
-                      <path
-                        d="M42.17 20.17L27.83 5.83c1.31 1.31.57 4.36-1.63 7.94a38.3 38.3 0 0 1-5.55 6.89 38.3 38.3 0 0 1-6.89 5.55c-3.58 2.2-6.63 2.93-7.94 1.63L20.17 42.17c1.31 1.31 4.36.57 7.94-1.63a38.3 38.3 0 0 0 6.89-5.55 38.3 38.3 0 0 0 5.55-6.89c2.2-3.58 2.93-6.63 1.63-7.94z"
-                        fill="currentColor"
-                      />
-                    </svg>
+                  <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-gradient-to-br from-primary to-primary-dark">
+                    <LogoIcon className="h-4 w-4 text-white" />
                   </div>
-                  <span className="font-bold text-[#0A1825] dark:text-[#D6EAFF]">
-                    Aqua<span className="text-[#0094C4] dark:text-[#00CCEE]">Luxe</span>
+                  <span className="font-bold text-foreground">
+                    Aqua<span className="text-primary">Luxe</span>
                   </span>
                 </Link>
                 <button
                   onClick={() => dispatch(closeMobileMenu())}
-                  className="rounded-full p-2 text-[#547698] hover:bg-[#E4EFF8] dark:text-[#6496B8] dark:hover:bg-[#071F36]"
+                  className="cursor-pointer rounded-full p-2 text-muted-foreground hover:bg-muted"
+                  aria-label="Close menu"
                 >
                   <X size={20} />
                 </button>
+              </div>
+
+              {/* Mobile search */}
+              <div className="px-5 pt-4">
+                <label className="flex h-10 cursor-text items-center gap-2 rounded-xl border border-border bg-background px-3.5 transition-all duration-200 focus-within:border-primary focus-within:shadow-[0_0_0_3px_rgba(0,148,196,0.12)]">
+                  <Search className="h-4 w-4 shrink-0 text-muted-foreground" />
+                  <input
+                    type="search"
+                    name="q"
+                    autoComplete="off"
+                    spellCheck={false}
+                    className="w-full border-none bg-transparent text-sm text-foreground placeholder-muted-foreground focus:outline-none focus:ring-0"
+                    placeholder="Search fish species…"
+                    onKeyDown={(e) => {
+                      if (e.key === 'Enter') {
+                        const v = (e.target as HTMLInputElement).value.trim();
+                        if (v) {
+                          navigate(`/search?q=${encodeURIComponent(v)}`);
+                          dispatch(closeMobileMenu());
+                        }
+                      }
+                    }}
+                  />
+                </label>
               </div>
 
               {/* Nav links */}
@@ -451,10 +481,10 @@ export default function Header() {
                       key={link.href}
                       to={link.href}
                       onClick={() => dispatch(closeMobileMenu())}
-                      className={`flex items-center justify-between rounded-xl px-4 py-3 text-sm font-medium transition-colors ${
+                      className={`flex cursor-pointer items-center justify-between rounded-xl px-4 py-3 text-sm font-medium transition-colors ${
                         isActive(link.href)
-                          ? 'bg-[#0094C4]/10 text-[#0094C4] dark:bg-[#00CCEE]/10 dark:text-[#00CCEE]'
-                          : 'text-[#0A1825] hover:bg-[#F2F8FC] dark:text-[#D6EAFF] dark:hover:bg-[#071F36]'
+                          ? 'bg-primary/10 text-primary'
+                          : 'text-foreground hover:bg-background dark:hover:bg-muted'
                       }`}
                     >
                       {link.label}
@@ -463,7 +493,16 @@ export default function Header() {
                   ))}
                 </div>
 
-                <div className="my-4 border-t border-[#CCE0ED] dark:border-[#0D2C45]" />
+                <div className="my-4 border-t border-border" />
+
+                {/* Theme toggle (mobile) */}
+                <button
+                  onClick={() => dispatch(toggleTheme())}
+                  className="mb-4 flex w-full cursor-pointer items-center justify-between rounded-xl px-4 py-3 text-sm font-medium text-foreground transition-colors hover:bg-background dark:hover:bg-muted"
+                >
+                  <span>{theme === 'light' ? 'Dark Mode' : 'Light Mode'}</span>
+                  {theme === 'light' ? <Moon size={16} /> : <Sun size={16} />}
+                </button>
 
                 {isAuthenticated ? (
                   <div className="flex flex-col gap-1">
@@ -476,7 +515,7 @@ export default function Header() {
                         key={item.to}
                         to={item.to}
                         onClick={() => dispatch(closeMobileMenu())}
-                        className="flex items-center justify-between rounded-xl px-4 py-3 text-sm font-medium text-[#0A1825] transition-colors hover:bg-[#F2F8FC] dark:text-[#D6EAFF] dark:hover:bg-[#071F36]"
+                        className="flex cursor-pointer items-center justify-between rounded-xl px-4 py-3 text-sm font-medium text-foreground transition-colors hover:bg-background dark:hover:bg-muted"
                       >
                         {item.label}
                         <ChevronRight size={14} className="opacity-40" />
@@ -487,7 +526,7 @@ export default function Header() {
                         handleLogout();
                         dispatch(closeMobileMenu());
                       }}
-                      className="mt-2 flex w-full items-center rounded-xl px-4 py-3 text-sm font-medium text-[#ef4444] transition-colors hover:bg-red-50 dark:hover:bg-red-900/10"
+                      className="mt-2 flex w-full cursor-pointer items-center rounded-xl px-4 py-3 text-sm font-medium text-danger transition-colors hover:bg-red-50 dark:hover:bg-red-900/10"
                     >
                       <LogOut size={15} className="mr-3" />
                       Sign out
@@ -497,7 +536,7 @@ export default function Header() {
                   <Link
                     to="/login"
                     onClick={() => dispatch(closeMobileMenu())}
-                    className="flex w-full items-center justify-center rounded-xl bg-gradient-to-r from-[#0094C4] to-[#0077A3] py-3 text-sm font-semibold text-white shadow-md dark:from-[#00CCEE] dark:to-[#0094C4] dark:text-[#000F1E]"
+                    className="flex w-full cursor-pointer items-center justify-center rounded-xl bg-gradient-to-r from-primary to-primary-dark py-3 text-sm font-semibold text-white shadow-md dark:text-background"
                   >
                     Sign in
                   </Link>

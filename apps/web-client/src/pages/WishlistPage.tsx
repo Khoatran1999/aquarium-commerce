@@ -52,14 +52,14 @@ export default function WishlistPage() {
         ) : items.length === 0 ? (
           <div className="flex min-h-[40vh] flex-col items-center justify-center text-center">
             <div className="mb-4">
-              <Heart size={56} className="text-red-400" />
+              <Heart size={56} className="text-secondary" />
             </div>
             <h2 className="text-foreground mb-2 text-xl font-semibold">Your wishlist is empty</h2>
             <p className="text-muted-foreground mb-6">
               Save your favorite fish to come back to them later.
             </p>
-            <Link to="/products">
-              <Button>Browse Products</Button>
+            <Link to="/products" className="cursor-pointer">
+              <Button className="cursor-pointer">Browse Products</Button>
             </Link>
           </div>
         ) : (
@@ -85,13 +85,13 @@ export default function WishlistPage() {
                       <button
                         onClick={() => handleRemove(product.id)}
                         disabled={removingId === product.id}
-                        className="absolute right-2 top-2 z-10 flex h-8 w-8 items-center justify-center rounded-full bg-white/80 text-red-500 shadow-sm backdrop-blur-sm transition-all hover:bg-red-50 hover:shadow-md"
+                        className="bg-card/80 text-secondary absolute right-2 top-2 z-10 flex h-8 w-8 cursor-pointer items-center justify-center rounded-full shadow-sm backdrop-blur-sm transition-all hover:bg-secondary/10 hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary disabled:cursor-not-allowed disabled:opacity-60"
                         aria-label="Remove from wishlist"
                       >
                         <Heart size={16} fill="currentColor" />
                       </button>
 
-                      <Link to={`/products/${product.slug}`}>
+                      <Link to={`/products/${product.slug}`} className="cursor-pointer">
                         <div className="aspect-square overflow-hidden">
                           {img ? (
                             <img
@@ -102,7 +102,7 @@ export default function WishlistPage() {
                             />
                           ) : (
                             <div className="bg-muted flex h-full w-full items-center justify-center">
-                              <Fish size={40} className="text-muted-foreground/40" />
+                              <Fish size={40} className="text-border" />
                             </div>
                           )}
                         </div>

@@ -80,20 +80,20 @@ export default function BlogSection() {
       {/* Header */}
       <div className="mb-10 flex items-end justify-between">
         <div>
-          <p ref={labelRef} className="mb-1 text-xs font-bold uppercase tracking-widest text-[#0094C4] opacity-0 dark:text-[#00CCEE]">
+          <p ref={labelRef} className="mb-1 text-xs font-bold uppercase tracking-widest text-primary opacity-0">
             Insights
           </p>
-          <h2 ref={titleRef} className="text-3xl font-bold text-[#0A1825] opacity-0 dark:text-[#D6EAFF] md:text-4xl">
+          <h2 ref={titleRef} className="text-3xl font-bold text-foreground opacity-0 md:text-4xl">
             From Our Blog
           </h2>
-          <p ref={subtitleRef} className="mt-1.5 text-sm text-[#547698] opacity-0 dark:text-[#6496B8]">
+          <p ref={subtitleRef} className="mt-1.5 text-sm text-muted-foreground opacity-0">
             Tips, guides, and fishkeeping stories
           </p>
         </div>
         <Link
           ref={linkRef}
           to="/blog"
-          className="group hidden items-center gap-1.5 text-sm font-semibold text-[#0094C4] opacity-0 transition-colors hover:text-[#0077A3] dark:text-[#00CCEE] dark:hover:text-[#55DDFF] sm:flex"
+          className="group hidden cursor-pointer items-center gap-1.5 text-sm font-semibold text-primary opacity-0 transition-colors hover:text-primary-dark sm:flex"
         >
           View All
           <ArrowRight size={14} className="transition-transform duration-200 group-hover:translate-x-1" />
@@ -104,7 +104,7 @@ export default function BlogSection() {
       <div ref={gridRef} className="grid gap-5 md:grid-cols-3">
         {isLoading
           ? Array.from({ length: 3 }).map((_, i) => (
-              <div key={i} className="rounded-2xl bg-white p-4 dark:bg-[#041628]">
+              <div key={i} className="rounded-2xl bg-card p-4">
                 <Skeleton className="mb-4 aspect-[16/9] w-full rounded-xl" />
                 <Skeleton className="mb-2 h-4 w-3/4" />
                 <Skeleton className="mb-2 h-4 w-full" />

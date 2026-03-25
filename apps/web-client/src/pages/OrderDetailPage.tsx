@@ -19,13 +19,13 @@ const stepLabels: Record<string, string> = {
 };
 
 const statusColor: Record<string, string> = {
-  PENDING: 'bg-yellow-100 text-yellow-800',
-  CONFIRMED: 'bg-blue-100 text-blue-800',
-  PREPARING: 'bg-purple-100 text-purple-800',
-  SHIPPING: 'bg-cyan-100 text-cyan-800',
-  DELIVERED: 'bg-emerald-100 text-emerald-800',
-  CANCELLED: 'bg-red-100 text-red-800',
-  REFUNDED: 'bg-gray-100 text-gray-800',
+  PENDING: 'bg-warning/10 text-warning',
+  CONFIRMED: 'bg-primary/10 text-primary',
+  PREPARING: 'bg-accent/10 text-accent',
+  SHIPPING: 'bg-primary/20 text-primary',
+  DELIVERED: 'bg-success/10 text-success',
+  CANCELLED: 'bg-danger/10 text-danger',
+  REFUNDED: 'bg-muted text-muted-foreground',
 };
 
 function ProgressBar({ status }: { status: OrderStatus }) {
@@ -64,7 +64,7 @@ function ProgressBar({ status }: { status: OrderStatus }) {
               )}
             </div>
             <span
-              className={`text-center text-[10px] font-medium md:text-xs ${done ? 'text-primary' : 'text-muted-foreground'}`}
+              className={`text-center text-xs font-medium ${done ? 'text-primary' : 'text-muted-foreground'}`}
             >
               {stepLabels[step]}
             </span>
@@ -100,10 +100,13 @@ export default function OrderDetailPage() {
     return (
       <div className="flex min-h-[50vh] flex-col items-center justify-center text-center">
         <div className="mb-3 flex justify-center">
-          <Search size={48} className="text-muted-foreground/40" />
+          <Search size={48} className="text-border" />
         </div>
         <p className="text-foreground mt-3 text-lg font-semibold">Order not found</p>
-        <Link to="/orders" className="text-primary mt-2 text-sm hover:underline">
+        <Link
+          to="/orders"
+          className="text-primary mt-2 cursor-pointer text-sm hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+        >
           Back to Orders
         </Link>
       </div>
@@ -123,7 +126,7 @@ export default function OrderDetailPage() {
           <div>
             <Link
               to="/orders"
-              className="text-primary mb-2 inline-flex items-center gap-1 text-sm hover:underline"
+              className="text-primary mb-2 inline-flex cursor-pointer items-center gap-1 text-sm hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
             >
               ← Back to Orders
             </Link>
@@ -140,7 +143,7 @@ export default function OrderDetailPage() {
             </p>
           </div>
           <span
-            className={`rounded-full px-4 py-2 text-sm font-semibold ${statusColor[order.status] ?? 'bg-gray-100 text-gray-800'}`}
+            className={`rounded-full px-4 py-2 text-sm font-semibold ${statusColor[order.status] ?? 'bg-muted text-muted-foreground'}`}
           >
             {order.status}
           </span>
@@ -168,13 +171,13 @@ export default function OrderDetailPage() {
                     />
                   ) : (
                     <div className="bg-muted flex h-14 w-14 items-center justify-center rounded-xl">
-                      <Fish size={24} className="text-muted-foreground/40" />
+                      <Fish size={24} className="text-border" />
                     </div>
                   )}
                   <div className="min-w-0 flex-1">
                     <Link
                       to={`/products/${item.product?.slug ?? item.productId}`}
-                      className="text-foreground hover:text-primary line-clamp-1 text-sm font-medium"
+                      className="text-foreground hover:text-primary line-clamp-1 cursor-pointer text-sm font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
                     >
                       {item.name}
                     </Link>

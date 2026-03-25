@@ -35,7 +35,7 @@ export default function StatsCard({
           )}
         </div>
         <div className="bg-primary/10 rounded-lg p-2.5">
-          <Icon className="text-primary h-5 w-5" />
+          <Icon className="text-primary h-5 w-5" aria-hidden="true" />
         </div>
       </div>
     </div>

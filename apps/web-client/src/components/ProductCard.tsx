@@ -49,30 +49,29 @@ const ProductCard = memo(function ProductCard({
   return (
     <Link
       to={`/products/${product.slug}`}
-      className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-[#CCE0ED] bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-[#0094C4]/40 hover:shadow-[0_8px_32px_rgba(0,148,196,0.18)] dark:border-[#0D2C45] dark:bg-[#041628] dark:hover:border-[#00CCEE]/30 dark:hover:shadow-[0_8px_32px_rgba(0,204,238,0.18)]"
+      className="group relative flex h-full cursor-pointer flex-col overflow-hidden rounded-2xl border border-border bg-card shadow-card transition-all duration-300 hover:-translate-y-1 hover:border-primary/40 hover:shadow-elevated"
     >
       {/* Image container */}
-      <div className="relative aspect-square overflow-hidden bg-[#E4EFF8] dark:bg-[#071F36]">
+      <div className="relative aspect-square overflow-hidden bg-muted">
         {img ? (
           <>
             <img
               src={img}
               alt={product.name}
-              className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-108"
+              className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
               loading="lazy"
             />
-            {/* Subtle gradient overlay on hover */}
             <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
           </>
         ) : (
           <div className="flex h-full w-full items-center justify-center">
-            <Fish size={44} className="text-[#CCE0ED] dark:text-[#0D2C45]" />
+            <Fish size={44} className="text-border" />
           </div>
         )}
 
         {/* Discount badge */}
         {hasDiscount && (
-          <span className="absolute left-3 top-3 rounded-full bg-[#FF5252] px-2.5 py-1 text-[10px] font-bold text-white shadow-md dark:bg-[#FF6B6B]">
+          <span className="absolute left-3 top-3 rounded-full bg-secondary px-2.5 py-1 text-xs font-bold text-white shadow-md">
             -{discountPct}%
           </span>
         )}
@@ -84,39 +83,38 @@ const ProductCard = memo(function ProductCard({
       {/* Content */}
       <div className="flex flex-1 flex-col p-4">
         {/* Species name */}
-        <p className="mb-0.5 text-xs font-medium text-[#547698] dark:text-[#6496B8]">
+        <p className="mb-0.5 text-xs font-medium text-muted-foreground">
           {product.species?.name ?? '\u00A0'}
         </p>
 
         {/* Product name */}
-        <h3 className="line-clamp-1 text-sm font-semibold text-[#0A1825] dark:text-[#D6EAFF]">
+        <h3 className="line-clamp-1 text-sm font-semibold text-foreground">
           {product.name}
         </h3>
 
         {/* Badges */}
         <div className="mt-2 flex flex-wrap gap-1.5">
           {careConf && (
-            <span className={`inline-flex items-center rounded-full px-2 py-0.5 text-[10px] font-semibold ring-1 ${careConf.className}`}>
+            <span className={`inline-flex items-center rounded-full px-2 py-0.5 text-xs font-semibold ring-1 ${careConf.className}`}>
               {careConf.label}
             </span>
           )}
           {product.size && (
-            <span className="inline-flex items-center rounded-full bg-[#E4EFF8] px-2 py-0.5 text-[10px] font-semibold text-[#0094C4] ring-1 ring-[#CCE0ED]/60 dark:bg-[#071F36] dark:text-[#55DDFF] dark:ring-[#0D2C45]/60">
+            <span className="inline-flex items-center rounded-full bg-muted px-2 py-0.5 text-xs font-semibold text-primary ring-1 ring-border/60">
               Size {product.size}
             </span>
           )}
         </div>
 
-        {/* Spacer */}
         <div className="flex-1" />
 
         {/* Price row */}
         <div className="mt-3 flex items-baseline gap-2">
-          <span className="text-lg font-black text-[#0094C4] dark:text-[#00CCEE]">
+          <span className="text-lg font-black text-primary">
             ${product.price.toFixed(2)}
           </span>
           {hasDiscount && (
-            <span className="text-xs text-[#547698] line-through dark:text-[#6496B8]">
+            <span className="text-xs text-muted-foreground line-through">
               ${product.comparePrice!.toFixed(2)}
             </span>
           )}
@@ -125,11 +123,11 @@ const ProductCard = memo(function ProductCard({
         {/* Rating */}
         {product.avgRating > 0 && (
           <div className="mt-1 flex items-center gap-1">
-            <Star size={11} className="fill-[#FFB300] text-[#FFB300]" />
-            <span className="text-xs font-semibold text-[#0A1825] dark:text-[#D6EAFF]">
+            <Star size={11} className="fill-accent text-accent" />
+            <span className="text-xs font-semibold text-foreground">
               {product.avgRating.toFixed(1)}
             </span>
-            <span className="text-xs text-[#547698] dark:text-[#6496B8]">
+            <span className="text-xs text-muted-foreground">
               ({product.reviewCount})
             </span>
           </div>
@@ -138,13 +136,13 @@ const ProductCard = memo(function ProductCard({
         {/* Add to Cart row */}
         {showAddToCart && (
           <div className="mt-3 flex items-center justify-between gap-2">
-            <span className={`text-xs font-medium ${product.available > 0 ? 'text-emerald-600 dark:text-emerald-400' : 'text-[#547698] dark:text-[#6496B8]'}`}>
+            <span className={`text-xs font-medium ${product.available > 0 ? 'text-success' : 'text-muted-foreground'}`}>
               {product.available > 0 ? `${product.available} in stock` : 'Out of stock'}
             </span>
             <button
               onClick={handleAdd}
               disabled={product.available <= 0}
-              className="flex items-center gap-1.5 rounded-xl bg-gradient-to-r from-[#0094C4] to-[#0077A3] px-3 py-1.5 text-xs font-semibold text-white shadow-sm transition-all duration-200 hover:shadow-[0_4px_16px_rgba(0,148,196,0.4)] hover:scale-105 disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:scale-100 disabled:hover:shadow-none dark:from-[#00CCEE] dark:to-[#0094C4] dark:text-[#000F1E]"
+              className="flex cursor-pointer items-center gap-1.5 rounded-xl bg-gradient-to-r from-primary to-primary-dark px-3 py-1.5 text-xs font-semibold text-white shadow-sm transition-all duration-200 hover:shadow-elevated hover:scale-105 disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:scale-100 disabled:hover:shadow-none dark:text-background"
             >
               <ShoppingCart size={12} />
               {product.available > 0 ? 'Add' : 'Sold Out'}

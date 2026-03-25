@@ -20,13 +20,13 @@ const TABS: { label: string; value: OrderStatus | 'ALL' }[] = [
 ];
 
 const statusColor: Record<string, string> = {
-  PENDING: 'bg-yellow-100 text-yellow-800',
-  CONFIRMED: 'bg-blue-100 text-blue-800',
-  PREPARING: 'bg-purple-100 text-purple-800',
-  SHIPPING: 'bg-cyan-100 text-cyan-800',
-  DELIVERED: 'bg-emerald-100 text-emerald-800',
-  CANCELLED: 'bg-red-100 text-red-800',
-  REFUNDED: 'bg-gray-100 text-gray-800',
+  PENDING: 'bg-warning/10 text-warning',
+  CONFIRMED: 'bg-primary/10 text-primary',
+  PREPARING: 'bg-accent/10 text-accent',
+  SHIPPING: 'bg-primary/20 text-primary',
+  DELIVERED: 'bg-success/10 text-success',
+  CANCELLED: 'bg-danger/10 text-danger',
+  REFUNDED: 'bg-muted text-muted-foreground',
 };
 
 function OrderCard({ order }: { order: Order }) {
@@ -41,13 +41,13 @@ function OrderCard({ order }: { order: Order }) {
     >
       <Link
         to={`/orders/${order.id}`}
-        className="bg-card border-border hover:shadow-card block rounded-2xl border p-5 transition-shadow"
+        className="bg-card border-border hover:shadow-card block cursor-pointer rounded-2xl border p-5 transition-shadow"
       >
         <div className="flex flex-wrap items-start justify-between gap-3">
           <div className="min-w-0 flex-1">
             <div className="flex items-center gap-3">
               <span
-                className={`rounded-full px-3 py-1 text-xs font-semibold ${statusColor[order.status] ?? 'bg-gray-100 text-gray-800'}`}
+                className={`rounded-full px-3 py-1 text-xs font-semibold ${statusColor[order.status] ?? 'bg-muted text-muted-foreground'}`}
               >
                 {order.status}
               </span>
@@ -117,7 +117,7 @@ export default function OrdersPage() {
             <button
               key={t.value}
               onClick={() => setTab(t.value)}
-              className={`whitespace-nowrap rounded-full px-4 py-2 text-sm font-medium transition-colors ${
+              className={`cursor-pointer whitespace-nowrap rounded-full px-4 py-2 text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary ${
                 tab === t.value
                   ? 'bg-primary text-white'
                   : 'bg-muted text-muted-foreground hover:bg-muted/80'
@@ -137,16 +137,16 @@ export default function OrdersPage() {
           </div>
         )}
 
-        {/* Orders */}
+        {/* Empty state */}
         {!isLoading && filtered.length === 0 && (
           <div className="py-20 text-center">
             <div className="mb-3 flex justify-center">
-              <Package size={48} className="text-muted-foreground/40" />
+              <Package size={48} className="text-border" />
             </div>
             <p className="text-muted-foreground mt-3">No orders found</p>
             <Link
               to="/products"
-              className="text-primary mt-2 inline-block text-sm font-medium hover:underline"
+              className="text-primary mt-2 inline-block cursor-pointer text-sm font-medium hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
             >
               Start Shopping
             </Link>
@@ -167,7 +167,7 @@ export default function OrdersPage() {
             <button
               disabled={page <= 1}
               onClick={() => setPage((p) => p - 1)}
-              className="text-muted-foreground hover:text-foreground text-sm font-medium disabled:opacity-40"
+              className="cursor-pointer text-muted-foreground hover:text-foreground text-sm font-medium disabled:cursor-not-allowed disabled:opacity-40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
             >
               Previous
             </button>
@@ -177,7 +177,7 @@ export default function OrdersPage() {
             <button
               disabled={page >= meta.totalPages}
               onClick={() => setPage((p) => p + 1)}
-              className="text-muted-foreground hover:text-foreground text-sm font-medium disabled:opacity-40"
+              className="cursor-pointer text-muted-foreground hover:text-foreground text-sm font-medium disabled:cursor-not-allowed disabled:opacity-40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
             >
               Next
             </button>

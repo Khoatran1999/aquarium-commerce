@@ -63,7 +63,7 @@ export default function RegisterPage() {
       </Helmet>
 
       <div className="flex min-h-[70vh] items-center justify-center px-4 py-12">
-        <div className="bg-card border-border w-full max-w-md rounded-2xl border p-8 shadow-lg">
+        <div className="bg-card border-border w-full max-w-md rounded-2xl border p-8 shadow-elevated">
           {/* Header */}
           <div className="mb-8 text-center">
             <h1 className="text-foreground text-2xl font-bold">Create your account</h1>
@@ -86,6 +86,7 @@ export default function RegisterPage() {
               type="text"
               placeholder="John Doe"
               autoComplete="name"
+              aria-label="Full name"
               error={errors.name?.message}
               {...register('name')}
             />
@@ -95,6 +96,7 @@ export default function RegisterPage() {
               type="email"
               placeholder="you@example.com"
               autoComplete="email"
+              aria-label="Email address"
               error={errors.email?.message}
               {...register('email')}
             />
@@ -104,6 +106,7 @@ export default function RegisterPage() {
               type="password"
               placeholder="••••••••"
               autoComplete="new-password"
+              aria-label="Password"
               error={errors.password?.message}
               {...register('password')}
             />
@@ -113,11 +116,17 @@ export default function RegisterPage() {
               type="password"
               placeholder="••••••••"
               autoComplete="new-password"
+              aria-label="Confirm password"
               error={errors.confirmPassword?.message}
               {...register('confirmPassword')}
             />
 
-            <Button type="submit" size="lg" className="mt-2 w-full" disabled={loading}>
+            <Button
+              type="submit"
+              size="lg"
+              className="mt-2 w-full cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+              disabled={loading}
+            >
               {loading ? (
                 <span className="flex items-center gap-2">
                   <span className="inline-block h-4 w-4 animate-spin rounded-full border-2 border-white border-t-transparent" />
@@ -132,7 +141,10 @@ export default function RegisterPage() {
           {/* Footer */}
           <p className="text-muted-foreground mt-6 text-center text-sm">
             Already have an account?{' '}
-            <Link to="/login" className="text-primary hover:text-primary-dark font-semibold">
+            <Link
+              to="/login"
+              className="text-primary hover:text-primary-dark cursor-pointer font-semibold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+            >
               Sign in
             </Link>
           </p>

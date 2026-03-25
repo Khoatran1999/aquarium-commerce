@@ -79,7 +79,10 @@ export default function DataTable<T>({
                   }`}
                 >
                   {columns.map((col) => (
-                    <td key={col.key} className={`px-4 py-3 ${col.className ?? ''}`}>
+                    <td
+                      key={col.key}
+                      className={`text-foreground px-4 py-3 ${col.className ?? ''}`}
+                    >
                       {col.render
                         ? col.render(row)
                         : String((row as Record<string, unknown>)[col.key] ?? '')}
@@ -106,14 +109,16 @@ export default function DataTable<T>({
             <button
               onClick={() => onPageChange(1)}
               disabled={page <= 1}
-              className="hover:bg-muted disabled:text-muted-foreground rounded p-1 disabled:opacity-40"
+              aria-label="First page"
+              className="text-foreground hover:bg-muted cursor-pointer rounded p-1 transition-colors disabled:cursor-not-allowed disabled:text-muted-foreground disabled:opacity-40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
             >
               <ChevronsLeft className="h-4 w-4" />
             </button>
             <button
               onClick={() => onPageChange(page - 1)}
               disabled={page <= 1}
-              className="hover:bg-muted disabled:text-muted-foreground rounded p-1 disabled:opacity-40"
+              aria-label="Previous page"
+              className="text-foreground hover:bg-muted cursor-pointer rounded p-1 transition-colors disabled:cursor-not-allowed disabled:text-muted-foreground disabled:opacity-40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
             >
               <ChevronLeft className="h-4 w-4" />
             </button>
@@ -123,14 +128,16 @@ export default function DataTable<T>({
             <button
               onClick={() => onPageChange(page + 1)}
               disabled={page >= totalPages}
-              className="hover:bg-muted disabled:text-muted-foreground rounded p-1 disabled:opacity-40"
+              aria-label="Next page"
+              className="text-foreground hover:bg-muted cursor-pointer rounded p-1 transition-colors disabled:cursor-not-allowed disabled:text-muted-foreground disabled:opacity-40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
             >
               <ChevronRight className="h-4 w-4" />
             </button>
             <button
               onClick={() => onPageChange(totalPages)}
               disabled={page >= totalPages}
-              className="hover:bg-muted disabled:text-muted-foreground rounded p-1 disabled:opacity-40"
+              aria-label="Last page"
+              className="text-foreground hover:bg-muted cursor-pointer rounded p-1 transition-colors disabled:cursor-not-allowed disabled:text-muted-foreground disabled:opacity-40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
             >
               <ChevronsRight className="h-4 w-4" />
             </button>

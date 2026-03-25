@@ -159,7 +159,8 @@ export default function ProductFormPage() {
       <div className="flex items-center gap-3">
         <button
           onClick={() => navigate('/admin/products')}
-          className="hover:bg-muted rounded-lg p-2 transition-colors"
+          aria-label="Back to products"
+          className="hover:bg-muted cursor-pointer rounded-lg p-2 transition-colors"
         >
           <ArrowLeft className="text-muted-foreground h-5 w-5" />
         </button>
@@ -273,7 +274,7 @@ export default function ProductFormPage() {
             <button
               type="button"
               onClick={addImage}
-              className="bg-primary flex items-center gap-1 rounded-lg px-3 py-2 text-sm font-medium text-white"
+              className="bg-primary flex cursor-pointer items-center gap-1 rounded-lg px-3 py-2 text-sm font-medium text-white transition-colors hover:opacity-90"
             >
               <Plus className="h-4 w-4" />
               Add
@@ -293,14 +294,15 @@ export default function ProductFormPage() {
                     <button
                       type="button"
                       onClick={() => setPrimary(i)}
-                      className="rounded bg-white/20 px-2 py-1 text-xs text-white"
+                      className="cursor-pointer rounded bg-white/20 px-2 py-1 text-xs text-white hover:bg-white/30"
                     >
                       {img.isPrimary ? 'Primary' : 'Set Primary'}
                     </button>
                     <button
                       type="button"
                       onClick={() => removeImage(i)}
-                      className="rounded bg-red-500/80 p-1 text-white"
+                      aria-label="Remove image"
+                      className="cursor-pointer rounded bg-danger/80 p-1 text-white hover:bg-danger"
                     >
                       <X className="h-3 w-3" />
                     </button>
@@ -316,14 +318,14 @@ export default function ProductFormPage() {
           <button
             type="button"
             onClick={() => navigate('/admin/products')}
-            className="border-border text-foreground hover:bg-muted rounded-lg border px-4 py-2.5 text-sm font-medium"
+            className="border-border text-foreground hover:bg-muted cursor-pointer rounded-lg border px-4 py-2.5 text-sm font-medium transition-colors"
           >
             Cancel
           </button>
           <button
             type="submit"
             disabled={isSaving}
-            className="bg-primary inline-flex items-center gap-2 rounded-lg px-4 py-2.5 text-sm font-medium text-white disabled:opacity-50"
+            className="bg-primary inline-flex cursor-pointer items-center gap-2 rounded-lg px-4 py-2.5 text-sm font-medium text-white transition-colors hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-50"
           >
             <Save className="h-4 w-4" />
             {isSaving ? 'Saving...' : isEdit ? 'Update Product' : 'Create Product'}

@@ -131,12 +131,15 @@ export default function ProductListingPage() {
     <div className="flex flex-col gap-6">
       {/* Search */}
       <div>
-        <label className="text-foreground mb-2 block text-sm font-semibold">Search</label>
+        <label className="text-foreground mb-2 block text-sm font-semibold" htmlFor="filter-search">
+          Search
+        </label>
         <input
+          id="filter-search"
           type="text"
           defaultValue={filters.search ?? ''}
           placeholder="Search fish..."
-          className="border-border bg-background text-foreground focus:border-primary h-10 w-full rounded-lg border px-3 text-sm outline-none transition-colors"
+          className="border-border bg-background text-foreground focus:border-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary h-10 w-full rounded-lg border px-3 text-sm outline-none transition-colors"
           onKeyDown={(e) => {
             if (e.key === 'Enter') {
               const v = (e.target as HTMLInputElement).value.trim();
@@ -149,11 +152,17 @@ export default function ProductListingPage() {
       {/* Species */}
       {speciesList.length > 0 && (
         <div>
-          <label className="text-foreground mb-2 block text-sm font-semibold">Species</label>
+          <label
+            className="text-foreground mb-2 block text-sm font-semibold"
+            htmlFor="filter-species"
+          >
+            Species
+          </label>
           <select
+            id="filter-species"
             value={filters.speciesId ?? ''}
             onChange={(e) => updateParam('speciesId', e.target.value || null)}
-            className="border-border bg-background text-foreground focus:border-primary h-10 w-full rounded-lg border px-3 text-sm outline-none"
+            className="border-border bg-background text-foreground focus:border-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary h-10 w-full cursor-pointer rounded-lg border px-3 text-sm outline-none"
           >
             <option value="">All Species</option>
             {speciesList.map((s) => (
@@ -173,16 +182,18 @@ export default function ProductListingPage() {
             type="number"
             min={0}
             placeholder="Min"
+            aria-label="Minimum price"
             defaultValue={filters.minPrice ?? ''}
-            className="border-border bg-background text-foreground focus:border-primary h-10 w-full rounded-lg border px-3 text-sm outline-none"
+            className="border-border bg-background text-foreground focus:border-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary h-10 w-full rounded-lg border px-3 text-sm outline-none"
             onBlur={(e) => updateParam('minPrice', e.target.value || null)}
           />
           <input
             type="number"
             min={0}
             placeholder="Max"
+            aria-label="Maximum price"
             defaultValue={filters.maxPrice ?? ''}
-            className="border-border bg-background text-foreground focus:border-primary h-10 w-full rounded-lg border px-3 text-sm outline-none"
+            className="border-border bg-background text-foreground focus:border-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary h-10 w-full rounded-lg border px-3 text-sm outline-none"
             onBlur={(e) => updateParam('maxPrice', e.target.value || null)}
           />
         </div>
@@ -222,7 +233,12 @@ export default function ProductListingPage() {
 
       {/* Clear */}
       {activeFilterCount > 0 && (
-        <Button variant="outline" size="sm" onClick={clearAllFilters} className="w-full">
+        <Button
+          variant="outline"
+          size="sm"
+          onClick={clearAllFilters}
+          className="w-full cursor-pointer"
+        >
           Clear All Filters ({activeFilterCount})
         </Button>
       )}
@@ -258,7 +274,7 @@ export default function ProductListingPage() {
             <Button
               variant="outline"
               size="sm"
-              className="md:hidden"
+              className="cursor-pointer md:hidden"
               onClick={() => setShowMobileFilters(true)}
             >
               Filters {activeFilterCount > 0 && <Badge className="ml-1">{activeFilterCount}</Badge>}
@@ -268,7 +284,8 @@ export default function ProductListingPage() {
             <select
               value={filters.sortBy}
               onChange={(e) => updateParam('sortBy', e.target.value)}
-              className="border-border bg-background text-foreground h-9 rounded-lg border px-3 text-sm"
+              aria-label="Sort products"
+              className="border-border bg-background text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary h-9 cursor-pointer rounded-lg border px-3 text-sm"
             >
               {SORT_OPTIONS.map((o) => (
                 <option key={o.value} value={o.value}>
@@ -281,13 +298,15 @@ export default function ProductListingPage() {
             <div className="border-border hidden items-center rounded-lg border md:flex">
               <button
                 onClick={() => setViewMode('grid')}
-                className={`p-2 ${viewMode === 'grid' ? 'bg-primary text-white' : 'text-muted-foreground'} rounded-l-lg transition-colors`}
+                aria-label="Grid view"
+                className={`cursor-pointer p-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary ${viewMode === 'grid' ? 'bg-primary text-white' : 'text-muted-foreground'} rounded-l-lg transition-colors`}
               >
                 <LayoutGrid size={16} />
               </button>
               <button
                 onClick={() => setViewMode('list')}
-                className={`p-2 ${viewMode === 'list' ? 'bg-primary text-white' : 'text-muted-foreground'} rounded-r-lg transition-colors`}
+                aria-label="List view"
+                className={`cursor-pointer p-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary ${viewMode === 'list' ? 'bg-primary text-white' : 'text-muted-foreground'} rounded-r-lg transition-colors`}
               >
                 <List size={16} />
               </button>
@@ -321,14 +340,14 @@ export default function ProductListingPage() {
             ) : products.length === 0 ? (
               <div className="flex flex-col items-center justify-center py-20 text-center">
                 <div className="mb-4">
-                  <Fish size={56} className="text-muted-foreground/40" />
+                  <Fish size={56} className="text-border" />
                 </div>
                 <h3 className="text-foreground text-lg font-semibold">No products found</h3>
                 <p className="text-muted-foreground mt-2 text-sm">
                   Try adjusting your filters or search terms.
                 </p>
                 {activeFilterCount > 0 && (
-                  <Button variant="outline" className="mt-4" onClick={clearAllFilters}>
+                  <Button variant="outline" className="mt-4 cursor-pointer" onClick={clearAllFilters}>
                     Clear Filters
                   </Button>
                 )}
@@ -385,6 +404,7 @@ export default function ProductListingPage() {
                             </div>
                             <Button
                               size="sm"
+                              className="cursor-pointer"
                               onClick={(e) => {
                                 e.preventDefault();
                                 e.stopPropagation();
@@ -444,13 +464,17 @@ export default function ProductListingPage() {
                 <h3 className="text-foreground text-lg font-bold">Filters</h3>
                 <button
                   onClick={() => setShowMobileFilters(false)}
-                  className="text-muted-foreground p-2"
+                  aria-label="Close filters"
+                  className="text-muted-foreground cursor-pointer p-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
                 >
                   <X size={20} />
                 </button>
               </div>
               {FilterSidebar}
-              <Button className="mt-6 w-full" onClick={() => setShowMobileFilters(false)}>
+              <Button
+                className="mt-6 w-full cursor-pointer"
+                onClick={() => setShowMobileFilters(false)}
+              >
                 Apply Filters
               </Button>
             </motion.aside>
@@ -481,7 +505,7 @@ function FilterCheckboxGroup<T extends string>({
           <button
             key={o.value}
             onClick={() => onToggle(o.value)}
-            className={`rounded-full border px-3 py-1.5 text-xs font-medium transition-colors ${
+            className={`cursor-pointer rounded-full border px-3 py-1.5 text-xs font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary ${
               selected.includes(o.value)
                 ? 'bg-primary border-primary text-white'
                 : 'border-border text-muted-foreground hover:border-primary hover:text-primary'

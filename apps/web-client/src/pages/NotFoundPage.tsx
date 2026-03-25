@@ -15,7 +15,7 @@ export default function NotFoundPage() {
         </p>
         <Link
           to="/"
-          className="bg-primary mt-6 inline-flex items-center rounded-full px-6 py-2.5 text-sm font-semibold text-white transition-transform hover:scale-105"
+          className="bg-primary mt-6 inline-flex cursor-pointer items-center rounded-full px-6 py-2.5 text-sm font-semibold text-white transition-transform hover:scale-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
         >
           Back to Home
         </Link>

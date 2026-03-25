@@ -33,7 +33,10 @@ export default function BlogDetailPage() {
     return (
       <div className="flex min-h-[60vh] flex-col items-center justify-center text-center">
         <h2 className="text-foreground text-2xl font-bold">Article not found</h2>
-        <Link to="/blog" className="text-primary mt-4 hover:underline">
+        <Link
+          to="/blog"
+          className="text-primary mt-4 cursor-pointer hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+        >
           Back to Blog
         </Link>
       </div>
@@ -62,11 +65,17 @@ export default function BlogDetailPage() {
       <article className="mx-auto max-w-3xl px-4 py-8 md:px-10">
         {/* Breadcrumb */}
         <nav className="text-muted-foreground mb-6 flex items-center gap-2 text-sm">
-          <Link to="/" className="hover:text-primary">
+          <Link
+            to="/"
+            className="cursor-pointer hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+          >
             Home
           </Link>
           <span>/</span>
-          <Link to="/blog" className="hover:text-primary">
+          <Link
+            to="/blog"
+            className="cursor-pointer hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+          >
             Blog
           </Link>
           <span>/</span>
@@ -81,7 +90,7 @@ export default function BlogDetailPage() {
                 <Link
                   key={tag}
                   to={`/blog?tag=${encodeURIComponent(tag)}`}
-                  className="bg-primary/10 text-primary hover:bg-primary/20 rounded-full px-3 py-1 text-xs font-semibold uppercase tracking-wider transition-colors"
+                  className="bg-primary/10 text-primary hover:bg-primary/20 cursor-pointer rounded-full px-3 py-1 text-xs font-semibold uppercase tracking-wider transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
                 >
                   {tag}
                 </Link>

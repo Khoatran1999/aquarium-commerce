@@ -57,12 +57,13 @@ export default function BlogListPage() {
             <input
               type="text"
               placeholder="Search articles..."
+              aria-label="Search articles"
               value={search}
               onChange={(e) => {
                 setSearch(e.target.value);
                 setPage(1);
               }}
-              className="bg-card border-border text-foreground placeholder-muted-foreground focus:border-primary focus:ring-primary w-full rounded-xl border py-2.5 pl-10 pr-4 text-sm focus:outline-none focus:ring-1"
+              className="bg-card border-border text-foreground placeholder:text-muted-foreground focus:border-primary w-full rounded-xl border py-2.5 pl-10 pr-4 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
             />
           </div>
 
@@ -73,7 +74,7 @@ export default function BlogListPage() {
                   setActiveTag(undefined);
                   setPage(1);
                 }}
-                className={`rounded-full px-3 py-1 text-xs font-medium transition-colors ${
+                className={`cursor-pointer rounded-full px-3 py-1 text-xs font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary ${
                   !activeTag
                     ? 'bg-primary text-white'
                     : 'bg-muted text-muted-foreground hover:text-foreground'
@@ -88,7 +89,7 @@ export default function BlogListPage() {
                     setActiveTag(tag === activeTag ? undefined : tag);
                     setPage(1);
                   }}
-                  className={`rounded-full px-3 py-1 text-xs font-medium transition-colors ${
+                  className={`cursor-pointer rounded-full px-3 py-1 text-xs font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary ${
                     activeTag === tag
                       ? 'bg-primary text-white'
                       : 'bg-muted text-muted-foreground hover:text-foreground'
@@ -116,7 +117,7 @@ export default function BlogListPage() {
         ) : blogs.length === 0 ? (
           <div className="flex min-h-[30vh] flex-col items-center justify-center text-center">
             <div className="mb-4">
-              <Inbox size={48} className="text-muted-foreground/40" />
+              <Inbox size={48} className="text-border" />
             </div>
             <h2 className="text-foreground text-xl font-semibold">No articles found</h2>
             <p className="text-muted-foreground mt-2">
@@ -145,7 +146,7 @@ export default function BlogListPage() {
                   <button
                     key={p}
                     onClick={() => setPage(p)}
-                    className={`h-9 min-w-9 rounded-lg px-3 text-sm font-medium transition-colors ${
+                    className={`h-9 min-w-9 cursor-pointer rounded-lg px-3 text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary ${
                       p === page
                         ? 'bg-primary text-white'
                         : 'bg-muted text-muted-foreground hover:text-foreground'

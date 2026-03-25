@@ -99,7 +99,7 @@ export default function InventoryPage() {
             setRestockProduct(p);
             setRestockOpen(true);
           }}
-          className="bg-primary/10 text-primary hover:bg-primary/20 inline-flex items-center gap-1 rounded-lg px-3 py-1.5 text-xs font-medium transition-colors"
+          className="bg-primary/10 text-primary hover:bg-primary/20 inline-flex cursor-pointer items-center gap-1 rounded-lg px-3 py-1.5 text-xs font-medium transition-colors"
         >
           <Plus className="h-3 w-3" />
           Restock
@@ -262,7 +262,8 @@ export default function InventoryPage() {
             >
               <button
                 onClick={() => setRestockOpen(false)}
-                className="text-muted-foreground absolute right-3 top-3"
+                aria-label="Close restock dialog"
+                className="text-muted-foreground hover:text-foreground absolute right-3 top-3 cursor-pointer rounded p-0.5 transition-colors"
               >
                 <X className="h-4 w-4" />
               </button>
@@ -281,7 +282,7 @@ export default function InventoryPage() {
               <div className="flex justify-end gap-2">
                 <button
                   onClick={() => setRestockOpen(false)}
-                  className="border-border text-foreground hover:bg-muted rounded-lg border px-4 py-2 text-sm font-medium"
+                  className="border-border text-foreground hover:bg-muted cursor-pointer rounded-lg border px-4 py-2 text-sm font-medium transition-colors"
                 >
                   Cancel
                 </button>
@@ -293,7 +294,7 @@ export default function InventoryPage() {
                     })
                   }
                   disabled={restockMutation.isPending}
-                  className="bg-primary rounded-lg px-4 py-2 text-sm font-medium text-white disabled:opacity-50"
+                  className="bg-primary cursor-pointer rounded-lg px-4 py-2 text-sm font-medium text-white transition-colors hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-50"
                 >
                   {restockMutation.isPending ? 'Restocking...' : 'Confirm Restock'}
                 </button>

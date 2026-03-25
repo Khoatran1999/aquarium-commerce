@@ -122,7 +122,7 @@ export default function ProductDetailPage() {
           <div>
             <motion.div
               key={mainImage}
-              className="mb-4 aspect-square overflow-hidden rounded-2xl bg-gray-100"
+              className="bg-muted mb-4 aspect-square overflow-hidden rounded-2xl"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
             >
@@ -134,11 +134,12 @@ export default function ProductDetailPage() {
                   <button
                     key={img.id}
                     onClick={() => setMainImage(i)}
-                    className={`h-20 w-20 overflow-hidden rounded-xl border-2 transition-colors ${
+                    aria-label={`View image ${i + 1} of ${images.length}`}
+                    className={`cursor-pointer h-20 w-20 overflow-hidden rounded-xl border-2 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary ${
                       i === mainImage ? 'border-primary' : 'border-transparent'
                     }`}
                   >
-                    <img src={img.url} alt={img.alt ?? ''} className="h-full w-full object-cover" />
+                    <img src={img.url} alt={img.alt ?? `Product image ${i + 1}`} className="h-full w-full object-cover" />
                   </button>
                 ))}
               </div>
@@ -200,19 +201,26 @@ export default function ProductDetailPage() {
               <div className="border-border flex items-center rounded-xl border">
                 <button
                   onClick={() => setQuantity((q) => Math.max(1, q - 1))}
-                  className="text-foreground hover:bg-muted h-12 w-12 text-lg font-semibold transition-colors"
+                  aria-label="Decrease quantity"
+                  className="text-foreground hover:bg-muted cursor-pointer h-12 w-12 text-lg font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
                 >
                   -
                 </button>
                 <span className="text-foreground w-12 text-center font-semibold">{quantity}</span>
                 <button
                   onClick={() => setQuantity((q) => Math.min(product.available, q + 1))}
-                  className="text-foreground hover:bg-muted h-12 w-12 text-lg font-semibold transition-colors"
+                  aria-label="Increase quantity"
+                  className="text-foreground hover:bg-muted cursor-pointer h-12 w-12 text-lg font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
                 >
                   +
                 </button>
               </div>
-              <Button size="lg" className="flex-1" disabled={!inStock} onClick={handleAddToCart}>
+              <Button
+                size="lg"
+                className="flex-1 cursor-pointer"
+                disabled={!inStock}
+                onClick={handleAddToCart}
+              >
                 {inStock ? 'Add to Cart' : 'Out of Stock'}
               </Button>
               <WishlistButton productId={product.id} variant="inline" size="md" />

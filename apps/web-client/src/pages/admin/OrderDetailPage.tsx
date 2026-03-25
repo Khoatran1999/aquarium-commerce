@@ -67,7 +67,8 @@ export default function AdminOrderDetailPage() {
         <div className="flex items-center gap-3">
           <button
             onClick={() => navigate('/admin/orders')}
-            className="hover:bg-muted rounded-lg p-2 transition-colors"
+            aria-label="Back to orders"
+            className="hover:bg-muted cursor-pointer rounded-lg p-2 transition-colors"
           >
             <ArrowLeft className="text-muted-foreground h-5 w-5" />
           </button>
@@ -93,7 +94,7 @@ export default function AdminOrderDetailPage() {
             <button
               onClick={() => statusMutation.mutate(nextStatus)}
               disabled={statusMutation.isPending}
-              className="bg-primary rounded-lg px-4 py-2 text-sm font-medium text-white transition-colors hover:opacity-90 disabled:opacity-50"
+              className="bg-primary cursor-pointer rounded-lg px-4 py-2 text-sm font-medium text-white transition-colors hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-50"
             >
               {statusMutation.isPending ? 'Updating...' : `Mark as ${nextStatus}`}
             </button>
@@ -102,7 +103,7 @@ export default function AdminOrderDetailPage() {
             <button
               onClick={() => statusMutation.mutate('CANCELLED')}
               disabled={statusMutation.isPending}
-              className="bg-danger/10 text-danger hover:bg-danger/20 rounded-lg px-4 py-2 text-sm font-medium transition-colors"
+              className="bg-danger/10 text-danger hover:bg-danger/20 cursor-pointer rounded-lg px-4 py-2 text-sm font-medium transition-colors disabled:cursor-not-allowed disabled:opacity-50"
             >
               Cancel Order
             </button>

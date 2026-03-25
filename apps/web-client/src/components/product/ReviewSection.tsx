@@ -110,7 +110,7 @@ export default function ReviewSection({
                 value={comment}
                 onChange={(e) => setComment(e.target.value)}
                 placeholder="Share your experience with this fish..."
-                className="border-border bg-background text-foreground focus:border-primary mb-3 w-full rounded-lg border p-3 text-sm outline-none transition-colors"
+                className="border-border bg-background text-foreground focus:border-primary mb-3 w-full rounded-lg border p-3 text-sm outline-none transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
                 rows={3}
               />
               <Button size="sm" onClick={handleSubmit} disabled={submitting}>
@@ -120,7 +120,10 @@ export default function ReviewSection({
           ) : (
             <Alert variant="info" className="mb-6">
               Please{' '}
-              <a href="/login" className="text-primary font-semibold underline">
+              <a
+                href="/login"
+                className="text-primary cursor-pointer font-semibold underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+              >
                 sign in
               </a>{' '}
               to write a review.
@@ -140,7 +143,7 @@ export default function ReviewSection({
                     {r.user?.avatar ? (
                       <img
                         src={r.user.avatar}
-                        alt=""
+                        alt={r.user?.name ? `${r.user.name}'s avatar` : 'User avatar'}
                         className="h-9 w-9 rounded-full object-cover"
                       />
                     ) : (

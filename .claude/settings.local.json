@@ -8,7 +8,10 @@
       "Bash(cat \"c:/Users/ADMIN/Desktop/ReactJS/aquarium-commerce/apps/web-client/src/assets/generated/aquarium-hero\"*)",
       "Bash(GEMINI_API_KEY=AIzaSyAeM95huapOLtbs_6Qcw1hiFZiOzZtTAMo py .claude/skills/ai-multimodal/scripts/gemini_batch_process.py --task generate --prompt \"A premium aquarium product hero shot. A sleek rectangular glass aquarium tank filled with crystal-clear water, lush vibrant green aquatic plants, colorful tropical fish swimming inside. Dramatic studio lighting, deep black background. Professional commercial product photography, ultra-realistic.\" --output apps/web-client/src/assets/generated/aquarium-hero --model imagen-3.0-generate-002 --aspect-ratio 16:9)",
       "Bash(pnpm --filter web-client test --run)",
-      "Bash(npx pnpm:*)"
+      "Bash(npx pnpm:*)",
+      "Bash(cmd.exe /c \"cd /d C:\\\\Users\\\\ADMIN\\\\Desktop\\\\ReactJS\\\\aquarium-commerce && pnpm dev:client 2>&1\")",
+      "Bash(cmd.exe /c \"where pnpm\" 2>&1)",
+      "Bash(cmd.exe /c \"where pnpm 2>&1 && echo done\")"
     ]
   }
 }

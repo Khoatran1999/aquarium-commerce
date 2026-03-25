@@ -24,13 +24,13 @@ export default function OrderSuccessPage() {
         >
           {/* Animated check */}
           <motion.div
-            className="mx-auto mb-6 flex h-20 w-20 items-center justify-center rounded-full bg-emerald-500/10"
+            className="bg-success/10 mx-auto mb-6 flex h-20 w-20 items-center justify-center rounded-full"
             initial={{ scale: 0 }}
             animate={{ scale: 1 }}
             transition={{ type: 'spring', stiffness: 200, delay: 0.2 }}
           >
             <motion.svg
-              className="h-10 w-10 text-emerald-500"
+              className="text-success h-10 w-10"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
@@ -58,8 +58,8 @@ export default function OrderSuccessPage() {
             >
               <p className="text-muted-foreground mb-1 text-sm">Order ID</p>
               <p className="text-foreground break-all font-mono text-sm font-semibold">{orderId}</p>
-              <Link to={`/orders/${orderId}`}>
-                <Button variant="outline" size="sm" className="mt-4 w-full">
+              <Link to={`/orders/${orderId}`} className="cursor-pointer">
+                <Button variant="outline" size="sm" className="mt-4 w-full cursor-pointer">
                   View Order Details
                 </Button>
               </Link>
@@ -67,11 +67,11 @@ export default function OrderSuccessPage() {
           )}
 
           <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
-            <Link to="/orders">
-              <Button variant="outline">My Orders</Button>
+            <Link to="/orders" className="cursor-pointer">
+              <Button variant="outline" className="cursor-pointer">My Orders</Button>
             </Link>
-            <Link to="/products">
-              <Button>Continue Shopping</Button>
+            <Link to="/products" className="cursor-pointer">
+              <Button className="cursor-pointer">Continue Shopping</Button>
             </Link>
           </div>
 

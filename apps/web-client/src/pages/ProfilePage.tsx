@@ -125,7 +125,7 @@ export default function ProfilePage() {
               />
 
               <div className="mt-2">
-                <Button type="submit" disabled={saving || !isDirty}>
+                <Button type="submit" disabled={saving || !isDirty} className="cursor-pointer">
                   {saving ? 'Saving…' : 'Save Changes'}
                 </Button>
               </div>

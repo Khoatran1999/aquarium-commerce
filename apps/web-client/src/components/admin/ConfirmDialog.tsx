@@ -51,7 +51,8 @@ export default function ConfirmDialog({
           >
             <button
               onClick={onCancel}
-              className="text-muted-foreground hover:text-foreground absolute right-3 top-3"
+              aria-label="Close dialog"
+              className="text-muted-foreground hover:text-foreground absolute right-3 top-3 cursor-pointer rounded focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
             >
               <X className="h-4 w-4" />
             </button>
@@ -72,14 +73,14 @@ export default function ConfirmDialog({
               <button
                 onClick={onCancel}
                 disabled={loading}
-                className="border-border text-foreground hover:bg-muted rounded-lg border px-4 py-2 text-sm font-medium transition-colors"
+                className="border-border text-foreground hover:bg-muted cursor-pointer rounded-lg border px-4 py-2 text-sm font-medium transition-colors disabled:cursor-not-allowed disabled:opacity-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
               >
                 {cancelLabel}
               </button>
               <button
                 onClick={onConfirm}
                 disabled={loading}
-                className={`rounded-lg px-4 py-2 text-sm font-medium transition-colors disabled:opacity-50 ${btnClass}`}
+                className={`cursor-pointer rounded-lg px-4 py-2 text-sm font-medium transition-colors disabled:cursor-not-allowed disabled:opacity-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary ${btnClass}`}
               >
                 {loading ? 'Processing...' : confirmLabel}
               </button>

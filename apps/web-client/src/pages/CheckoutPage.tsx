@@ -99,7 +99,7 @@ export default function CheckoutPage() {
         </Helmet>
         <div className="flex min-h-[60vh] flex-col items-center justify-center text-center">
           <p className="text-muted-foreground">Your cart is empty. Add some products first!</p>
-          <Button className="mt-4" onClick={() => navigate('/products')}>
+          <Button className="mt-4 cursor-pointer" onClick={() => navigate('/products')}>
             Browse Products
           </Button>
         </div>
@@ -151,11 +151,15 @@ export default function CheckoutPage() {
                     {...register('shippingCity')}
                   />
                   <div>
-                    <label className="text-foreground mb-1.5 block text-sm font-medium">
+                    <label
+                      className="text-foreground mb-1.5 block text-sm font-medium"
+                      htmlFor="checkout-note"
+                    >
                       Note (optional)
                     </label>
                     <textarea
-                      className="border-border bg-background text-foreground focus:border-primary w-full rounded-lg border p-3 text-sm outline-none transition-colors"
+                      id="checkout-note"
+                      className="border-border bg-background text-foreground focus:border-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary w-full rounded-lg border p-3 text-sm outline-none transition-colors"
                       rows={2}
                       placeholder="Delivery instructions..."
                       {...register('note')}
@@ -217,7 +221,7 @@ export default function CheckoutPage() {
                     <div key={item.id} className="flex items-center gap-3">
                       <img
                         src={item.product?.images?.[0]?.url ?? '/placeholder-fish.jpg'}
-                        alt={item.product?.name ?? ''}
+                        alt={item.product?.name ?? 'Product'}
                         className="h-12 w-12 rounded-lg object-cover"
                       />
                       <div className="min-w-0 flex-1">
@@ -253,7 +257,12 @@ export default function CheckoutPage() {
                   </div>
                 </div>
 
-                <Button type="submit" size="lg" className="mt-6 w-full" disabled={submitting}>
+                <Button
+                  type="submit"
+                  size="lg"
+                  className="mt-6 w-full cursor-pointer"
+                  disabled={submitting}
+                >
                   {submitting ? 'Placing Order…' : `Place Order · $${total.toFixed(2)}`}
                 </Button>
               </div>

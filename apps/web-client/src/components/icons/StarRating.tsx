@@ -48,24 +48,24 @@ export default function StarRating({
   return (
     <span
       className={`inline-flex items-center gap-0.5 ${className}`}
-      role="img"
-      aria-label={`${rating} out of ${max} stars`}
+      role={interactive ? 'group' : 'img'}
+      aria-label={interactive ? `Rate out of ${max} stars` : `${rating} out of ${max} stars`}
     >
       {Array.from({ length: max }, (_, i) => {
         const starIndex = i + 1;
         const isFilled = starIndex <= Math.round(displayRating);
 
-        const star = (
+        const starIcon = (
           <Star
-            key={i}
             size={size}
             className={`transition-colors ${
               isFilled ? 'fill-accent text-accent' : 'text-muted-foreground/30 fill-none'
             }`}
+            aria-hidden="true"
           />
         );
 
-        if (!interactive) return star;
+        if (!interactive) return <span key={i}>{starIcon}</span>;
 
         return (
           <button
@@ -74,9 +74,10 @@ export default function StarRating({
             onClick={() => onRate?.(starIndex)}
             onMouseEnter={() => onHover?.(starIndex)}
             onMouseLeave={onLeave}
-            className="cursor-pointer transition-transform hover:scale-110"
+            aria-label={`Rate ${starIndex} out of ${max} stars`}
+            className="cursor-pointer transition-transform hover:scale-110 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
           >
-            {star}
+            {starIcon}
           </button>
         );
       })}

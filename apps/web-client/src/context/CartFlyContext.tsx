@@ -59,8 +59,8 @@ export function CartFlyProvider({ children }: { children: React.ReactNode }) {
               transition={{ duration: 0.55, ease: [0.4, 0, 0.2, 1] }}
               onAnimationComplete={() => removeParticle(p.id)}
             >
-              <div className="flex h-7 w-7 items-center justify-center rounded-full bg-[#0094C4] shadow-lg dark:bg-[#00CCEE]">
-                <ShoppingCart size={14} className="text-white dark:text-[#000F1E]" />
+              <div className="flex h-7 w-7 items-center justify-center rounded-full bg-primary shadow-lg">
+                <ShoppingCart size={14} className="text-white dark:text-background" />
               </div>
             </motion.div>
           ))}

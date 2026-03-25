@@ -17,6 +17,8 @@ interface AnimatedIconProps extends Omit<MotionDivProps, 'children'> {
   hoverScale?: number;
   /** Scale on tap / click (set 1 to disable) */
   tapScale?: number;
+  /** Accessible label — required when used as a standalone interactive element */
+  'aria-label'?: string;
 }
 
 /**
@@ -48,7 +50,7 @@ const AnimatedIcon = forwardRef<HTMLDivElement, AnimatedIconProps>(function Anim
       transition={{ type: 'spring', stiffness: 400, damping: 17 }}
       {...motionProps}
     >
-      <Icon size={size} className={iconClassName} {...iconProps} />
+      <Icon size={size} className={iconClassName} aria-hidden="true" {...iconProps} />
     </motion.div>
   );
 });

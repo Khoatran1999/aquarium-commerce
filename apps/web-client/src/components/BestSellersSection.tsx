@@ -43,24 +43,24 @@ export default function BestSellersSection() {
   );
 
   return (
-    <section ref={sectionRef} className="bg-[#E4EFF8]/50 py-20 dark:bg-[#071F36]/40">
+    <section ref={sectionRef} className="bg-muted/50 py-20">
       <div className="mx-auto max-w-[1280px] px-4 md:px-10">
         <div className="mb-10 flex items-end justify-between">
           <div>
-            <p ref={labelRef} className="mb-1 text-xs font-bold uppercase tracking-widest text-[#0094C4] opacity-0 dark:text-[#00CCEE]">
+            <p ref={labelRef} className="mb-1 text-xs font-bold uppercase tracking-widest text-primary opacity-0">
               Most Loved
             </p>
-            <h2 ref={titleRef} className="text-3xl font-bold text-[#0A1825] opacity-0 dark:text-[#D6EAFF] md:text-4xl">
+            <h2 ref={titleRef} className="text-3xl font-bold text-foreground opacity-0 md:text-4xl">
               Best Sellers
             </h2>
-            <p ref={subtitleRef} className="mt-1.5 text-sm text-[#547698] opacity-0 dark:text-[#6496B8]">
+            <p ref={subtitleRef} className="mt-1.5 text-sm text-muted-foreground opacity-0">
               Our most popular picks
             </p>
           </div>
           <Link
             ref={linkRef}
             to="/products?sortBy=popular"
-            className="group hidden items-center gap-1.5 text-sm font-semibold text-[#0094C4] opacity-0 transition-colors hover:text-[#0077A3] dark:text-[#00CCEE] dark:hover:text-[#55DDFF] sm:flex"
+            className="group hidden cursor-pointer items-center gap-1.5 text-sm font-semibold text-primary opacity-0 transition-colors hover:text-primary-dark sm:flex"
           >
             View All
             <ArrowRight size={14} className="transition-transform duration-200 group-hover:translate-x-1" />
@@ -70,7 +70,7 @@ export default function BestSellersSection() {
         {isLoading ? (
           <div className="grid grid-cols-2 gap-5 md:grid-cols-4">
             {Array.from({ length: 4 }).map((_, i) => (
-              <div key={i} className="rounded-2xl bg-white p-4 dark:bg-[#041628]">
+              <div key={i} className="rounded-2xl bg-card p-4">
                 <Skeleton className="mb-4 aspect-square w-full rounded-xl" />
                 <Skeleton className="mb-2 h-4 w-3/4" />
                 <Skeleton className="h-4 w-1/2" />

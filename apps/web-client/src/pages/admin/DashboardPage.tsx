@@ -134,12 +134,12 @@ export default function DashboardPage() {
             <TrendingUp className="text-primary h-4 w-4" />
             <h2 className="text-foreground text-sm font-semibold">Revenue Trend</h2>
           </div>
-          <div className="flex gap-1 rounded-lg bg-gray-100 p-0.5 dark:bg-gray-800">
+          <div className="flex gap-1 rounded-lg bg-muted p-0.5">
             {(Object.entries(PERIOD_LABELS) as [Period, string][]).map(([key, label]) => (
               <button
                 key={key}
                 onClick={() => setPeriod(key)}
-                className={`rounded-md px-3 py-1 text-xs font-medium transition-colors ${
+                className={`cursor-pointer rounded-md px-3 py-1 text-xs font-medium transition-colors ${
                   period === key
                     ? 'bg-primary text-white shadow-sm'
                     : 'text-muted-foreground hover:text-foreground'

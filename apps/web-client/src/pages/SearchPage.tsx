@@ -43,7 +43,7 @@ export default function SearchPage() {
         ) : (
           <div className="flex min-h-[40vh] flex-col items-center justify-center text-center">
             <div className="mb-4">
-              <Search size={48} className="text-muted-foreground/40" />
+              <Search size={48} className="text-border" />
             </div>
             <h1 className="text-foreground mt-4 text-xl font-bold">Search Products</h1>
             <p className="text-muted-foreground mt-2">
@@ -63,14 +63,14 @@ export default function SearchPage() {
         {!isLoading && q && products.length === 0 && (
           <div className="py-20 text-center">
             <div className="mb-3 flex justify-center">
-              <Fish size={48} className="text-muted-foreground/40" />
+              <Fish size={48} className="text-border" />
             </div>
             <p className="text-foreground mt-3 text-lg font-semibold">No results found</p>
             <p className="text-muted-foreground mt-1 text-sm">
               Try a different search term or browse our collection.
             </p>
-            <Link to="/products">
-              <Button variant="outline" className="mt-4">
+            <Link to="/products" className="cursor-pointer">
+              <Button variant="outline" className="mt-4 cursor-pointer">
                 Browse All Products
               </Button>
             </Link>

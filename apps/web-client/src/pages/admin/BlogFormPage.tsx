@@ -159,7 +159,8 @@ export default function BlogFormPage() {
       <div className="flex items-center gap-3">
         <button
           onClick={() => navigate('/admin/blogs')}
-          className="hover:bg-muted rounded-lg p-2 transition-colors"
+          aria-label="Back to blog posts"
+          className="hover:bg-muted cursor-pointer rounded-lg p-2 transition-colors"
         >
           <ArrowLeft className="text-muted-foreground h-5 w-5" />
         </button>
@@ -286,7 +287,7 @@ export default function BlogFormPage() {
             <button
               type="button"
               onClick={addTag}
-              className="bg-primary rounded-lg px-3 py-2 text-sm font-medium text-white"
+              className="bg-primary cursor-pointer rounded-lg px-3 py-2 text-sm font-medium text-white transition-colors hover:opacity-90"
             >
               Add
             </button>
@@ -302,7 +303,8 @@ export default function BlogFormPage() {
                   <button
                     type="button"
                     onClick={() => removeTag(tag)}
-                    className="hover:bg-primary/20 rounded-full p-0.5"
+                    aria-label={`Remove tag ${tag}`}
+                    className="hover:bg-primary/20 cursor-pointer rounded-full p-0.5"
                   >
                     <X className="h-3 w-3" />
                   </button>
@@ -330,14 +332,14 @@ export default function BlogFormPage() {
           <button
             type="button"
             onClick={() => navigate('/admin/blogs')}
-            className="border-border text-foreground hover:bg-muted rounded-lg border px-4 py-2.5 text-sm font-medium"
+            className="border-border text-foreground hover:bg-muted cursor-pointer rounded-lg border px-4 py-2.5 text-sm font-medium transition-colors"
           >
             Cancel
           </button>
           <button
             type="submit"
             disabled={isSaving}
-            className="bg-primary inline-flex items-center gap-2 rounded-lg px-4 py-2.5 text-sm font-medium text-white disabled:opacity-50"
+            className="bg-primary inline-flex cursor-pointer items-center gap-2 rounded-lg px-4 py-2.5 text-sm font-medium text-white transition-colors hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-50"
           >
             <Save className="h-4 w-4" />
             {isSaving ? 'Saving...' : isEdit ? 'Update Post' : 'Create Post'}
