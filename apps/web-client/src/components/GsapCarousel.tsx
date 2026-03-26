@@ -203,7 +203,7 @@ export default function GsapCarousel({ products, autoplayDelay = 4000 }: GsapCar
               className="shrink-0"
               style={{ width: `calc((100% - ${GAP * (spv - 1)}px) / ${spv})` }}
             >
-              <ProductCard product={product} />
+              <ProductCard product={product} showAddToCart />
             </div>
           ))}
         </div>

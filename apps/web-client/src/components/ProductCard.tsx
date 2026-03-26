@@ -23,7 +23,7 @@ const careLevelConfig: Record<string, { label: string; className: string }> = {
 
 const ProductCard = memo(function ProductCard({
   product,
-  showAddToCart = false,
+  showAddToCart = true,
 }: ProductCardProps) {
   const dispatch = useAppDispatch();
   const { triggerFly } = useCartFly();
